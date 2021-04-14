@@ -1,7 +1,7 @@
 # ChurchTools API
 
 This is a python wrapper for the ChurchTools API.
-The API from ChutchTools is provided using the Swagger toolset.
+The API from ChurchTools is provided using the Swagger toolset.
 An overview of the available endpoints can be found here:
 <https://wetzlar.church.tools/api>
 
