@@ -5,6 +5,10 @@ The API from ChurchTools is provided using the Swagger toolset.
 An overview of the available endpoints can be found here:
 <https://wetzlar.church.tools/api>
 
+__Note:__ This library is very incomplete and WIP.
+Many endpoints are not implemented at all and the others are only partly
+implemented.
+
 ## Installation
 
 Dependencies:
@@ -43,7 +47,8 @@ ct.login('your_email', 'your_password')
 
 ### Example
 
-You can execute the following in a python console to test the functionality.
+You can execute the following in a python console or script to test the
+functionality.
 
 ```python3
 from ct import CT
@@ -51,9 +56,9 @@ from ct import CT
 ct_wetzlar = CT()
 ct_wetzlar.login('your_email', 'your_password')
 
-events = c.Events.events()
-events[0]
-vars(events[0])
+events = ct_wetzlar.Events.events()
+print(events[0])
+print(vars(events[0]))
 ```
 
 ### Notes
