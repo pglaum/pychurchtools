@@ -43,26 +43,19 @@ class CT:
         :rtype: binary, dict, or string
         """
 
-        # if not self.cookie:
-        #     print('error: no authentication method set')
-        #     return None
+        # TODO: implement lists in params
 
         rurl = f'{self.base_url}{endpoint}'
-
-        # param_list = []
-        # if params:
-        #     for param in params:
-        #         param_list.append(json.dumps(param))
-        # rparams = '?' + '&'.join(param_list)
 
         if self.debugging > 1:
             for line in traceback.format_stack():
                 print(line.strip())
 
         if binary:
-            return requests.get(rurl, cookies=self.cookie).content
+            return requests.get(rurl, params=params,
+                                cookies=self.cookie).content
 
-        resp = requests.get(rurl, cookies=self.cookie)
+        resp = requests.get(rurl, params=params, cookies=self.cookie)
         rstr = resp.content.decode()
 
         r_ok = self.check_response(resp)

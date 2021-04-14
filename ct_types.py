@@ -51,6 +51,33 @@ class EventService:
         # TODO: requesterPerson
 
 
+class Group:
+
+    def __init__(self, qdict):
+
+        self.title = qdict['title'] if 'title' in qdict else None
+        self.domainType = qdict['domainType'] \
+            if 'domainType' in qdict else None
+        self.apiUrl = qdict['apiUrl'] if 'apiUrl' in qdict else None
+        self.frontendUrl = qdict['frontendUrl'] \
+            if 'frontendUrl' in qdict else None
+        self.imageUrl = qdict['imageUrl'] if 'imageUrl' in qdict else None
+        self.domainAttributes = \
+            GroupDomainAttributes(qdict['domainAttributes']) \
+            if 'domainAttributes' in qdict else None
+
+    def __repr__(self):
+
+        return f'<Group: {self.title}>'
+
+
+class GroupDomainAttributes:
+
+    def __init__(self, qdict):
+
+        self.note = qdict['note'] if 'note' in qdict else None
+
+
 class Person:
 
     def __init__(self, qdict):
