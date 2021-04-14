@@ -57,8 +57,13 @@ ct_wetzlar = CT()
 ct_wetzlar.login('your_email', 'your_password')
 
 events = ct_wetzlar.Events.events()
-print(events[0])
+print('Upcoming event:', events[0])
 print(vars(events[0]))
+
+myself = ct_wetzlar.General.whoami()
+print('Logged in as:', myself)
+my_events = ct_wetzlar.Person.events(myself.id)
+print('Your next events:', my_events)
 ```
 
 ### Notes
