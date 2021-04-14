@@ -14,7 +14,7 @@ import traceback
 class CT:
 
     base_url = 'https://wetzlar.church.tools/api/'
-    debugging = 2
+    debugging = 0
     cookie = None
 
     def __init__(self, cookie=None):
@@ -43,9 +43,9 @@ class CT:
         :rtype: binary, dict, or string
         """
 
-        if not self.cookie:
-            print('error: no authentication method set')
-            return None
+        # if not self.cookie:
+        #     print('error: no authentication method set')
+        #     return None
 
         rurl = f'{self.base_url}{endpoint}'
 
@@ -119,7 +119,8 @@ class CT:
             print('login unsuccessful')
             return
 
-        print('login successful')
+        if self.debugging > 0:
+            print('login successful')
 
         cookie = response.cookies.items()[0]
         self.cookie = {cookie[0]: cookie[1]}
