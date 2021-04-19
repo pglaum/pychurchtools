@@ -33,7 +33,6 @@ cookie = {
 Pass this object to the init function of the CT class or set the field `cookie`
 in the CT object.
 
-
 #### Via old AJAX API
 
 Since the login function does not seem to be implemented in the new REST API, we
@@ -47,23 +46,26 @@ ct.login('your_email', 'your_password')
 
 ### Example
 
-You can execute the following in a python console or script to test the
-functionality.
+You can execute the following in a python script to test the functionality.
 
 ```python3
 from ct import CT
 
-ct_wetzlar = CT()
-ct_wetzlar.login('your_email', 'your_password')
+c = CT()
+c.login('your_email', 'your_password')
 
-events = ct_wetzlar.Events.events()
-print('Upcoming event:', events[0])
-print(vars(events[0]))
+events = c.events.list()
+print('Upcoming event:', events[0].__repr__())
+print(events[0].dict())
+print()
 
-myself = ct_wetzlar.General.whoami()
-print('Logged in as:', myself)
-my_events = ct_wetzlar.Person.events(myself.id)
-print('Your next events:', my_events)
+me = c.general.whoami()
+print('Logged in as:', me.__repr__())
+print()
+
+my_events = c.person.events(me.id)
+print('Your next events:')
+[print(f'- {e.__repr__()}') for e in my_events]
 ```
 
 ### Notes
