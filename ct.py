@@ -1,3 +1,40 @@
+"""
+pychurchtools
+=============
+
+This is the entrypoint for the ChurchTools API.
+
+Currently, only `GET`-type methods are implemented (-> read-only).
+In the future, maybe `POST`, `DELETE`, etc. may also be of interest.
+
+TODO (primary):
+
+    - groups
+
+TODO (for 100% completion):
+
+    - publicgroups
+    - campus
+    - fields
+    - tags
+    - departments
+    - admin
+    - calendar
+    - masterdata
+    - translations
+    - finance
+    - queue
+    - permissions
+    - sync
+    - checkin
+    - absence
+    - files
+    - chat
+    - contactlabels
+    - jobs
+
+"""
+
 from events import Events
 from general import General
 from persons import Persons
