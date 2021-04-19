@@ -41,6 +41,7 @@ from persons import Persons
 from services import Services
 from songs import Songs
 from status import Status
+from wiki import Wiki
 
 from typing import Any, Dict
 import json
@@ -80,6 +81,7 @@ class CT:
         self.services = Services(self)
         self.songs = Songs(self)
         self.status = Status(self)
+        self.wiki = Wiki(self)
 
     def make_request(self, endpoint: str, params: Any = None,
                      binary: bool = False) -> Any:
