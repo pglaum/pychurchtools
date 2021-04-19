@@ -4,7 +4,7 @@ Person
 
 Find out about persons in ChurchTools
 
-All `GET`-endpoints are implemented except for:
+TODO:
 
     - settings
     - servicerequests
@@ -17,16 +17,28 @@ from datetime import datetime
 from typing import List
 
 
-class CTPerson:
+class Persons:
 
     def __init__(self, CT):
 
         self.CT = CT
 
-    def persons(self, ids: List[int] = None, status_ids: List[int] = None,
-                campus_ids: List[int] = None, birthday_before: datetime = None,
-                birthday_after: datetime = None, is_archived: bool = False,
-                page: int = 1, limit: int = 10):
+    def get(self, person_id: int):
+
+        route = f'persons/{person_id}'
+        res = self.CT.make_request(route)
+
+        if res and 'data' in res:
+            return Person(**res['data'])
+
+        return None
+
+    def list(self, ids: List[int] = None, status_ids: List[int] = None,
+             campus_ids: List[int] = None, birthday_before: datetime = None,
+             birthday_after: datetime = None, is_archived: bool = False,
+             page: int = 1, limit: int = 10):
+
+        # TODO: pagination
 
         params = {}
 
@@ -56,19 +68,10 @@ class CTPerson:
         persons = []
         if res and 'data' in res:
             for item in res['data']:
-                persons.append(Person(item))
+                pers = Person(**item)
+                persons.append(pers)
 
         return persons
-
-    def person(self, person_id: int):
-
-        route = f'persons/{person_id}'
-        res = self.CT.make_request(route)
-
-        if res and 'data' in res:
-            return Person(res['data'])
-
-        return None
 
     def tags(self, person_id: int):
 
@@ -78,7 +81,7 @@ class CTPerson:
         tags = []
         if res and 'data' in res:
             for item in res['data']:
-                tags.append(PersonTag(item))
+                tags.append(PersonTag(**item))
 
         return tags
 
@@ -87,12 +90,13 @@ class CTPerson:
         route = f'persons/{person_id}/relationships'
         res = self.CT.make_request(route)
 
-        relationships = []
+        rls = []
         if res and 'data' in res:
             for item in res['data']:
-                relationships.append(PersonRelationship(item))
+                rl = PersonRelationship(**item)
+                rls.append(rl)
 
-        return relationships
+        return rls
 
     def events(self, person_id: int, from_date: datetime = None):
 
@@ -106,9 +110,10 @@ class CTPerson:
         res = self.CT.make_request(route, params)
 
         evs = []
-        if res and 'data' in res:
+        if 'data' in res:
             for item in res['data']:
-                evs.append(Event(item))
+                ev = Event(**item)
+                evs.append(ev)
 
         return evs
 
@@ -128,6 +133,7 @@ class CTPerson:
         #       usually, only the group itself should be interesting.
         grps = []
         for item in res['data']:
-            grps.append(Group(item['group']))
+            grp = Group(**item['group'])
+            grps.append(grp)
 
         return grps

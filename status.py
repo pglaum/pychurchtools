@@ -4,12 +4,15 @@ Status
 
 CRUD methods for status field
 
+These are the statuses that a person can have.
+(e.g. "Visitor", "Friend", "Member", etc.)
+
 """
 
-from ct_types import Status
+from ct_types import CTStatus
 
 
-class CTStatus:
+class Status:
 
     def __init__(self, CT):
 
@@ -22,7 +25,7 @@ class CTStatus:
         statuses = []
         if res and 'data' in res:
             for item in res['data']:
-                statuses.append(Status(item))
+                statuses.append(CTStatus(**item))
 
         return statuses
 
@@ -32,6 +35,6 @@ class CTStatus:
         res = self.CT.make_request(route)
 
         if res and 'data' in res:
-            return Status(res['data'])
+            return CTStatus(**res['data'])
 
         return None

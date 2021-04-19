@@ -23,7 +23,7 @@ class General:
         """
 
         res = self.CT.make_request('info')
-        return VersionInfo(res)
+        return VersionInfo(**res)
 
     def whoami(self):
         """Currently logged in user.
@@ -37,9 +37,11 @@ class General:
         """
 
         res = self.CT.make_request('whoami')
-        return Person(res['data'])
+        return Person(**res['data'])
 
     def test_route(self, route):
+        """Test an arbitrary route.
+        """
 
         res = self.CT.make_request(route)
         return res

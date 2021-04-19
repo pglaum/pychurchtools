@@ -4,9 +4,14 @@ Events
 
 Endpoints for the event module.
 
+TODO:
+    - masterdata
+
 """
 
-from ct_types import Event
+from ct_types import Agenda, Event, Song
+from datetime import datetime
+from typing import List
 
 
 class Events:
@@ -15,25 +20,53 @@ class Events:
 
         self.CT = CT
 
-    def events(self):
+    def get(self, event_id: int) -> Event:
 
-        res = self.CT.make_request('events')
-
-        events = []
-        if 'data' in res:
-            for item in res['data']:
-                events.append(Event(item))
-
-        return events
-
-    def persons_events(self, person_id):
-
-        route = f'persons/{person_id}/events'
+        route = f'events/{event_id}'
         res = self.CT.make_request(route)
 
+        return Event(**res['data'])
+
+    def list(self, from_date: datetime = None, to_date: datetime = None
+             ) -> List[Event]:
+
+        # TODO: pagination
+
+        params = {}
+
+        if to_date:
+            params['to_date'] = \
+                f'{to_date.year}-{to_date.month:02d}-' \
+                f'{to_date.day:02d}'
+        if from_date:
+            params['from_date'] = \
+                f'{from_date.year}-{from_date.month:02d}-' \
+                f'{from_date.day:02d}'
+
+        res = self.CT.make_request('events', params)
+
         events = []
-        if 'data' in res:
-            for item in res['data']:
-                events.append(Event(item))
+        for item in res['data']:
+            ev = Event(**item)
+            events.append(ev)
 
         return events
+
+    def agenda(self, event_id: int) -> Agenda:
+
+        route = f'events/{event_id}/agenda'
+        res = self.CT.make_request(route)
+
+        return Agenda(**res['data'])
+
+    def songs(self, event_id: int) -> List[Song]:
+
+        route = f'events/{event_id}/agenda/songs'
+        res = self.CT.make_request(route)
+
+        sngs = []
+        for item in res['data']:
+            sng = Song(**item)
+            sngs.append(sng)
+
+        return sngs

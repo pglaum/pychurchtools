@@ -1,9 +1,9 @@
 from events import Events
 from general import General
-from person import CTPerson
-from service import CTService
-from status import CTStatus
-from songs import CTSongs
+from persons import Persons
+from services import Services
+from songs import Songs
+from status import Status
 
 from typing import Any
 import json
@@ -22,12 +22,12 @@ class CT:
         if cookie:
             self.cookie = cookie
 
-        self.Events = Events(self)
-        self.General = General(self)
-        self.Service = CTService(self)
-        self.Person = CTPerson(self)
-        self.Status = CTStatus(self)
-        self.Songs = CTSongs(self)
+        self.events = Events(self)
+        self.general = General(self)
+        self.persons = Persons(self)
+        self.services = Services(self)
+        self.songs = Songs(self)
+        self.status = Status(self)
 
     def make_request(self, endpoint: str, params: Any = None,
                      binary: bool = False) -> Any:
@@ -43,7 +43,7 @@ class CT:
         :rtype: binary, dict, or string
         """
 
-        # TODO: implement lists in params
+        # TODO: implement lists in params (e.g. ids for songs.list())
 
         rurl = f'{self.base_url}{endpoint}'
 
