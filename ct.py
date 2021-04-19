@@ -5,7 +5,7 @@ from services import Services
 from songs import Songs
 from status import Status
 
-from typing import Any
+from typing import Any, Dict
 import json
 import requests
 import traceback
@@ -13,14 +13,29 @@ import traceback
 
 class CT:
 
-    base_url = 'https://wetzlar.church.tools/api/'
-    debugging = 0
-    cookie = None
+    __base_url = 'https://wetzlar.church.tools/api/'
+    __debugging = 0
+    __cookie = None
 
-    def __init__(self, cookie=None):
+    def __init__(self, cookie: Dict[str, str] = None) -> None:
+        """Initialize a CT object.
+
+        The login cookie can look like this:
+
+        .. code-block ::
+
+            cookie = {
+                'ChurchTools_ct_wetzlar': 'some_random_text',
+            }
+
+        :param cookie: The login cookie
+        :type cookie: dict
+        :returns: An initialized CT object
+        :rtype: CT
+        """
 
         if cookie:
-            self.cookie = cookie
+            self.__cookie = cookie
 
         self.events = Events(self)
         self.general = General(self)
@@ -45,22 +60,22 @@ class CT:
 
         # TODO: implement lists in params (e.g. ids for songs.list())
 
-        rurl = f'{self.base_url}{endpoint}'
+        rurl = f'{self.__base_url}{endpoint}'
 
-        if self.debugging > 1:
+        if self.__debugging > 1:
             for line in traceback.format_stack():
                 print(line.strip())
 
         if binary:
             return requests.get(rurl, params=params,
-                                cookies=self.cookie).content
+                                cookies=self.__cookie).content
 
-        resp = requests.get(rurl, params=params, cookies=self.cookie)
+        resp = requests.get(rurl, params=params, cookies=self.__cookie)
         rstr = resp.content.decode()
 
         r_ok = self.check_response(resp)
         if not r_ok:
-            if self.debugging > 0:
+            if self.__debugging > 0:
                 print(rurl, '->', resp.status_code)
                 print(rstr)
 
@@ -68,19 +83,21 @@ class CT:
 
         robj = json.loads(rstr)
 
-        # if 'data' in robj:
-        #     robj = robj['data']
-
-        if self.debugging > 0:
+        if self.__debugging > 0:
             print(rurl, '->', resp.status_code)
             print(rstr)
             print()
 
         return robj
 
-    def check_response(self, resp):
+    def check_response(self, resp: requests.models.Response) -> bool:
+        """Check a response for errors.
 
-        # rstr = resp.content.decode()
+        :param resp: The API response
+        :type resp: requsts.models.Response
+        :returns: Status of the response (successful/not successful)
+        :rtype: bool
+        """
 
         if resp.status_code == 401:
             print('Error: 401 Unauthorized')
@@ -94,13 +111,26 @@ class CT:
 
         return True
 
-    def login(self, email, password):
+    def login(self, email: str, password: str, login_url: str = None) -> None:
         """Login to the ChurchTools API.
 
+        The login cookie is saved to the CT object.
+
         BE CAREFUL what you do with your passwords!
+
+        :param email: Email address for the ChurchTools login
+        :type email: str
+        :param password: Password for the ChurchTools login
+        :type password: str
+        :param login_url: The URL to the AJAX function.
+            This parameter typically ends in: `/index.php?q=login/ajax`
+        :type login_url: str
         """
 
-        login_url = 'https://wetzlar.church.tools/index.php?q=login/ajax'
+        if not login_url:
+            # TODO: generalize this
+            login_url = 'https://wetzlar.church.tools/index.php?q=login/ajax'
+
         data = {
             'func': 'login',
             'email': email,
@@ -112,8 +142,54 @@ class CT:
             print('login unsuccessful')
             return
 
-        if self.debugging > 0:
+        if self.__debugging > 0:
             print('login successful')
 
         cookie = response.cookies.items()[0]
-        self.cookie = {cookie[0]: cookie[1]}
+        self.__cookie = {cookie[0]: cookie[1]}
+
+    def set_base_url(self, base_url: str) -> None:
+        """Set the base URL.
+
+        The URL has to point to a churchtools instance.
+
+        :param base_url: The new base_url
+        :type base_url: str
+        """
+
+        self.__base_url = base_url
+
+    def set_debugging_level(self, level: int) -> None:
+        """Set the debug level.
+
+        0: No debugging messages, only error message
+        1: Some debugging messages, including full ChurchTools response
+        2: Very many debugging messages, including stacktrace for every
+           API query
+
+        :param level: The debug level (0 - 2)
+        :type level: int
+        """
+
+        self.__debugging = level
+
+    def set_login_cookie(self, cookie: dict) -> None:
+        """Set the login cookie.
+
+        This cookie will be sent with every API query.
+        Alternatively, you can login using func:`CT.login()`, where the cookie
+        is set automatically
+
+        Example:
+
+        .. code-block ::
+
+            cookie = {
+                'ChurchTools_ct_wetzlar': 'some_random_text',
+            }
+
+        :param cookie: The login cookie
+        :type cookie: dict
+        """
+
+        self.__cookie = cookie

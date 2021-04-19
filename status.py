@@ -10,17 +10,25 @@ These are the statuses that a person can have.
 """
 
 from ct_types import CTStatus
+from typing import Any, List, Optional
 
 
 class Status:
 
-    def __init__(self, CT):
+    def __init__(self, ct: Any) -> None:
+        """Initialize a Status object.
+        """
 
-        self.CT = CT
+        self.__ct = ct
 
-    def get_all(self):
+    def get_all(self) -> List[CTStatus]:
+        """Get all statuses from the API.
 
-        res = self.CT.make_request('statuses')
+        :returns: A list of all status
+        :rtype: List[CTStatus]
+        """
+
+        res = self.__ct.make_request('statuses')
 
         statuses = []
         if res and 'data' in res:
@@ -29,10 +37,17 @@ class Status:
 
         return statuses
 
-    def get(self, status_id: int):
+    def get(self, status_id: int) -> Optional[CTStatus]:
+        """Get a status by ID.
+
+        :param status_id: The ID of the status
+        :type status_id: int
+        :returns: The status
+        :rtype: CTStatus
+        """
 
         route = f'statuses/{status_id}'
-        res = self.CT.make_request(route)
+        res = self.__ct.make_request(route)
 
         if res and 'data' in res:
             return CTStatus(**res['data'])

@@ -1,14 +1,14 @@
 from datetime import date, datetime
 from pydantic import BaseModel
 from pydantic.fields import ModelField
-from typing import Generic, List, Optional, TypeVar
+from typing import Generator, Generic, List, Optional, TypeVar
 
 PydanticField = TypeVar('PydanticField')
 
 
 class EmptyStrToNone(Generic[PydanticField]):
     @classmethod
-    def __get_validators__(cls):
+    def __get_validators__(cls) -> Generator:
         yield cls.validate
 
     @classmethod
@@ -72,7 +72,7 @@ class Person(BaseModel):
     # TODO: privacyPolicyAgreement
     # TODO: meta
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<Person: {self.firstName} {self.lastName} [{self.id}]>'
 
@@ -118,7 +118,7 @@ class Agenda(BaseModel):
 
     # TODO: meta
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<Agenda: {self.name} [{self.id}]>'
 
@@ -143,7 +143,7 @@ class Service(BaseModel):
     calTextTemplate: str
     allowChat: bool
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<Service: {self.name} [{self.id}]>'
 
@@ -157,7 +157,7 @@ class ServiceGroup(BaseModel):
     campusId: Optional[int]
     onlyVisibleInCampusFilter: Optional[bool]
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<ServiceGroup: {self.name} [{self.id}]>'
 
@@ -177,7 +177,7 @@ class EventService(BaseModel):
     # TODO: person
     # TODO: requesterPerson
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<EventService: {self.name}>'
 
@@ -196,7 +196,7 @@ class Event(BaseModel):
     # TODO: permissions
     # TODO: calendar
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<Event: {self.startDate.day:02}.' \
             f'{self.startDate.month:02} {self.startDate.hour:02}:' \
@@ -218,7 +218,7 @@ class Group(BaseModel):
     imageUrl: Optional[str]
     domainAttributes: GroupDomainAttributes
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<Group: {self.title}>'
 
@@ -280,7 +280,7 @@ class Song(BaseModel):
 
     # TODO: meta
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<Song: {self.name} [{self.id}]>'
 
@@ -290,7 +290,7 @@ class VersionInfo(BaseModel):
     build: str
     version: str
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<Version: {self.version} (build: {self.build})>'
 
@@ -327,7 +327,7 @@ class PersonRelationship(BaseModel):
     relationshipName: str
     relationshipTypeId: int
 
-    def __repr__(self):
+    def __repr__(self) -> str:
 
         return f'<Relationship: {self.relative.title} ' \
             f'({self.degreeOfRelationship})>'

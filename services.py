@@ -7,17 +7,23 @@ CRUD methods for services & service groups
 """
 
 from ct_types import Service, ServiceGroup
+from typing import Any, List
 
 
 class Services:
 
-    def __init__(self, CT):
+    def __init__(self, ct: Any) -> None:
 
-        self.CT = CT
+        self.__ct = ct
 
-    def list(self):
+    def list(self) -> List[Service]:
+        """List all services.
 
-        res = self.CT.make_request('services')
+        :returns: A list of all services
+        :rtype: List[Service]
+        """
+
+        res = self.__ct.make_request('services')
 
         services = []
         if res and 'data' in res:
@@ -26,9 +32,14 @@ class Services:
 
         return services
 
-    def groups(self):
+    def groups(self) -> List[ServiceGroup]:
+        """List all service groups.
 
-        res = self.CT.make_request('services')
+        :returns: A list of all service groups
+        :rtype: List[ServiceGroup]
+        """
+
+        res = self.__ct.make_request('services')
 
         sgroups = []
         if res and 'data' in res:
