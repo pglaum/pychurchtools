@@ -1,4 +1,4 @@
-# ChurchTools API
+# pychurchtools
 
 This is a python wrapper for the ChurchTools API.
 The API from ChurchTools is provided using the Swagger toolset.
@@ -11,8 +11,8 @@ implemented.
 
 ## Installation
 
-To install, you can use `pip install .` in the source directory.
-Type `pip uninstall churchtools` to remove the library.
+To install, you can use "`pip install .`" in the source directory.
+Type "`pip uninstall churchtools`" to remove the library.
 
 Dependencies:
 
