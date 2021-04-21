@@ -20,7 +20,7 @@ setup(
     keywords="api churchtools",
     url="https://git.sr.ht/~pglaum/pychurchtools",
     packages=['churchtools'],
-    install_required=['pydantic', 'requests'],
+    install_requires=['pydantic', 'requests'],
     long_description=read('README.md'),
     classifiers=[
         "Programming Language :: Python :: 3",
