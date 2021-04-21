@@ -6,7 +6,7 @@ CRUD methods for services & service groups
 
 """
 
-from ct_types import Service, ServiceGroup
+from churchtools.ct_types import Service, ServiceGroup
 from typing import Any, List
 
 

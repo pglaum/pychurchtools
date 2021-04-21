@@ -6,7 +6,7 @@ Endpoints for Songs
 
 """
 
-from ct_types import Song
+from churchtools.ct_types import Song
 from typing import Any, Dict, List, Optional
 
 

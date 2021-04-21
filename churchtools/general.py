@@ -6,7 +6,7 @@ Endpoints of general purpose.
 
 """
 
-from ct_types import Person, VersionInfo
+from churchtools.ct_types import Person, VersionInfo
 from typing import Any
 
 

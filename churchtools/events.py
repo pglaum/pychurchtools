@@ -9,7 +9,7 @@ TODO:
 
 """
 
-from ct_types import Agenda, Event, Song
+from churchtools.ct_types import Agenda, Event, Song
 from datetime import datetime
 from typing import Any, List
 

@@ -9,7 +9,7 @@ These are the statuses that a person can have.
 
 """
 
-from ct_types import CTStatus
+from churchtools.ct_types import CTStatus
 from typing import Any, List, Optional
 
 

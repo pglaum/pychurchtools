@@ -35,13 +35,13 @@ TODO (for 100% completion):
 
 """
 
-from events import Events
-from general import General
-from persons import Persons
-from services import Services
-from songs import Songs
-from status import Status
-from wiki import Wiki
+from churchtools.events import Events
+from churchtools.general import General
+from churchtools.persons import Persons
+from churchtools.services import Services
+from churchtools.songs import Songs
+from churchtools.status import Status
+from churchtools.wiki import Wiki
 
 from typing import Any, Dict
 import json

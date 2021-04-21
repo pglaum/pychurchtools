@@ -12,7 +12,7 @@ TODO:
 
 """
 
-from ct_types import Event, Group, Person, PersonRelationship, PersonTag
+from churchtools.ct_types import Event, Group, Person, PersonRelationship, PersonTag
 from datetime import datetime
 from typing import Any, Dict, List, Optional
 
