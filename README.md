@@ -11,8 +11,12 @@ implemented.
 
 ## Installation
 
+To install, you can use `pip install .` in the source directory.
+Type `pip uninstall churchtools` to remove the library.
+
 Dependencies:
 
+- `pydantic`
 - `requests`
 
 ## Usage
@@ -49,7 +53,7 @@ ct.login('your_email', 'your_password')
 You can execute the following in a python script to test the functionality.
 
 ```python3
-from ct import CT
+from churchtools import CT
 
 c = CT()
 c.login('your_email', 'your_password')
