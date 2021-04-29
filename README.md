@@ -2,11 +2,9 @@
 
 This is a python wrapper for the ChurchTools API.
 The API from ChurchTools is provided using the Swagger toolset.
-An overview of the available endpoints can be found here:
-<https://wetzlar.church.tools/api>
 
-__Note:__ This library is very incomplete and WIP.
-Many endpoints are not implemented at all and the others are only partly
+__Note:__ This library is WIP.
+Some endpoints are not implemented at all and the others are only partly
 implemented.
 
 ## Installation
@@ -26,11 +24,11 @@ Dependencies:
 #### Via a cookie
 
 Login to churchtools in your browser and copy the cookie.
-The cookie object looks like this:
+The cookie object looks something like this:
 
 ```python3
 cookie = {
-  'ChurchTools_ct_wetzlar': 'some_random_text',
+  'ChurchTools_ct_<church_name>': 'some_random_text',
 }
 ```
 
@@ -55,7 +53,7 @@ You can execute the following in a python script to test the functionality.
 ```python3
 from churchtools import CT
 
-c = CT()
+c = CT('https://<church_name>.church.tools')
 c.login('your_email', 'your_password')
 
 events = c.events.list()
@@ -74,7 +72,5 @@ print('Your next events:')
 
 ### Notes
 
-- You can use the library for other ChurchTools instances by setting the
-  `base_url` field to another URL.
 - Set the `debugging` field from 0 - 2 for none to many debug messages.
 - Times are in UTC

@@ -44,6 +44,7 @@ from churchtools.status import Status
 from churchtools.wiki import Wiki
 
 from typing import Any, Dict
+from urllib.parse import urljoin
 import json
 import requests
 import traceback
@@ -51,11 +52,11 @@ import traceback
 
 class CT:
 
-    __base_url = 'https://wetzlar.church.tools/api/'
+    __base_url = ''
     __debugging = 0
     __cookie = None
 
-    def __init__(self, cookie: Dict[str, str] = None) -> None:
+    def __init__(self, base_url: str, cookie: Dict[str, str] = None) -> None:
         """Initialize a CT object.
 
         The login cookie can look like this:
@@ -63,15 +64,19 @@ class CT:
         .. code-block ::
 
             cookie = {
-                'ChurchTools_ct_wetzlar': 'some_random_text',
+                'ChurchTools_ct_<church_name>': 'some_random_text',
             }
 
+        :param base_url: Set the base_url to the API. It typically looks like
+            this: https://<church_name>.church.tools/api/
+        :type base_url: str
         :param cookie: The login cookie
         :type cookie: dict
         :returns: An initialized CT object
         :rtype: CT
         """
 
+        self.__base_url = base_url
         if cookie:
             self.__cookie = cookie
 
@@ -99,9 +104,10 @@ class CT:
 
         # TODO: implement lists in params (e.g. ids for songs.list())
 
-        rurl = f'{self.__base_url}{endpoint}'
+        rurl = urljoin(self.__base_url, 'api/') + endpoint
 
         if self.__debugging > 1:
+            print('request to:', rurl)
             for line in traceback.format_stack():
                 print(line.strip())
 
@@ -167,8 +173,7 @@ class CT:
         """
 
         if not login_url:
-            # TODO: generalize this
-            login_url = 'https://wetzlar.church.tools/index.php?q=login/ajax'
+            login_url = urljoin(self.__base_url, '/index.php?q=login/ajax')
 
         data = {
             'func': 'login',
@@ -224,7 +229,7 @@ class CT:
         .. code-block ::
 
             cookie = {
-                'ChurchTools_ct_wetzlar': 'some_random_text',
+                'ChurchTools_ct_<church_name>': 'some_random_text',
             }
 
         :param cookie: The login cookie
