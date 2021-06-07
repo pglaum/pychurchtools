@@ -6,14 +6,13 @@ Find out about persons in ChurchTools
 
 TODO:
 
-    - settings
-    - servicerequests
-    - devices
+    - All DELETE/PATCH/POST/PUT endpoints
 
 """
 
-from churchtools.ct_types import Event, Group, Person, PersonRelationship, PersonTag
-from datetime import datetime
+from churchtools.ct_types import Birthday, Device, Event, Group, Person, \
+    PersonRelationship, PersonTag, ServiceRequest, Setting
+from datetime import date, datetime
 from typing import Any, Dict, List, Optional
 
 
@@ -202,3 +201,154 @@ class Persons:
             grps.append(grp)
 
         return grps
+
+    def settings(self, person_id: int, module: str = None) -> List[Setting]:
+        """Get the settings for a person.
+
+        :param person_id: The ID of the person
+        :type person_id: int
+        :param module: Only list settings for a module
+        :type module: str
+        :returns: A list of settings
+        :rtype: List[Setting]
+        """
+
+        route = f'persons/{person_id}/settings'
+        if module:
+            route = f'{route}/{module}'
+
+        res = self.__ct.make_request(route)
+
+        sttngs = []
+
+        for item in res['data']:
+            sttng = Setting(**item)
+            sttngs.append(sttng)
+
+        return sttngs
+
+    def setting(self, person_id: int, module: str, attribute: str) -> Setting:
+        """Get a setting for a person.
+
+        :param person_id: The ID of the person
+        :type person_id: int
+        :param module: The settings module
+        :type module: str
+        :param attribute: The wanted attribute
+        :type attribute: str
+        :returns: The setting
+        :rtype: Setting
+        """
+
+        route = f'persons/{person_id}/settings/{module}/{attribute}'
+
+        res = self.__ct.make_request(route)
+
+        sttng = Setting(**res['data'])
+        return sttng
+
+    def birthdays(self, start_date: date = None, end_date: date = None
+                  ) -> List[Birthday]:
+        """Get all birthdays in a time span.
+
+        :param start_date: Start date of the timespan (default: yesterday)
+        :type start_date: date
+        :param end_date: End date of the timespan (default: 30 days from now)
+        :type end_date: date
+        :returns: A list of birthdays, including ages and persons
+        :rtype: List[Birthday]
+        """
+
+        route = 'persons/birthdays'
+
+        params = {}
+        if start_date:
+            params['start_date'] = start_date.strftime('%Y-%m-%d')
+        if end_date:
+            params['end_date'] = end_date.strftime('%Y-%m-%d')
+
+        res = self.__ct.make_request(route, params)
+
+        bdays = []
+
+        for item in res['data']:
+            bday = Birthday(**item)
+            bdays.append(bday)
+
+        return bdays
+
+    def servicerequests(self, person_id: int) -> List[ServiceRequest]:
+        """Get all service requests for a person.
+
+        :param person_id: The ID of the person
+        :type person_id: int
+        :returns: A list of service requests
+        :rtype: List[ServiceRequest]
+        """
+
+        route = f'persons/{person_id}/servicerequests'
+        res = self.__ct.make_request(route)
+
+        rqsts = []
+
+        for item in res['data']:
+            rqst = ServiceRequest(**item)
+            rqsts.append(rqst)
+
+        return rqsts
+
+    def servicerequest(self, person_id: int, servicerequest_id: int
+                       ) -> ServiceRequest:
+        """Get all service requests for a person.
+
+        :param person_id: The ID of the person
+        :type person_id: int
+        :param servicerequest_id: The ID of the service request
+        :type servicerequest_id: int
+        :returns: A service request
+        :rtype: ServiceRequest
+        """
+
+        route = f'persons/{person_id}/servicerequests/{servicerequest_id}'
+        res = self.__ct.make_request(route)
+
+        rqst = ServiceRequest(**res['data'])
+        return rqst
+
+    def devices(self, person_id: int) -> List[Device]:
+        """Get all in ChurchTools registered devices of a person.
+
+        These are all registered smartphones/tablets with the CT app.
+
+        :param person_id: The ID of the person
+        :type person_id: int
+        :returns: A list of registered devices
+        :rtype: List[Device]
+        """
+
+        route = f'persons/{person_id}/devices'
+        res = self.__ct.make_request(route)
+
+        dvcs = []
+        for item in res['data']:
+            dvc = Device(**item)
+            dvcs.append(dvc)
+
+        return dvcs
+
+    def device(self, person_id: int, device_id: str) -> Device:
+        """Get all information about one device.
+
+        :param person_id: The ID of the person
+        :type person_id: int
+        :param device_id: The ID of the device
+        :type device_id: str
+        :returns: A list of registered devices
+        :rtype: List[Device]
+        """
+
+        route = f'persons/{person_id}/devices/{device_id}'
+        res = self.__ct.make_request(route)
+
+        dvc = Device(**res['data'])
+        return dvc

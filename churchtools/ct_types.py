@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from pydantic import BaseModel
 from pydantic.fields import ModelField
-from typing import Generator, Generic, List, Optional, TypeVar
+from typing import Generator, Generic, List, Optional, TypeVar, Union
 
 PydanticField = TypeVar('PydanticField')
 
@@ -346,6 +346,17 @@ class PersonRelationship(BaseModel):
             f'({self.degreeOfRelationship})>'
 
 
+class Setting(BaseModel):
+
+    module: str
+    attribute: str
+    value: Union[dict, int, str]
+
+    def __repr__(self) -> str:
+
+        return f'<Relationship: {self.module}.{self.attribute} = {self.value}>'
+
+
 class CTStatus(BaseModel):
 
     id: int
@@ -409,3 +420,69 @@ class WikiSearchResult(BaseModel):
     def __repr__(self) -> str:
 
         return f'<WikiSearchResult: {self.title} ({self.preview})>'
+
+
+class BirthdayPersonDomainAttributes(BaseModel):
+
+    firstName: str
+    lastName: str
+    guid: str
+
+
+class BirthdayPerson(BaseModel):
+
+    title: str
+    domainType: str
+    domainIdentifier: str
+    apiUrl: str
+    frontendUrl: str
+    imageUrl: Optional[str]
+    domainAttributes: BirthdayPersonDomainAttributes
+
+    def __repr__(self) -> str:
+
+        return f'<BirthdayPerson: {self.title}>'
+
+
+class Birthday(BaseModel):
+
+    type: str
+    date: date
+    age: Optional[int]
+    person: BirthdayPerson
+
+    def __repr__(self) -> str:
+
+        return f'<Birthday: {self.person.title} {self.date} ' \
+            f'({self.age} years)>'
+
+
+class ServiceRequest(BaseModel):
+
+    id: int
+    personId: int
+    name: str
+    serviceId: int
+    agreed: bool
+    isValid: bool
+    requestedDate: datetime
+    requesterPersonId: int
+    comment: str
+    counter: int
+
+    # TODO: person
+    # TODO: requesterPerson
+
+    def __repr__(self) -> str:
+
+        return f'<ServiceRequest: {self.name} {self.serviceId} [{self.id}]>'
+
+
+class Device(BaseModel):
+
+    id: str
+    type: str
+    ttl: datetime
+    version: str
+    createdAt: datetime
+    updatedAt: datetime
