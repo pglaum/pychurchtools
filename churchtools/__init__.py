@@ -79,6 +79,8 @@ class CT:
         self.__base_url = base_url
         if cookie:
             self.__cookie = cookie
+        else:
+            self.__cookie = None
 
         self.events = Events(self)
         self.general = General(self)
@@ -191,6 +193,24 @@ class CT:
 
         cookie = response.cookies.items()[0]
         self.__cookie = {cookie[0]: cookie[1]}
+
+    def is_authenticated(self) -> bool:
+        """Check if the current object is authenticated with curchtools.
+
+        :returns: If the object is authenticated
+        :rtype: bool
+        """
+
+        # check if no cookie is set
+        if not self.__cookie:
+            return False
+
+        # check if the user is 'anonymous'
+        i_am = self.general.whoami()
+        if i_am.id < 0:
+            return False
+
+        return True
 
     def set_base_url(self, base_url: str) -> None:
         """Set the base URL.
