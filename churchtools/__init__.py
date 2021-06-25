@@ -147,18 +147,21 @@ class CT:
         """
 
         if resp.status_code == 401:
-            print('Error: 401 Unauthorized')
+            if self.__debugging > 0:
+                print('Error: 401 Unauthorized')
             return False
         if resp.status_code == 403:
-            print('Error: 403 Forbidden')
+            if self.__debugging > 0:
+                print('Error: 403 Forbidden')
             return False
         if resp.status_code == 404:
-            print('Error: 404 Not Found')
+            if self.__debugging > 0:
+                print('Error: 404 Not Found')
             return False
 
         return True
 
-    def login(self, email: str, password: str, login_url: str = None) -> None:
+    def login(self, email: str, password: str, login_url: str = None) -> bool:
         """Login to the ChurchTools API.
 
         The login cookie is saved to the CT object.
@@ -172,6 +175,8 @@ class CT:
         :param login_url: The URL to the AJAX function.
             This parameter typically ends in: `/index.php?q=login/ajax`
         :type login_url: str
+        :returns: Success
+        :rtype: bool
         """
 
         if not login_url:
@@ -185,14 +190,17 @@ class CT:
         response = requests.post(login_url, data=data)
 
         if not self.check_response(response):
-            print('login unsuccessful')
-            return
+            if self.__debugging > 0:
+                print('login unsuccessful')
+            return False
 
         if self.__debugging > 0:
             print('login successful')
 
         cookie = response.cookies.items()[0]
         self.__cookie = {cookie[0]: cookie[1]}
+
+        return True
 
     def is_authenticated(self) -> bool:
         """Check if the current object is authenticated with curchtools.
