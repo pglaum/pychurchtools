@@ -11,10 +11,8 @@ from typing import Any, Dict, List, Optional
 
 
 class Wiki:
-
     def __init__(self, ct: Any) -> None:
-        """Initialize a Status object.
-        """
+        """Initialize a Status object."""
 
         self.__ct = ct
 
@@ -25,11 +23,11 @@ class Wiki:
         :rtype: List[WikiCategory]
         """
 
-        res = self.__ct.make_request('wiki/categories')
+        res = self.__ct.make_request("wiki/categories")
 
         ctgs = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 ctg = WikiCategory(**item)
                 ctgs.append(ctg)
 
@@ -44,18 +42,19 @@ class Wiki:
         :rtype: List[WikiPage]
         """
 
-        res = self.__ct.make_request(f'wiki/categories/{category_id}/pages')
+        res = self.__ct.make_request(f"wiki/categories/{category_id}/pages")
 
         pgs = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 pg = WikiPage(**item)
                 pgs.append(pg)
 
         return pgs
 
-    def page(self, category_id: int, identifier: str,
-             version: Optional[int] = None) -> Optional[WikiPage]:
+    def page(
+        self, category_id: int, identifier: str, version: Optional[int] = None
+    ) -> Optional[WikiPage]:
         """Get a wiki page.
 
         :param category_id: The ID of the category
@@ -69,15 +68,18 @@ class Wiki:
         """
 
         if version:
-            res = self.__ct.make_request(f'wiki/categories/{category_id}/'
-                                         f'pages/{identifier}/'
-                                         f'versions/{version}')
+            res = self.__ct.make_request(
+                f"wiki/categories/{category_id}/"
+                f"pages/{identifier}/"
+                f"versions/{version}"
+            )
         else:
-            res = self.__ct.make_request(f'wiki/categories/{category_id}/'
-                                         f'pages/{identifier}')
+            res = self.__ct.make_request(
+                f"wiki/categories/{category_id}/" f"pages/{identifier}"
+            )
 
-        if res and 'data' in res:
-            return WikiPage(**res['data'])
+        if res and "data" in res:
+            return WikiPage(**res["data"])
 
         return None
 
@@ -92,18 +94,20 @@ class Wiki:
         :rtype: WikiPage
         """
 
-        res = self.__ct.make_request(f'wiki/categories/{category_id}/'
-                                     f'pages/{identifier}/versions')
+        res = self.__ct.make_request(
+            f"wiki/categories/{category_id}/" f"pages/{identifier}/versions"
+        )
 
         pgs = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 pgs.append(WikiPage(**item))
 
         return pgs
 
-    def search(self, query: str, wiki_category_ids: List[int] = None
-               ) -> List[WikiSearchResult]:
+    def search(
+        self, query: str, wiki_category_ids: List[int] = None
+    ) -> List[WikiSearchResult]:
         """Search for a query.
 
         :param query: The search query
@@ -116,15 +120,15 @@ class Wiki:
 
         params: Dict[str, Any] = {}
 
-        params['query'] = query
+        params["query"] = query
         if wiki_category_ids:
-            params['wiki_category_ids'] = wiki_category_ids
+            params["wiki_category_ids"] = wiki_category_ids
 
-        res = self.__ct.make_request('wiki/search', params)
+        res = self.__ct.make_request("wiki/search", params)
 
         results = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 result = WikiSearchResult(**item)
                 results.append(result)
 

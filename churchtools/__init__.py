@@ -52,7 +52,7 @@ import traceback
 
 class CT:
 
-    __base_url = ''
+    __base_url = ""
     __debugging = 0
     __cookie = None
 
@@ -90,8 +90,9 @@ class CT:
         self.status = Status(self)
         self.wiki = Wiki(self)
 
-    def make_request(self, endpoint: str, params: Any = None,
-                     binary: bool = False) -> Any:
+    def make_request(
+        self, endpoint: str, params: Any = None, binary: bool = False
+    ) -> Any:
         """Make a request to the churchtools API.
 
         :param endpoint: The url endpoint (excluding base_url), that is called.
@@ -106,16 +107,15 @@ class CT:
 
         # TODO: implement lists in params (e.g. ids for songs.list())
 
-        rurl = urljoin(self.__base_url, 'api/') + endpoint
+        rurl = urljoin(self.__base_url, "api/") + endpoint
 
         if self.__debugging > 1:
-            print('request to:', rurl)
+            print("request to:", rurl)
             for line in traceback.format_stack():
                 print(line.strip())
 
         if binary:
-            return requests.get(rurl, params=params,
-                                cookies=self.__cookie).content
+            return requests.get(rurl, params=params, cookies=self.__cookie).content
 
         resp = requests.get(rurl, params=params, cookies=self.__cookie)
         rstr = resp.content.decode()
@@ -123,7 +123,7 @@ class CT:
         r_ok = self.check_response(resp)
         if not r_ok:
             if self.__debugging > 0:
-                print(rurl, '->', resp.status_code)
+                print(rurl, "->", resp.status_code)
                 print(rstr)
 
             return None
@@ -131,7 +131,7 @@ class CT:
         robj = json.loads(rstr)
 
         if self.__debugging > 0:
-            print(rurl, '->', resp.status_code)
+            print(rurl, "->", resp.status_code)
             print(rstr)
             print()
 
@@ -148,15 +148,15 @@ class CT:
 
         if resp.status_code == 401:
             if self.__debugging > 0:
-                print('Error: 401 Unauthorized')
+                print("Error: 401 Unauthorized")
             return False
         if resp.status_code == 403:
             if self.__debugging > 0:
-                print('Error: 403 Forbidden')
+                print("Error: 403 Forbidden")
             return False
         if resp.status_code == 404:
             if self.__debugging > 0:
-                print('Error: 404 Not Found')
+                print("Error: 404 Not Found")
             return False
 
         return True
@@ -180,22 +180,22 @@ class CT:
         """
 
         if not login_url:
-            login_url = urljoin(self.__base_url, '/index.php?q=login/ajax')
+            login_url = urljoin(self.__base_url, "/index.php?q=login/ajax")
 
         data = {
-            'func': 'login',
-            'email': email,
-            'password': password,
+            "func": "login",
+            "email": email,
+            "password": password,
         }
         response = requests.post(login_url, data=data)
 
         if not self.check_response(response):
             if self.__debugging > 0:
-                print('login unsuccessful')
+                print("login unsuccessful")
             return False
 
         if self.__debugging > 0:
-            print('login successful')
+            print("login successful")
 
         cookie = response.cookies.items()[0]
         self.__cookie = {cookie[0]: cookie[1]}
@@ -265,3 +265,12 @@ class CT:
         """
 
         self.__cookie = cookie
+
+    def get_login_cookie(self) -> dict:
+        """Get the login cookie.
+
+        :returns: the login cookie
+        :rtype: dict
+        """
+
+        return self.__cookie

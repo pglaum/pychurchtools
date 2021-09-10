@@ -19,9 +19,9 @@ setup(
     license="GPLv3",
     keywords="api churchtools",
     url="https://git.sr.ht/~pglaum/pychurchtools",
-    packages=['churchtools'],
-    install_requires=['pydantic', 'requests'],
-    long_description=read('README.md'),
+    packages=["churchtools"],
+    install_requires=["pydantic", "requests"],
+    long_description=read("README.md"),
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",

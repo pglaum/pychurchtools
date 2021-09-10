@@ -11,10 +11,8 @@ from typing import Any
 
 
 class General:
-
     def __init__(self, ct: Any) -> None:
-        """Initialize a General object.
-        """
+        """Initialize a General object."""
 
         self.__ct = ct
 
@@ -28,7 +26,7 @@ class General:
         :rtype: VersionInfo
         """
 
-        res = self.__ct.make_request('info')
+        res = self.__ct.make_request("info")
         return VersionInfo(**res)
 
     def whoami(self) -> Person:
@@ -45,12 +43,11 @@ class General:
         :rtype: Person
         """
 
-        res = self.__ct.make_request('whoami')
-        return Person(**res['data'])
+        res = self.__ct.make_request("whoami")
+        return Person(**res["data"])
 
     def test_route(self, route: str) -> dict:
-        """Test an arbitrary route.
-        """
+        """Test an arbitrary route."""
 
         res = self.__ct.make_request(route)
         return res

@@ -11,14 +11,19 @@ from typing import Any, Dict, List, Optional
 
 
 class Songs:
-
     def __init__(self, ct: Any) -> None:
 
         self.__ct = ct
 
-    def list(self, song_category_ids: List[int] = None, ids: List[int] = None,
-             practice: bool = False, key_of_arrangement: str = None,
-             page: int = 1, limit: int = 10) -> List[Song]:
+    def list(
+        self,
+        song_category_ids: List[int] = None,
+        ids: List[int] = None,
+        practice: bool = False,
+        key_of_arrangement: str = None,
+        page: int = 1,
+        limit: int = 10,
+    ) -> List[Song]:
         """Return a list of songs.
 
         :param song_category_ids: Only query for these category IDs
@@ -42,23 +47,23 @@ class Songs:
         params: Dict[str, Any] = {}
 
         if song_category_ids:
-            params['song_category_ids'] = song_category_ids
+            params["song_category_ids"] = song_category_ids
         if ids:
-            params['ids'] = ids
+            params["ids"] = ids
         if practice:
-            params['practice'] = practice
+            params["practice"] = practice
         if key_of_arrangement:
-            params['key_of_arrangement'] = key_of_arrangement
+            params["key_of_arrangement"] = key_of_arrangement
         if page:
-            params['page'] = page
+            params["page"] = page
         if limit:
-            params['limit'] = limit
+            params["limit"] = limit
 
-        res = self.__ct.make_request('songs', params=params)
+        res = self.__ct.make_request("songs", params=params)
 
         songs = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 song = Song(**item)
                 songs.append(song)
 
@@ -73,10 +78,10 @@ class Songs:
         :rtype: Song
         """
 
-        route = f'songs/{song_id}'
+        route = f"songs/{song_id}"
         res = self.__ct.make_request(route)
 
-        if res and 'data' in res:
-            return Song(**res['data'])
+        if res and "data" in res:
+            return Song(**res["data"])
 
         return None

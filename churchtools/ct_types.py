@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from pydantic.fields import ModelField
 from typing import Generator, Generic, List, Optional, TypeVar, Union
 
-PydanticField = TypeVar('PydanticField')
+PydanticField = TypeVar("PydanticField")
 
 
 class EmptyStrToNone(Generic[PydanticField]):
@@ -12,9 +12,8 @@ class EmptyStrToNone(Generic[PydanticField]):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v: PydanticField, field: ModelField
-                 ) -> Optional[PydanticField]:
-        if v == '':
+    def validate(cls, v: PydanticField, field: ModelField) -> Optional[PydanticField]:
+        if v == "":
             return None
         return v
 
@@ -25,9 +24,8 @@ class EmptyStrToFalse(Generic[PydanticField]):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v: PydanticField, field: ModelField
-                 ) -> bool:
-        if v == '' or not v:
+    def validate(cls, v: PydanticField, field: ModelField) -> bool:
+        if v == "" or not v:
             return False
         return True
 
@@ -87,7 +85,7 @@ class Person(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Person: {self.firstName} {self.lastName} [{self.id}]>'
+        return f"<Person: {self.firstName} {self.lastName} [{self.id}]>"
 
 
 class AgendaSong(BaseModel):
@@ -133,7 +131,7 @@ class Agenda(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Agenda: {self.name} [{self.id}]>'
+        return f"<Agenda: {self.name} [{self.id}]>"
 
 
 class Service(BaseModel):
@@ -158,7 +156,7 @@ class Service(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Service: {self.name} [{self.id}]>'
+        return f"<Service: {self.name} [{self.id}]>"
 
 
 class ServiceGroup(BaseModel):
@@ -172,7 +170,7 @@ class ServiceGroup(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<ServiceGroup: {self.name} [{self.id}]>'
+        return f"<ServiceGroup: {self.name} [{self.id}]>"
 
 
 class EventService(BaseModel):
@@ -192,7 +190,7 @@ class EventService(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<EventService: {self.name}>'
+        return f"<EventService: {self.name}>"
 
 
 class Event(BaseModel):
@@ -211,9 +209,11 @@ class Event(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Event: {self.startDate.day:02}.' \
-            f'{self.startDate.month:02} {self.startDate.hour:02}:' \
+        return (
+            f"<Event: {self.startDate.day:02}."
+            f"{self.startDate.month:02} {self.startDate.hour:02}:"
             f'{self.startDate.minute:02} "{self.name}" [{self.id}]>'
+        )
 
 
 class GroupDomainAttributes(BaseModel):
@@ -233,7 +233,7 @@ class Group(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Group: {self.title}>'
+        return f"<Group: {self.title}>"
 
 
 class ArrangementLink(BaseModel):
@@ -295,7 +295,7 @@ class Song(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Song: {self.name} [{self.id}]>'
+        return f"<Song: {self.name} [{self.id}]>"
 
 
 class VersionInfo(BaseModel):
@@ -305,7 +305,7 @@ class VersionInfo(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Version: {self.version} (build: {self.build})>'
+        return f"<Version: {self.version} (build: {self.build})>"
 
 
 class PersonTag(BaseModel):
@@ -342,8 +342,9 @@ class PersonRelationship(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Relationship: {self.relative.title} ' \
-            f'({self.degreeOfRelationship})>'
+        return (
+            f"<Relationship: {self.relative.title} " f"({self.degreeOfRelationship})>"
+        )
 
 
 class Setting(BaseModel):
@@ -354,7 +355,7 @@ class Setting(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Relationship: {self.module}.{self.attribute} = {self.value}>'
+        return f"<Relationship: {self.module}.{self.attribute} = {self.value}>"
 
 
 class CTStatus(BaseModel):
@@ -380,7 +381,7 @@ class WikiCategory(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<WikiCategory: {self.name} [{self.id}]>'
+        return f"<WikiCategory: {self.name} [{self.id}]>"
 
 
 class WikiPermission(BaseModel):
@@ -404,7 +405,7 @@ class WikiPage(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<WikiPage: {self.title} [{self.identifier}]>'
+        return f"<WikiPage: {self.title} [{self.identifier}]>"
 
 
 class WikiSearchResult(BaseModel):
@@ -419,7 +420,7 @@ class WikiSearchResult(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<WikiSearchResult: {self.title} ({self.preview})>'
+        return f"<WikiSearchResult: {self.title} ({self.preview})>"
 
 
 class BirthdayPersonDomainAttributes(BaseModel):
@@ -441,7 +442,7 @@ class BirthdayPerson(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<BirthdayPerson: {self.title}>'
+        return f"<BirthdayPerson: {self.title}>"
 
 
 class Birthday(BaseModel):
@@ -453,8 +454,7 @@ class Birthday(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Birthday: {self.person.title} {self.date} ' \
-            f'({self.age} years)>'
+        return f"<Birthday: {self.person.title} {self.date} " f"({self.age} years)>"
 
 
 class ServiceRequest(BaseModel):
@@ -475,7 +475,7 @@ class ServiceRequest(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<ServiceRequest: {self.name} {self.serviceId} [{self.id}]>'
+        return f"<ServiceRequest: {self.name} {self.serviceId} [{self.id}]>"
 
 
 class Device(BaseModel):

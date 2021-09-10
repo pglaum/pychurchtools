@@ -11,7 +11,6 @@ from typing import Any, List
 
 
 class Services:
-
     def __init__(self, ct: Any) -> None:
 
         self.__ct = ct
@@ -23,11 +22,11 @@ class Services:
         :rtype: List[Service]
         """
 
-        res = self.__ct.make_request('services')
+        res = self.__ct.make_request("services")
 
         services = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 services.append(Service(**item))
 
         return services
@@ -39,11 +38,11 @@ class Services:
         :rtype: List[ServiceGroup]
         """
 
-        res = self.__ct.make_request('services')
+        res = self.__ct.make_request("services")
 
         sgroups = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 sgroups.append(ServiceGroup(**item))
 
         return sgroups

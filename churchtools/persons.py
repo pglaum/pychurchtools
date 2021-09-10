@@ -10,17 +10,24 @@ TODO:
 
 """
 
-from churchtools.ct_types import Birthday, Device, Event, Group, Person, \
-    PersonRelationship, PersonTag, ServiceRequest, Setting
+from churchtools.ct_types import (
+    Birthday,
+    Device,
+    Event,
+    Group,
+    Person,
+    PersonRelationship,
+    PersonTag,
+    ServiceRequest,
+    Setting,
+)
 from datetime import date, datetime
 from typing import Any, Dict, List, Optional
 
 
 class Persons:
-
     def __init__(self, ct: Any) -> None:
-        """Initialize a Persons object.
-        """
+        """Initialize a Persons object."""
 
         self.__ct = ct
 
@@ -33,18 +40,25 @@ class Persons:
         :rtype: Person
         """
 
-        route = f'persons/{person_id}'
+        route = f"persons/{person_id}"
         res = self.__ct.make_request(route)
 
-        if res and 'data' in res:
-            return Person(**res['data'])
+        if res and "data" in res:
+            return Person(**res["data"])
 
         return None
 
-    def list(self, ids: List[int] = None, status_ids: List[int] = None,
-             campus_ids: List[int] = None, birthday_before: datetime = None,
-             birthday_after: datetime = None, is_archived: bool = False,
-             page: int = 1, limit: int = 10) -> List[Person]:
+    def list(
+        self,
+        ids: List[int] = None,
+        status_ids: List[int] = None,
+        campus_ids: List[int] = None,
+        birthday_before: datetime = None,
+        birthday_after: datetime = None,
+        is_archived: bool = False,
+        page: int = 1,
+        limit: int = 10,
+    ) -> List[Person]:
         """Returns a list of persons, that the logged in user can see.
 
         :param ids: A list of IDs that is to be queried
@@ -72,31 +86,33 @@ class Persons:
         params: Dict[str, Any] = {}
 
         if ids:
-            params['ids'] = ids
+            params["ids"] = ids
         if status_ids:
-            params['status_ids'] = status_ids
+            params["status_ids"] = status_ids
         if campus_ids:
-            params['campus_ids'] = campus_ids
+            params["campus_ids"] = campus_ids
         if birthday_before:
-            params['birthday_before'] = \
-                f'{birthday_before.year}-{birthday_before.month:02d}-' \
-                f'{birthday_before.day:02d}'
+            params["birthday_before"] = (
+                f"{birthday_before.year}-{birthday_before.month:02d}-"
+                f"{birthday_before.day:02d}"
+            )
         if birthday_after:
-            params['birthday_after'] = \
-                f'{birthday_after.year}-{birthday_after.month:02d}-' \
-                f'{birthday_after.day:02d}'
+            params["birthday_after"] = (
+                f"{birthday_after.year}-{birthday_after.month:02d}-"
+                f"{birthday_after.day:02d}"
+            )
         if is_archived:
-            params['is_archived'] = is_archived
+            params["is_archived"] = is_archived
         if page:
-            params['page'] = page
+            params["page"] = page
         if limit:
-            params['limit'] = limit
+            params["limit"] = limit
 
-        res = self.__ct.make_request('persons', params=params)
+        res = self.__ct.make_request("persons", params=params)
 
         persons = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 pers = Person(**item)
                 persons.append(pers)
 
@@ -111,12 +127,12 @@ class Persons:
         :rtype: List[PersonTag]
         """
 
-        route = f'persons/{person_id}/tags'
+        route = f"persons/{person_id}/tags"
         res = self.__ct.make_request(route)
 
         tags = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 tags.append(PersonTag(**item))
 
         return tags
@@ -130,19 +146,18 @@ class Persons:
         :rtype: List[PersonRelationship]
         """
 
-        route = f'persons/{person_id}/relationships'
+        route = f"persons/{person_id}/relationships"
         res = self.__ct.make_request(route)
 
         rls = []
-        if res and 'data' in res:
-            for item in res['data']:
+        if res and "data" in res:
+            for item in res["data"]:
                 rl = PersonRelationship(**item)
                 rls.append(rl)
 
         return rls
 
-    def events(self, person_id: int, from_date: datetime = None
-               ) -> List[Event]:
+    def events(self, person_id: int, from_date: datetime = None) -> List[Event]:
         """Get events that a person is involved in.
 
         :param person_id: The ID of the person
@@ -155,23 +170,27 @@ class Persons:
 
         params = {}
         if from_date:
-            params['from'] = \
-                f'{from_date.year}-{from_date.month:02d}-' \
-                f'{from_date.day:02d}'
+            params["from"] = (
+                f"{from_date.year}-{from_date.month:02d}-" f"{from_date.day:02d}"
+            )
 
-        route = f'persons/{person_id}/events'
+        route = f"persons/{person_id}/events"
         res = self.__ct.make_request(route, params)
 
         evs = []
-        if 'data' in res:
-            for item in res['data']:
+        if "data" in res:
+            for item in res["data"]:
                 ev = Event(**item)
                 evs.append(ev)
 
         return evs
 
-    def groups(self, person_id: int, show_overdue_groups: bool = False,
-               show_inactive_groups: bool = False) -> List[Group]:
+    def groups(
+        self,
+        person_id: int,
+        show_overdue_groups: bool = False,
+        show_inactive_groups: bool = False,
+    ) -> List[Group]:
         """Get events that a person is part of.
 
         :param person_id: The ID of the person
@@ -186,18 +205,18 @@ class Persons:
 
         params = {}
         if show_overdue_groups:
-            params['show_overdue_groups'] = show_overdue_groups
+            params["show_overdue_groups"] = show_overdue_groups
         if show_inactive_groups:
-            params['show_inactive_groups'] = show_inactive_groups
+            params["show_inactive_groups"] = show_inactive_groups
 
-        route = f'persons/{person_id}/groups'
+        route = f"persons/{person_id}/groups"
         res = self.__ct.make_request(route, params)
 
         # TODO: check if we are missing some relevant data.
         #       usually, only the group itself should be interesting.
         grps = []
-        for item in res['data']:
-            grp = Group(**item['group'])
+        for item in res["data"]:
+            grp = Group(**item["group"])
             grps.append(grp)
 
         return grps
@@ -213,15 +232,15 @@ class Persons:
         :rtype: List[Setting]
         """
 
-        route = f'persons/{person_id}/settings'
+        route = f"persons/{person_id}/settings"
         if module:
-            route = f'{route}/{module}'
+            route = f"{route}/{module}"
 
         res = self.__ct.make_request(route)
 
         sttngs = []
 
-        for item in res['data']:
+        for item in res["data"]:
             sttng = Setting(**item)
             sttngs.append(sttng)
 
@@ -240,15 +259,16 @@ class Persons:
         :rtype: Setting
         """
 
-        route = f'persons/{person_id}/settings/{module}/{attribute}'
+        route = f"persons/{person_id}/settings/{module}/{attribute}"
 
         res = self.__ct.make_request(route)
 
-        sttng = Setting(**res['data'])
+        sttng = Setting(**res["data"])
         return sttng
 
-    def birthdays(self, start_date: date = None, end_date: date = None
-                  ) -> List[Birthday]:
+    def birthdays(
+        self, start_date: date = None, end_date: date = None
+    ) -> List[Birthday]:
         """Get all birthdays in a time span.
 
         :param start_date: Start date of the timespan (default: yesterday)
@@ -259,19 +279,19 @@ class Persons:
         :rtype: List[Birthday]
         """
 
-        route = 'persons/birthdays'
+        route = "persons/birthdays"
 
         params = {}
         if start_date:
-            params['start_date'] = start_date.strftime('%Y-%m-%d')
+            params["start_date"] = start_date.strftime("%Y-%m-%d")
         if end_date:
-            params['end_date'] = end_date.strftime('%Y-%m-%d')
+            params["end_date"] = end_date.strftime("%Y-%m-%d")
 
         res = self.__ct.make_request(route, params)
 
         bdays = []
 
-        for item in res['data']:
+        for item in res["data"]:
             bday = Birthday(**item)
             bdays.append(bday)
 
@@ -286,19 +306,18 @@ class Persons:
         :rtype: List[ServiceRequest]
         """
 
-        route = f'persons/{person_id}/servicerequests'
+        route = f"persons/{person_id}/servicerequests"
         res = self.__ct.make_request(route)
 
         rqsts = []
 
-        for item in res['data']:
+        for item in res["data"]:
             rqst = ServiceRequest(**item)
             rqsts.append(rqst)
 
         return rqsts
 
-    def servicerequest(self, person_id: int, servicerequest_id: int
-                       ) -> ServiceRequest:
+    def servicerequest(self, person_id: int, servicerequest_id: int) -> ServiceRequest:
         """Get all service requests for a person.
 
         :param person_id: The ID of the person
@@ -309,10 +328,10 @@ class Persons:
         :rtype: ServiceRequest
         """
 
-        route = f'persons/{person_id}/servicerequests/{servicerequest_id}'
+        route = f"persons/{person_id}/servicerequests/{servicerequest_id}"
         res = self.__ct.make_request(route)
 
-        rqst = ServiceRequest(**res['data'])
+        rqst = ServiceRequest(**res["data"])
         return rqst
 
     def devices(self, person_id: int) -> List[Device]:
@@ -326,11 +345,11 @@ class Persons:
         :rtype: List[Device]
         """
 
-        route = f'persons/{person_id}/devices'
+        route = f"persons/{person_id}/devices"
         res = self.__ct.make_request(route)
 
         dvcs = []
-        for item in res['data']:
+        for item in res["data"]:
             dvc = Device(**item)
             dvcs.append(dvc)
 
@@ -347,8 +366,8 @@ class Persons:
         :rtype: List[Device]
         """
 
-        route = f'persons/{person_id}/devices/{device_id}'
+        route = f"persons/{person_id}/devices/{device_id}"
         res = self.__ct.make_request(route)
 
-        dvc = Device(**res['data'])
+        dvc = Device(**res["data"])
         return dvc
