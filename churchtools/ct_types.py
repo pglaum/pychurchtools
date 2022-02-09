@@ -351,11 +351,11 @@ class Setting(BaseModel):
 
     module: str
     attribute: str
-    value: Union[dict, int, str]
+    value: Union[dict, int, List, str]
 
     def __repr__(self) -> str:
 
-        return f"<Relationship: {self.module}.{self.attribute} = {self.value}>"
+        return f"<Setting: {self.module}.{self.attribute} = {self.value}>"
 
 
 class CTStatus(BaseModel):
@@ -486,3 +486,17 @@ class Device(BaseModel):
     version: str
     createdAt: datetime
     updatedAt: datetime
+
+
+class Pagination(BaseModel):
+
+    total: int
+    current: int
+    limit: int
+    lastPage: int
+
+
+class MetaPagination(BaseModel):
+
+    count: int
+    pagination: Pagination

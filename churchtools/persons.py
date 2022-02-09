@@ -15,6 +15,7 @@ from churchtools.ct_types import (
     Device,
     Event,
     Group,
+    MetaPagination,
     Person,
     PersonRelationship,
     PersonTag,
@@ -22,7 +23,7 @@ from churchtools.ct_types import (
     Setting,
 )
 from datetime import date, datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 
 class Persons:
@@ -58,7 +59,7 @@ class Persons:
         is_archived: bool = False,
         page: int = 1,
         limit: int = 10,
-    ) -> List[Person]:
+    ) -> Tuple[List[Person], MetaPagination]:
         """Returns a list of persons, that the logged in user can see.
 
         :param ids: A list of IDs that is to be queried
@@ -80,8 +81,6 @@ class Persons:
         :returns: A list of persons that match the query
         :rtype: List[Person]
         """
-
-        # TODO: pagination
 
         params: Dict[str, Any] = {}
 
@@ -116,7 +115,11 @@ class Persons:
                 pers = Person(**item)
                 persons.append(pers)
 
-        return persons
+        pagination = None
+        if res and "meta" in res:
+            pagination = MetaPagination(**res["meta"])
+
+        return persons, pagination
 
     def tags(self, person_id: int) -> List[PersonTag]:
         """Get the tags of a person.
@@ -371,3 +374,14 @@ class Persons:
 
         dvc = Device(**res["data"])
         return dvc
+
+    def logintoken(self, person_id: int) -> str:
+        """Fetch login token for person.
+
+        If a token does not yet exist, a new one is created on the fly.
+        """
+
+        route = f"persons/{person_id}/logintoken"
+        res = self.__ct.make_request(route)
+
+        return res["data"]
