@@ -32,15 +32,15 @@ cookie = {
 }
 ```
 
-Pass this object to the init function of the CT class or set the field `cookie`
-in the CT object.
+Pass this object to the init function of the `ChurchTools` class or set the
+field `cookie` in the `ChurchTools` object.
 
 #### Via old AJAX API
 
 Since the login function does not seem to be implemented in the new REST API, we
 have to use the old AJAX API.
-The CT class provides a method `login` to log you in and set the cookie
-automatically.
+The `ChurchTools` class provides a method `login` to log you in and set the
+cookie automatically.
 
 ```python3
 ct.login('your_email', 'your_password')
@@ -51,9 +51,9 @@ ct.login('your_email', 'your_password')
 You can execute the following in a python script to test the functionality.
 
 ```python3
-from churchtools import CT
+from churchtools import ChurchTools
 
-c = CT('https://<church_name>.church.tools')
+c = ChurchTools('https://<church_name>.church.tools')
 c.login('your_email', 'your_password')
 
 events = c.events.list()

@@ -1,6 +1,6 @@
 from datetime import date, datetime
-from pydantic import BaseModel
-from pydantic.fields import ModelField
+from pydantic import BaseModel  # type: ignore
+from pydantic.fields import ModelField  # type: ignore
 from typing import Generator, Generic, List, Optional, TypeVar, Union
 
 PydanticField = TypeVar("PydanticField")

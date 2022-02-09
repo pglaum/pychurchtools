@@ -43,14 +43,14 @@ from churchtools.songs import Songs
 from churchtools.status import Status
 from churchtools.wiki import Wiki
 
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 from urllib.parse import urljoin
 import json
 import requests
 import traceback
 
 
-class CT:
+class ChurchTools:
 
     __base_url = ""
     __debugging = 0
@@ -266,7 +266,7 @@ class CT:
 
         self.__cookie = cookie
 
-    def get_login_cookie(self) -> dict:
+    def get_login_cookie(self) -> Optional[dict]:
         """Get the login cookie.
 
         :returns: the login cookie
