@@ -6,8 +6,8 @@ Endpoints for Songs
 
 """
 
-from churchtools.ct_types import Song
-from typing import Any, Dict, List, Optional
+from churchtools.ct_types import MetaPagination, Song
+from typing import Any, Dict, List, Optional, Tuple
 
 
 class Songs:
@@ -23,7 +23,7 @@ class Songs:
         key_of_arrangement: str = None,
         page: int = 1,
         limit: int = 10,
-    ) -> List[Song]:
+    ) -> Tuple[List[Song], Optional[MetaPagination]]:
         """Return a list of songs.
 
         :param song_category_ids: Only query for these category IDs
@@ -41,8 +41,6 @@ class Songs:
         :returns: A list of songs that match the query
         :rtype: List[Song]
         """
-
-        # TODO: pagination
 
         params: Dict[str, Any] = {}
 
@@ -67,7 +65,11 @@ class Songs:
                 song = Song(**item)
                 songs.append(song)
 
-        return songs
+        pagination = None
+        if res and "meta" in res:
+            pagination = MetaPagination(**res["meta"])
+
+        return songs, pagination
 
     def get(self, song_id: int) -> Optional[Song]:
         """Get a song by id.
