@@ -97,3 +97,17 @@ class Events:
             sngs.append(sng)
 
         return sngs
+
+    def masterdata(self) -> dict:
+        """Get masterdata for module `event`.
+
+        The master data are the backbone of ChurchTools. This endpoint returns
+        all data for that module to work with. Different endpoints don't
+        include the master data directly but only state the ID for this data
+        and this endpoint provides the data with all its details.
+        """
+
+        route = f"event/masterdata"
+        res = self.__ct.make_request(route)
+
+        return res

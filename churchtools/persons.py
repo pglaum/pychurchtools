@@ -59,7 +59,7 @@ class Persons:
         is_archived: bool = False,
         page: int = 1,
         limit: int = 10,
-    ) -> Tuple[List[Person], MetaPagination]:
+    ) -> Tuple[List[Person], Optional[MetaPagination]]:
         """Returns a list of persons, that the logged in user can see.
 
         :param ids: A list of IDs that is to be queried
@@ -215,8 +215,6 @@ class Persons:
         route = f"persons/{person_id}/groups"
         res = self.__ct.make_request(route, params)
 
-        # TODO: check if we are missing some relevant data.
-        #       usually, only the group itself should be interesting.
         grps = []
         for item in res["data"]:
             grp = Group(**item["group"])
@@ -385,3 +383,18 @@ class Persons:
         res = self.__ct.make_request(route)
 
         return res["data"]
+
+    def masterdata(self) -> dict:
+        """Fetch all master data for the module `people & groups`.
+
+        The master data are the backbone of ChurchTools. You can add new db
+        fields, or change the available countries. This endpoint returns all
+        data for that module to work with. Different endpoints don't include
+        the master data directly but only state the ID for this data and this
+        endpoint provides the data with all its details.
+        """
+
+        route = f"person/masterdata"
+        res = self.__ct.make_request(route)
+
+        return res
