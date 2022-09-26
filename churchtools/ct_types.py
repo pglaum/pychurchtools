@@ -500,3 +500,11 @@ class MetaPagination(BaseModel):
 
     count: int
     pagination: Pagination
+
+
+class Department(BaseModel):
+
+    id: int
+    name: str
+    nameTranslated: Optional[str]
+    sortKey: int

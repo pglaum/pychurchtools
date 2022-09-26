@@ -35,6 +35,7 @@ TODO (for 100% completion):
 
 """
 
+from churchtools.departments import Departments
 from churchtools.events import Events
 from churchtools.general import General
 from churchtools.persons import Persons
@@ -82,6 +83,7 @@ class ChurchTools:
         else:
             self.__cookie = None
 
+        self.departments = Departments(self)
         self.events = Events(self)
         self.general = General(self)
         self.persons = Persons(self)
