@@ -4,6 +4,10 @@ Service
 
 CRUD methods for services & service groups
 
+TODO:
+
+    - servicegroups
+
 """
 
 from churchtools.ct_types import Service, ServiceGroup
