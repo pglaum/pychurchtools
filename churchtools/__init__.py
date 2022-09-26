@@ -93,7 +93,11 @@ class ChurchTools:
         self.wiki = Wiki(self)
 
     def make_request(
-        self, endpoint: str, params: Any = None, binary: bool = False
+        self,
+        endpoint: str,
+        params: Any = None,
+        binary: bool = False,
+        method: str = "get",
     ) -> Any:
         """Make a request to the churchtools API.
 
@@ -103,6 +107,8 @@ class ChurchTools:
         :type params: list, dict, or str
         :param binary: Return the binary answer.
         :type binary: bool
+        :param method: The http request method
+        :type method: str
         :returns: The result of the request
         :rtype: binary, dict, or string
         """
@@ -119,7 +125,11 @@ class ChurchTools:
         if binary:
             return requests.get(rurl, params=params, cookies=self.__cookie).content
 
-        resp = requests.get(rurl, params=params, cookies=self.__cookie)
+        if method == "post":
+            resp = requests.post(rurl, params=params, cookies=self.__cookie)
+        else:
+            resp = requests.get(rurl, params=params, cookies=self.__cookie)
+
         rstr = resp.content.decode()
 
         r_ok = self.check_response(resp)
@@ -163,33 +173,27 @@ class ChurchTools:
 
         return True
 
-    def login(self, email: str, password: str, login_url: str = None) -> bool:
+    def login(self, username: str, password: str) -> bool:
         """Login to the ChurchTools API.
 
         The login cookie is saved to the CT object.
 
         BE CAREFUL what you do with your passwords!
 
-        :param email: Email address for the ChurchTools login
-        :type email: str
+        :param username: The user name for the ChurchTools login
+        :type username: str
         :param password: Password for the ChurchTools login
         :type password: str
-        :param login_url: The URL to the AJAX function.
-            This parameter typically ends in: `/index.php?q=login/ajax`
-        :type login_url: str
         :returns: Success
         :rtype: bool
         """
 
-        if not login_url:
-            login_url = urljoin(self.__base_url, "/index.php?q=login/ajax")
+        rurl = urljoin(self.__base_url, "api/login")
 
-        data = {
-            "func": "login",
-            "email": email,
-            "password": password,
-        }
-        response = requests.post(login_url, data=data)
+        params: Dict[str, Any] = {}
+        params["password"] = password
+        params["username"] = username
+        response = requests.post(rurl, data=params, cookies=self.__cookie)
 
         if not self.check_response(response):
             if self.__debugging > 0:

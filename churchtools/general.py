@@ -7,7 +7,7 @@ Endpoints of general purpose.
 """
 
 from churchtools.ct_types import Person, VersionInfo
-from typing import Any
+from typing import Any, Dict, Optional
 
 
 class General:
@@ -15,6 +15,16 @@ class General:
         """Initialize a General object."""
 
         self.__ct = ct
+
+    def csrftoken(self) -> str:
+        """Returns the CSRF-Token for the current user.
+
+        :returns: CSRF-Token for the current user
+        :rtype: str
+        """
+
+        res = self.__ct.make_request("csrftoken")
+        return res["data"]
 
     def info(self) -> VersionInfo:
         """Information about the API.
