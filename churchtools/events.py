@@ -5,7 +5,10 @@ Events
 Endpoints for the event module.
 
 TODO:
-    - masterdata
+    - export
+    - ical
+    - send
+    - chat
 
 """
 

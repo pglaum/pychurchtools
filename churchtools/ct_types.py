@@ -500,3 +500,32 @@ class MetaPagination(BaseModel):
 
     count: int
     pagination: Pagination
+
+
+class Department(BaseModel):
+
+    id: int
+    name: str
+    nameTranslated: Optional[str]
+    sortKey: int
+
+    def __repr__(self) -> str:
+
+        return f'<Department: {self.name} [{self.id}]>'
+
+
+class SearchResult(BaseModel):
+
+    apiUrl: str
+    domainIdentifier: str
+    domainType: str
+    frontendUrl: str
+    icon: str
+    imageUrl: Optional[str]
+    title: str
+
+    # TODO: domainAttributes
+
+    def __repr__(self) -> str:
+
+        return f'<SearchResult: {self.title} [{self.domainType}]>'

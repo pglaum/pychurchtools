@@ -7,6 +7,11 @@ CRUD methods for status field
 These are the statuses that a person can have.
 (e.g. "Visitor", "Friend", "Member", etc.)
 
+TODO:
+
+    - new status
+    - status DELETE, PUT
+
 """
 
 from churchtools.ct_types import CTStatus

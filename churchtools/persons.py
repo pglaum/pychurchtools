@@ -6,7 +6,18 @@ Find out about persons in ChurchTools
 
 TODO:
 
-    - All DELETE/PATCH/POST/PUT endpoints
+    - information
+    - persons POST
+    - duplicates
+    - properties
+    - person DELETE, PATCH
+    - archive
+    - device DELETE, PUT
+    - invite
+    - merge GET, PATCH
+    - servicerequest DELETE, PUT
+    - undo servicerequest
+    - attribute DELETE, PUT
 
 """
 
