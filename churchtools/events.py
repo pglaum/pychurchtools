@@ -62,9 +62,10 @@ class Events:
         res = self.__ct.make_request("events", params)
 
         events = []
-        for item in res["data"]:
-            ev = Event(**item)
-            events.append(ev)
+        if "data" in res:
+            for item in res["data"]:
+                ev = Event(**item)
+                events.append(ev)
 
         return events
 

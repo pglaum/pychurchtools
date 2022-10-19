@@ -120,13 +120,28 @@ class ChurchTools:
             for line in traceback.format_stack():
                 print(line.strip())
 
+        param_str = "?"
+        if isinstance(params, dict):
+            for key, value in params.items():
+                if isinstance(value, list):
+                    for item in value:
+                        param_str += f"{key}[]={item}&"
+                else:
+                    param_str += f"{key}={value}&"
+
+        if param_str[-1] == "&":
+            param_str = param_str[:-1]
+
         if binary:
             return requests.get(rurl, params=params, cookies=self.__cookie).content
 
         if method == "post":
             resp = requests.post(rurl, params=params, cookies=self.__cookie)
         else:
-            resp = requests.get(rurl, params=params, cookies=self.__cookie)
+            if param_str:
+                resp = requests.get(rurl + param_str, cookies=self.__cookie)
+            else:
+                resp = requests.get(rurl, params=params, cookies=self.__cookie)
 
         rstr = resp.content.decode()
 
