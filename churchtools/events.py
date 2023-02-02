@@ -37,7 +37,9 @@ class Events:
 
         return Event(**res["data"])
 
-    def list(self, from_date: datetime = None, to_date: datetime = None) -> List[Event]:
+    def list(
+        self, from_date: datetime = None, to_date: datetime = None, include: str = None
+    ) -> List[Event]:
         """List upcoming events, or events from or to a date.
 
         :param from_date: List events after this date. Default: today
@@ -58,6 +60,8 @@ class Events:
             params["from_date"] = (
                 f"{from_date.year}-{from_date.month:02d}-" f"{from_date.day:02d}"
             )
+        if include:
+            params["include"] = include
 
         res = self.__ct.make_request("events", params)
 
