@@ -33,6 +33,14 @@ TODO (for 100% completion):
 
 """
 
+import json
+import traceback
+from typing import Any, Dict, Optional
+from urllib.parse import urljoin
+
+import requests
+
+from churchtools.calendars import Calendars
 from churchtools.departments import Departments
 from churchtools.events import Events
 from churchtools.general import General
@@ -41,12 +49,6 @@ from churchtools.services import Services
 from churchtools.songs import Songs
 from churchtools.status import Status
 from churchtools.wiki import Wiki
-
-from typing import Any, Dict, Optional
-from urllib.parse import urljoin
-import json
-import requests
-import traceback
 
 
 class ChurchTools:
@@ -81,6 +83,7 @@ class ChurchTools:
         else:
             self.__cookie = None
 
+        self.calendars = Calendars(self)
         self.departments = Departments(self)
         self.events = Events(self)
         self.general = General(self)

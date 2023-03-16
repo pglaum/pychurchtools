@@ -1,7 +1,8 @@
 from datetime import date, datetime
-from pydantic import BaseModel  # type: ignore
-from pydantic.fields import ModelField  # type: ignore
 from typing import Generator, Generic, List, Optional, TypeVar, Union
+
+from pydantic import BaseModel  # type: ignore
+from pydantic.fields import ModelField
 
 PydanticField = TypeVar("PydanticField")
 
@@ -529,3 +530,42 @@ class SearchResult(BaseModel):
     def __repr__(self) -> str:
 
         return f'<SearchResult: {self.title} [{self.domainType}]>'
+
+
+class Calendar(BaseModel):
+
+    campusId: Optional[int]
+    color: str
+    eventTemplateId: Optional[int]
+    iCalSourceUrl: Optional[str]
+    id: int
+    isPrivate: bool
+    isPublic: bool
+    name: str
+    nameTranslated: str
+    randomUrl: str
+    sortKey: int
+
+    # TODO: meta
+
+
+class Appointment(BaseModel):
+    id: int
+    caption: str
+    note: str
+    address: Optional[str]
+    version: int
+    calendar: Calendar
+    information: Optional[str]
+    image: Optional[str]
+    link: str
+    isInternal: bool
+    startDate: datetime
+    endDate: datetime
+    allDay: bool
+    repeatId: int
+    repeatFrequency: Optional[int]
+    repeatUntil: Optional[str]
+    repeatOption: Optional[int]
+
+    # TODO: additions, exceptions, meta
