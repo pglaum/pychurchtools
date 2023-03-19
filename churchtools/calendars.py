@@ -44,12 +44,12 @@ class Calendars:
         params["calendar_ids"] = calendar_ids
 
         if start_date:
-            params["startDate"] = (
+            params["from"] = (
                 f"{start_date.year}-{start_date.month:02d}-"
                 f"{start_date.day:02d}"
             )
         if end_date:
-            params["endDate"] = (
+            params["to"] = (
                 f"{end_date.year}-{end_date.month:02d}-"
                 f"{end_date.day:02d}"
             )
@@ -61,7 +61,13 @@ class Calendars:
         if "data" in res:
             for item in res["data"]:
                 if 'base' in item:
-                    app = Appointment(**item['base'])
-                    apps.append(app)
+                    item['base']['startDate'] = item['calculated']['startDate']
+                    item['base']['endDate'] = item['calculated']['endDate']
+                    try:
+                        app = Appointment(**item['base'])
+                        apps.append(app)
+                    except Exception as e:
+                        print(item)
+                        print(e)
 
         return apps

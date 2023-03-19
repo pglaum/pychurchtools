@@ -556,12 +556,12 @@ class Appointment(BaseModel):
     address: Optional[str]
     version: int
     calendar: Calendar
-    information: Optional[str]
+    information: str
     image: Optional[str]
     link: str
     isInternal: bool
-    startDate: datetime
-    endDate: datetime
+    startDate: Union[date, datetime]
+    endDate: Union[date, datetime]
     allDay: bool
     repeatId: int
     repeatFrequency: Optional[int]
