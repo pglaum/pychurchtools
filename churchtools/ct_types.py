@@ -550,7 +550,7 @@ class Calendar(BaseModel):
 
 
 class Appointment(BaseModel):
-    id: Union[int, string]
+    id: Union[int, str]
     caption: str
     note: str
     address: Optional[str]
