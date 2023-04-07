@@ -549,11 +549,24 @@ class Calendar(BaseModel):
     # TODO: meta
 
 
+class Address(BaseModel):
+
+    meetingAt: Optional[str]
+    street: Optional[str]
+    addition: Optional[str]
+    district: Optional[str]
+    zip: Optional[str]
+    city: Optional[str]
+    country: Optional[str]
+    latitude: Optional[float]
+    longitued: Optional[float]
+
+
 class Appointment(BaseModel):
     id: Union[int, str]
     caption: str
     note: str
-    address: Optional[str]
+    address: Optional[Address]
     version: int
     calendar: Calendar
     information: str
