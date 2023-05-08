@@ -174,6 +174,10 @@ class ChurchTools:
         :rtype: bool
         """
 
+        if resp.status_code == 400:
+            if self.__debugging > 0:
+                print("Error: 400 No Authorization")
+            return False
         if resp.status_code == 401:
             if self.__debugging > 0:
                 print("Error: 401 Unauthorized")
