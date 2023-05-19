@@ -193,7 +193,7 @@ class ChurchTools:
 
         return True
 
-    def login(self, username: str, password: str) -> bool:
+    def login(self, username: str, password: str, remember_me: bool = False) -> bool:
         """Login to the ChurchTools API.
 
         The login cookie is saved to the CT object.
@@ -213,6 +213,7 @@ class ChurchTools:
         params: Dict[str, Any] = {}
         params["password"] = password
         params["username"] = username
+        params["rememberMe"] = remember_me
         response = requests.post(rurl, data=params, cookies=self.__cookie)
 
         if not self.check_response(response):
