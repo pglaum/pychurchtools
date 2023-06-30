@@ -35,7 +35,10 @@ class Events:
         route = f"events/{event_id}"
         res = self.__ct.make_request(route)
 
-        return Event(**res["data"])
+        if res and res["data"]:
+            return Event(**res["data"])
+
+        return None
 
     def list(
         self, from_date: datetime = None, to_date: datetime = None, include: str = None
@@ -85,7 +88,10 @@ class Events:
         route = f"events/{event_id}/agenda"
         res = self.__ct.make_request(route)
 
-        return Agenda(**res["data"])
+        if res and res["data"]:
+            return Agenda(**res["data"])
+
+        return None
 
     def songs(self, event_id: int) -> List[Song]:
         """Get the songs of an event.
