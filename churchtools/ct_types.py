@@ -512,7 +512,7 @@ class Department(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<Department: {self.name} [{self.id}]>'
+        return f"<Department: {self.name} [{self.id}]>"
 
 
 class SearchResult(BaseModel):
@@ -529,7 +529,7 @@ class SearchResult(BaseModel):
 
     def __repr__(self) -> str:
 
-        return f'<SearchResult: {self.title} [{self.domainType}]>'
+        return f"<SearchResult: {self.title} [{self.domainType}]>"
 
 
 class Calendar(BaseModel):
@@ -569,7 +569,7 @@ class Appointment(BaseModel):
     address: Optional[Address]
     version: int
     calendar: Calendar
-    information: str
+    information: Optional[str]
     image: Optional[str]
     link: str
     isInternal: bool
