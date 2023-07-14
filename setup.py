@@ -12,7 +12,7 @@ def read(fname):
 
 setup(
     name="churchtools",
-    version="0.1.7",
+    version="0.1.8",
     author="Philipp Glaum",
     author_email="p@pglaum.de",
     description=("A library for the ChurchTools API"),
@@ -20,7 +20,7 @@ setup(
     keywords="api churchtools",
     url="https://git.sr.ht/~pglaum/pychurchtools",
     packages=["churchtools"],
-    install_requires=["pydantic", "requests"],
+    install_requires=["pydantic==1.10.10", "requests"],
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     classifiers=[
