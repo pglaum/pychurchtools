@@ -35,10 +35,8 @@ cookie = {
 Pass this object to the init function of the `ChurchTools` class or set the
 field `cookie` in the `ChurchTools` object.
 
-#### Via old AJAX API
+#### Via REST API
 
-Since the login function does not seem to be implemented in the new REST API, we
-have to use the old AJAX API.
 The `ChurchTools` class provides a method `login` to log you in and set the
 cookie automatically.
 
