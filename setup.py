@@ -1,5 +1,4 @@
 import os
-
 from setuptools import setup
 
 
@@ -13,7 +12,7 @@ def read(fname):
 
 setup(
     name="churchtools",
-    version="0.1.6",
+    version="0.1.7",
     author="Philipp Glaum",
     author_email="p@pglaum.de",
     description=("A library for the ChurchTools API"),
@@ -23,9 +22,10 @@ setup(
     packages=["churchtools"],
     install_requires=["pydantic", "requests"],
     long_description=read("README.md"),
+    long_description_content_type="text/markdown",
     classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
-        "License :: OSI Approved :: GPLv3 License",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
     ],
 )
