@@ -565,13 +565,13 @@ class Address(BaseModel):
 class Appointment(BaseModel):
     id: Union[int, str]
     caption: str
-    note: str
+    note: Optional[str]
     address: Optional[Address]
     version: int
     calendar: Calendar
     information: Optional[str]
     image: Optional[str]
-    link: str
+    link: Optional[str]
     isInternal: bool
     startDate: Union[date, datetime]
     endDate: Union[date, datetime]
