@@ -1,5 +1,5 @@
 from datetime import date, datetime
-from typing import Generator, Generic, List, Optional, TypeVar, Union
+from typing import Dict, Generator, Generic, List, Optional, TypeVar, Union
 
 from pydantic import BaseModel  # type: ignore
 from pydantic.fields import ModelField
@@ -33,9 +33,9 @@ class EmptyStrToFalse(Generic[PydanticField]):
 
 class Person(BaseModel):
 
-    id: int
-    securityLevelForPerson: int
-    editSecurityLevelForPerson: int
+    id: Optional[int]
+    securityLevelForPerson: Optional[int]
+    editSecurityLevelForPerson: Optional[int]
     title: Optional[str]
     firstName: Optional[str]
     lastName: Optional[str]
@@ -582,3 +582,74 @@ class Appointment(BaseModel):
     repeatOption: Optional[int]
 
     # TODO: additions, exceptions, meta
+
+class AgeGroup(BaseModel):
+    end: Optional[int]
+    id: int
+    name: str
+    nameTranslated: Optional[str]
+    start: Optional[int]
+    sortKey: Optional[int]
+
+class GroupHomepageDomainAttributes(BaseModel):
+    childGroupIds: Optional[List[int]]
+
+
+class GroupHomepageSimple(BaseModel):
+    apiUrl: Optional[str]
+    domainAttributes: Optional[GroupHomepageDomainAttributes]
+    frontendUrl: Optional[str]
+    icon: Optional[str]
+    imageUrl: Optional[str]
+    title: Optional[str]
+
+    def get_hash(self) -> str:
+        if self.apiUrl:
+            return self.apiUrl.split("/")[-1]
+
+        return ""
+
+class GroupInformation(BaseModel):
+    ageGroups: Optional[List[AgeGroup]]
+    campus: Optional[Dict]
+    groupCategory: Optional[str]
+    groupPlaces: Optional[List[Dict]]
+    imageUrl: Optional[str]
+    leader: Optional[List[PersonDomainObject]]
+    meetingTime: Optional[str]
+    note: Optional[str]
+    targetGroup: Optional[Dict]
+    weekday: Optional[Dict]
+
+class GroupDetail(BaseModel):
+    allowWaitinglist: Optional[bool]
+    autoAccept: Optional[bool]
+    canSignUp: Optional[bool]
+    children: Optional[List[int]]
+    currentMemberCount: Optional[int]
+    id: Optional[int]
+    information: Optional[GroupInformation]
+    maxMemberCount: Optional[int]
+    name: Optional[str]
+    requestedPlacesCount: Optional[int]
+    requestedWaitinglistPlacesCount: Optional[int]
+    signUpConditions: Optional[Dict]
+    signUpHeadline: Optional[str]
+    signUpPersons: Optional[Dict]
+
+
+class GroupHomepage(BaseModel):
+    defaultView: Optional[str]
+    filter: Optional[List[Dict]]
+    groups: List[GroupDetail]
+    id: Optional[int]
+    isEnabled: Optional[bool]
+    meta: Optional[Dict]
+    orderDirection: Optional[str]
+    parentGroup: Optional[int]
+    randomUrl: Optional[str]
+    showFilter: Optional[bool]
+    showGroups: Optional[bool]
+    showLeader: Optional[bool]
+    showMap: Optional[bool]
+    sortBy: Optional[str]

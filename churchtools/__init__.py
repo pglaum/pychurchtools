@@ -44,6 +44,8 @@ from churchtools.calendars import Calendars
 from churchtools.departments import Departments
 from churchtools.events import Events
 from churchtools.general import General
+from churchtools.groups import Groups
+from churchtools.group_homepages import GroupHomepages
 from churchtools.persons import Persons
 from churchtools.services import Services
 from churchtools.songs import Songs
@@ -87,6 +89,8 @@ class ChurchTools:
         self.departments = Departments(self)
         self.events = Events(self)
         self.general = General(self)
+        self.groups = Groups(self)
+        self.group_homepages = GroupHomepages(self)
         self.persons = Persons(self)
         self.services = Services(self)
         self.songs = Songs(self)
