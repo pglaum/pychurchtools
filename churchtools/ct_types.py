@@ -199,7 +199,7 @@ class Event(BaseModel):
     id: int
     guid: str
     name: str
-    description: str
+    description: Optional[str]
     startDate: datetime
     endDate: datetime
     chatStatus: str
