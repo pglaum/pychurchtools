@@ -1,4 +1,5 @@
 import os
+
 from setuptools import setup
 
 
@@ -12,7 +13,7 @@ def read(fname):
 
 setup(
     name="churchtools",
-    version="0.1.13",
+    version="0.1.14",
     author="Philipp Glaum",
     author_email="p@pglaum.de",
     description=("A library for the ChurchTools API"),

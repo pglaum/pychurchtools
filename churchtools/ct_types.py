@@ -32,7 +32,6 @@ class EmptyStrToFalse(Generic[PydanticField]):
 
 
 class Person(BaseModel):
-
     id: Optional[int]
     securityLevelForPerson: Optional[int]
     editSecurityLevelForPerson: Optional[int]
@@ -46,10 +45,10 @@ class Person(BaseModel):
     zip: Optional[str]
     city: Optional[str]
     country: Optional[str]
-    latitude: Optional[float]
-    longitude: Optional[float]
-    latidudeLoose: Optional[float]
-    longitudeLoose: Optional[float]
+    latitude: Optional[EmptyStrToNone[float]]
+    longitude: Optional[EmptyStrToNone[float]]
+    latitudeLoose: Optional[EmptyStrToNone[float]]
+    longitudeLoose: Optional[EmptyStrToNone[float]]
     phonePrivate: Optional[str]
     phoneWork: Optional[str]
     mobile: Optional[str]
@@ -85,12 +84,10 @@ class Person(BaseModel):
     # TODO: meta
 
     def __repr__(self) -> str:
-
         return f"<Person: {self.firstName} {self.lastName} [{self.id}]>"
 
 
 class AgendaSong(BaseModel):
-
     songId: int
     arrangementId: int
     title: str
@@ -102,7 +99,6 @@ class AgendaSong(BaseModel):
 
 
 class AgendaItem(BaseModel):
-
     id: int
     position: int
     type: str
@@ -119,7 +115,6 @@ class AgendaItem(BaseModel):
 
 
 class Agenda(BaseModel):
-
     id: int
     name: str
     series: str
@@ -131,12 +126,10 @@ class Agenda(BaseModel):
     # TODO: meta
 
     def __repr__(self) -> str:
-
         return f"<Agenda: {self.name} [{self.id}]>"
 
 
 class Service(BaseModel):
-
     id: int
     name: str
     serviceGroupId: int
@@ -156,12 +149,10 @@ class Service(BaseModel):
     allowChat: bool
 
     def __repr__(self) -> str:
-
         return f"<Service: {self.name} [{self.id}]>"
 
 
 class ServiceGroup(BaseModel):
-
     id: int
     name: str
     sortKey: int
@@ -170,12 +161,10 @@ class ServiceGroup(BaseModel):
     onlyVisibleInCampusFilter: Optional[bool]
 
     def __repr__(self) -> str:
-
         return f"<ServiceGroup: {self.name} [{self.id}]>"
 
 
 class EventService(BaseModel):
-
     id: int
     name: Optional[str]
     serviceId: int
@@ -190,12 +179,10 @@ class EventService(BaseModel):
     # TODO: requesterPerson
 
     def __repr__(self) -> str:
-
         return f"<EventService: {self.name}>"
 
 
 class Event(BaseModel):
-
     id: int
     guid: str
     name: str
@@ -209,7 +196,6 @@ class Event(BaseModel):
     # TODO: calendar
 
     def __repr__(self) -> str:
-
         return (
             f"<Event: {self.startDate.day:02}."
             f"{self.startDate.month:02} {self.startDate.hour:02}:"
@@ -218,12 +204,10 @@ class Event(BaseModel):
 
 
 class GroupDomainAttributes(BaseModel):
-
     note: str
 
 
 class Group(BaseModel):
-
     title: str
     domainType: str
     domainIdentifier: str
@@ -233,12 +217,10 @@ class Group(BaseModel):
     domainAttributes: GroupDomainAttributes
 
     def __repr__(self) -> str:
-
         return f"<Group: {self.title}>"
 
 
 class ArrangementLink(BaseModel):
-
     domainType: str
     domainId: str
     name: str
@@ -247,7 +229,6 @@ class ArrangementLink(BaseModel):
 
 
 class ArrangementFile(BaseModel):
-
     domainType: str
     domainId: str
     name: str
@@ -256,7 +237,6 @@ class ArrangementFile(BaseModel):
 
 
 class Arrangement(BaseModel):
-
     id: int
     name: str
     isDefault: bool
@@ -272,7 +252,6 @@ class Arrangement(BaseModel):
 
 
 class SongCategory(BaseModel):
-
     id: int
     name: str
     nameTranslated: str
@@ -281,7 +260,6 @@ class SongCategory(BaseModel):
 
 
 class Song(BaseModel):
-
     id: int
     name: str
     category: SongCategory
@@ -295,36 +273,30 @@ class Song(BaseModel):
     # TODO: meta
 
     def __repr__(self) -> str:
-
         return f"<Song: {self.name} [{self.id}]>"
 
 
 class VersionInfo(BaseModel):
-
     build: str
     version: str
 
     def __repr__(self) -> str:
-
         return f"<Version: {self.version} (build: {self.build})>"
 
 
 class PersonTag(BaseModel):
-
     id: int
     name: str
     count: int
 
 
 class PersonDomainAttributes(BaseModel):
-
     firstName: str
     lastName: str
     guid: str
 
 
 class PersonDomainObject(BaseModel):
-
     domainAttributes: PersonDomainAttributes
     imageUrl: str
     frontendUrl: str
@@ -335,32 +307,27 @@ class PersonDomainObject(BaseModel):
 
 
 class PersonRelationship(BaseModel):
-
     relative: PersonDomainObject
     degreeOfRelationship: str
     relationshipName: str
     relationshipTypeId: int
 
     def __repr__(self) -> str:
-
         return (
             f"<Relationship: {self.relative.title} " f"({self.degreeOfRelationship})>"
         )
 
 
 class Setting(BaseModel):
-
     module: str
     attribute: str
     value: Union[dict, int, List, str]
 
     def __repr__(self) -> str:
-
         return f"<Setting: {self.module}.{self.attribute} = {self.value}>"
 
 
 class CTStatus(BaseModel):
-
     id: int
     name: str
     shorty: str
@@ -371,7 +338,6 @@ class CTStatus(BaseModel):
 
 
 class WikiCategory(BaseModel):
-
     id: int
     name: str
     sortKey: int
@@ -381,17 +347,14 @@ class WikiCategory(BaseModel):
     nameTranslated: str
 
     def __repr__(self) -> str:
-
         return f"<WikiCategory: {self.name} [{self.id}]>"
 
 
 class WikiPermission(BaseModel):
-
     canEdit: bool
 
 
 class WikiPage(BaseModel):
-
     identifier: str
     wikiCategory: WikiCategory
     title: str
@@ -405,12 +368,10 @@ class WikiPage(BaseModel):
     # TODO: meta
 
     def __repr__(self) -> str:
-
         return f"<WikiPage: {self.title} [{self.identifier}]>"
 
 
 class WikiSearchResult(BaseModel):
-
     title: str
     domainType: str
     domainIdentifier: str
@@ -420,19 +381,16 @@ class WikiSearchResult(BaseModel):
     preview: str
 
     def __repr__(self) -> str:
-
         return f"<WikiSearchResult: {self.title} ({self.preview})>"
 
 
 class BirthdayPersonDomainAttributes(BaseModel):
-
     firstName: str
     lastName: str
     guid: str
 
 
 class BirthdayPerson(BaseModel):
-
     title: str
     domainType: str
     domainIdentifier: str
@@ -442,24 +400,20 @@ class BirthdayPerson(BaseModel):
     domainAttributes: BirthdayPersonDomainAttributes
 
     def __repr__(self) -> str:
-
         return f"<BirthdayPerson: {self.title}>"
 
 
 class Birthday(BaseModel):
-
     type: str
     date: date
     age: Optional[int]
     person: BirthdayPerson
 
     def __repr__(self) -> str:
-
         return f"<Birthday: {self.person.title} {self.date} " f"({self.age} years)>"
 
 
 class ServiceRequest(BaseModel):
-
     id: int
     personId: int
     name: str
@@ -475,12 +429,10 @@ class ServiceRequest(BaseModel):
     # TODO: requesterPerson
 
     def __repr__(self) -> str:
-
         return f"<ServiceRequest: {self.name} {self.serviceId} [{self.id}]>"
 
 
 class Device(BaseModel):
-
     id: str
     type: str
     ttl: datetime
@@ -490,7 +442,6 @@ class Device(BaseModel):
 
 
 class Pagination(BaseModel):
-
     total: int
     current: int
     limit: int
@@ -498,25 +449,21 @@ class Pagination(BaseModel):
 
 
 class MetaPagination(BaseModel):
-
     count: int
     pagination: Pagination
 
 
 class Department(BaseModel):
-
     id: int
     name: str
     nameTranslated: Optional[str]
     sortKey: int
 
     def __repr__(self) -> str:
-
         return f"<Department: {self.name} [{self.id}]>"
 
 
 class SearchResult(BaseModel):
-
     apiUrl: str
     domainIdentifier: str
     domainType: str
@@ -528,12 +475,10 @@ class SearchResult(BaseModel):
     # TODO: domainAttributes
 
     def __repr__(self) -> str:
-
         return f"<SearchResult: {self.title} [{self.domainType}]>"
 
 
 class Calendar(BaseModel):
-
     campusId: Optional[int]
     color: str
     eventTemplateId: Optional[int]
@@ -550,7 +495,6 @@ class Calendar(BaseModel):
 
 
 class Address(BaseModel):
-
     meetingAt: Optional[str]
     street: Optional[str]
     addition: Optional[str]
@@ -558,8 +502,8 @@ class Address(BaseModel):
     zip: Optional[str]
     city: Optional[str]
     country: Optional[str]
-    latitude: Optional[float]
-    longitued: Optional[float]
+    latitude: Optional[EmptyStrToNone[float]]
+    longitude: Optional[EmptyStrToNone[float]]
 
 
 class Appointment(BaseModel):
@@ -583,6 +527,7 @@ class Appointment(BaseModel):
 
     # TODO: additions, exceptions, meta
 
+
 class AgeGroup(BaseModel):
     end: Optional[int]
     id: int
@@ -590,6 +535,7 @@ class AgeGroup(BaseModel):
     nameTranslated: Optional[str]
     start: Optional[int]
     sortKey: Optional[int]
+
 
 class GroupHomepageDomainAttributes(BaseModel):
     childGroupIds: Optional[List[int]]
@@ -609,6 +555,7 @@ class GroupHomepageSimple(BaseModel):
 
         return ""
 
+
 class GroupInformation(BaseModel):
     ageGroups: Optional[List[AgeGroup]]
     campus: Optional[Dict]
@@ -620,6 +567,7 @@ class GroupInformation(BaseModel):
     note: Optional[str]
     targetGroup: Optional[Dict]
     weekday: Optional[Dict]
+
 
 class GroupDetail(BaseModel):
     allowWaitinglist: Optional[bool]
