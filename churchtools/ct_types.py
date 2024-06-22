@@ -1,8 +1,7 @@
 from datetime import date, datetime
-from typing import Dict, Generator, Generic, List, Optional, TypeVar, Union
+from typing import Any, Dict, Generator, Generic, List, Optional, TypeVar, Union
 
 from pydantic import BaseModel  # type: ignore
-from pydantic.fields import ModelField
 
 PydanticField = TypeVar("PydanticField")
 
@@ -13,7 +12,7 @@ class EmptyStrToNone(Generic[PydanticField]):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v: PydanticField, field: ModelField) -> Optional[PydanticField]:
+    def validate(cls, v: PydanticField, field: Any) -> Optional[PydanticField]:
         if v == "":
             return None
         return v
@@ -25,60 +24,60 @@ class EmptyStrToFalse(Generic[PydanticField]):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v: PydanticField, field: ModelField) -> bool:
+    def validate(cls, v: PydanticField, field: Any) -> bool:
         if v == "" or not v:
             return False
         return True
 
 
 class Person(BaseModel):
-    id: Optional[int]
-    securityLevelForPerson: Optional[int]
-    editSecurityLevelForPerson: Optional[int]
-    title: Optional[str]
-    firstName: Optional[str]
-    lastName: Optional[str]
-    nickname: Optional[str]
-    job: Optional[str]
-    street: Optional[str]
-    addressAddition: Optional[str]
-    zip: Optional[str]
-    city: Optional[str]
-    country: Optional[str]
-    latitude: Optional[EmptyStrToNone[float]]
-    longitude: Optional[EmptyStrToNone[float]]
-    latitudeLoose: Optional[EmptyStrToNone[float]]
-    longitudeLoose: Optional[EmptyStrToNone[float]]
-    phonePrivate: Optional[str]
-    phoneWork: Optional[str]
-    mobile: Optional[str]
-    fax: Optional[str]
-    birthName: Optional[str]
-    birthday: Optional[EmptyStrToNone[date]]
-    birthplace: Optional[str]
-    imageUrl: Optional[str]
-    familyImageUrl: Optional[str]
-    sexId: Optional[int]
-    email: Optional[str]
-    cmsUserId: Optional[str]
-    optigemUserId: Optional[str]
-    nationalityId: Optional[int]
-    familyStatusId: Optional[int]
-    weddingDate: Optional[EmptyStrToNone[date]]
-    campusId: Optional[int]
-    statusId: Optional[int]
-    departmentIds: Optional[List[int]]
-    firstContact: Optional[EmptyStrToNone[datetime]]
-    dateOfBelonging: Optional[EmptyStrToNone[date]]
-    dateOfEntry: Optional[EmptyStrToNone[datetime]]
-    dateOfResign: Optional[EmptyStrToNone[datetime]]
-    dateOfBaptism: Optional[EmptyStrToNone[date]]
-    placeOfBaptism: Optional[str]
-    baptisedBy: Optional[str]
-    referredBy: Optional[str]
-    referredTo: Optional[str]
-    growPathId: Optional[int]
-    isArchived: Optional[bool]
+    id: Optional[int] = None
+    securityLevelForPerson: Optional[int] = None
+    editSecurityLevelForPerson: Optional[int] = None
+    title: Optional[str] = None
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+    nickname: Optional[str] = None
+    job: Optional[str] = None
+    street: Optional[str] = None
+    addressAddition: Optional[str] = None
+    zip: Optional[str] = None
+    city: Optional[str] = None
+    country: Optional[str] = None
+    latitude: Optional[EmptyStrToNone[float]] = None
+    longitude: Optional[EmptyStrToNone[float]] = None
+    latitudeLoose: Optional[EmptyStrToNone[float]] = None
+    longitudeLoose: Optional[EmptyStrToNone[float]] = None
+    phonePrivate: Optional[str] = None
+    phoneWork: Optional[str] = None
+    mobile: Optional[str] = None
+    fax: Optional[str] = None
+    birthName: Optional[str] = None
+    birthday: Optional[EmptyStrToNone[date]] = None
+    birthplace: Optional[str] = None
+    imageUrl: Optional[str] = None
+    familyImageUrl: Optional[str] = None
+    sexId: Optional[int] = None
+    email: Optional[str] = None
+    cmsUserId: Optional[str] = None
+    optigemUserId: Optional[str] = None
+    nationalityId: Optional[int] = None
+    familyStatusId: Optional[int] = None
+    weddingDate: Optional[EmptyStrToNone[date]] = None
+    campusId: Optional[int] = None
+    statusId: Optional[int] = None
+    departmentIds: Optional[List[int]] = None
+    firstContact: Optional[EmptyStrToNone[datetime]] = None
+    dateOfBelonging: Optional[EmptyStrToNone[date]] = None
+    dateOfEntry: Optional[EmptyStrToNone[datetime]] = None
+    dateOfResign: Optional[EmptyStrToNone[datetime]] = None
+    dateOfBaptism: Optional[EmptyStrToNone[date]] = None
+    placeOfBaptism: Optional[str] = None
+    baptisedBy: Optional[str] = None
+    referredBy: Optional[str] = None
+    referredTo: Optional[str] = None
+    growPathId: Optional[int] = None
+    isArchived: Optional[bool] = None
 
     # TODO: privacyPolicyAgreement
     # TODO: meta
@@ -95,7 +94,7 @@ class AgendaSong(BaseModel):
     category: str
     key: str
     bpm: str
-    defaultArrangement: Optional[str]
+    defaultArrangement: Optional[str] = None
 
 
 class AgendaItem(BaseModel):
@@ -103,11 +102,11 @@ class AgendaItem(BaseModel):
     position: int
     type: str
     title: str
-    note: Optional[str]
+    note: Optional[str] = None
     duration: int
     start: datetime
     isBeforeEvent: bool
-    song: Optional[AgendaSong]
+    song: Optional[AgendaSong] = None
 
     # TODO: responsible
     # TODO: serviceGroupNotes
@@ -141,10 +140,10 @@ class Service(BaseModel):
     standard: bool
     hidePersonName: bool
     sendReminderMails: bool
-    sendServiceRequestMails: Optional[bool]
+    sendServiceRequestMails: Optional[bool] = None
     allowControlLiveAgenda: bool
-    groupIds: Optional[str]
-    tagIds: Optional[str]
+    groupIds: Optional[str] = None
+    tagIds: Optional[str] = None
     calTextTemplate: str
     allowChat: bool
 
@@ -156,9 +155,9 @@ class ServiceGroup(BaseModel):
     id: int
     name: str
     sortKey: int
-    viewAll: Optional[bool]
-    campusId: Optional[int]
-    onlyVisibleInCampusFilter: Optional[bool]
+    viewAll: Optional[bool] = None
+    campusId: Optional[int] = None
+    onlyVisibleInCampusFilter: Optional[bool] = None
 
     def __repr__(self) -> str:
         return f"<ServiceGroup: {self.name} [{self.id}]>"
@@ -166,7 +165,7 @@ class ServiceGroup(BaseModel):
 
 class EventService(BaseModel):
     id: int
-    name: Optional[str]
+    name: Optional[str] = None
     serviceId: int
     agreed: bool
     isValid: bool
@@ -186,11 +185,11 @@ class Event(BaseModel):
     id: int
     guid: str
     name: str
-    description: Optional[str]
+    description: Optional[str] = None
     startDate: datetime
     endDate: datetime
     chatStatus: str
-    eventServices: Optional[List[EventService]]
+    eventServices: Optional[List[EventService]] = None
 
     # TODO: permissions
     # TODO: calendar
@@ -213,7 +212,7 @@ class Group(BaseModel):
     domainIdentifier: str
     apiUrl: str
     frontendUrl: str
-    imageUrl: Optional[str]
+    imageUrl: Optional[str] = None
     domainAttributes: GroupDomainAttributes
 
     def __repr__(self) -> str:
@@ -243,7 +242,7 @@ class Arrangement(BaseModel):
     keyOfArrangement: str
     bpm: str
     beat: str
-    duration: str
+    duration: int
     note: str
     links: List[ArrangementLink]
     files: List[ArrangementFile]
@@ -256,7 +255,7 @@ class SongCategory(BaseModel):
     name: str
     nameTranslated: str
     sortKey: int
-    campusId: Optional[int]
+    campusId: Optional[int] = None
 
 
 class Song(BaseModel):
@@ -341,7 +340,7 @@ class WikiCategory(BaseModel):
     id: int
     name: str
     sortKey: int
-    campusId: Optional[int]
+    campusId: Optional[int] = None
     inMenu: bool
     fileAccessWithoutPermission: bool
     nameTranslated: str
@@ -359,9 +358,9 @@ class WikiPage(BaseModel):
     wikiCategory: WikiCategory
     title: str
     version: int
-    text: Optional[str]
+    text: Optional[str] = None
     onStartpage: EmptyStrToFalse[bool]
-    redirectTo: Optional[str]
+    redirectTo: Optional[str] = None
     permissions: WikiPermission
     isMarkdown: bool
 
@@ -377,7 +376,7 @@ class WikiSearchResult(BaseModel):
     domainIdentifier: str
     apiUrl: str
     frontendUrl: str
-    imageUrl: Optional[str]
+    imageUrl: Optional[str] = None
     preview: str
 
     def __repr__(self) -> str:
@@ -396,7 +395,7 @@ class BirthdayPerson(BaseModel):
     domainIdentifier: str
     apiUrl: str
     frontendUrl: str
-    imageUrl: Optional[str]
+    imageUrl: Optional[str] = None
     domainAttributes: BirthdayPersonDomainAttributes
 
     def __repr__(self) -> str:
@@ -406,7 +405,7 @@ class BirthdayPerson(BaseModel):
 class Birthday(BaseModel):
     type: str
     date: date
-    age: Optional[int]
+    age: Optional[int] = None
     person: BirthdayPerson
 
     def __repr__(self) -> str:
@@ -456,7 +455,7 @@ class MetaPagination(BaseModel):
 class Department(BaseModel):
     id: int
     name: str
-    nameTranslated: Optional[str]
+    nameTranslated: Optional[str] = None
     sortKey: int
 
     def __repr__(self) -> str:
@@ -469,7 +468,7 @@ class SearchResult(BaseModel):
     domainType: str
     frontendUrl: str
     icon: str
-    imageUrl: Optional[str]
+    imageUrl: Optional[str] = None
     title: str
 
     # TODO: domainAttributes
@@ -479,10 +478,10 @@ class SearchResult(BaseModel):
 
 
 class Calendar(BaseModel):
-    campusId: Optional[int]
+    campusId: Optional[int] = None
     color: str
-    eventTemplateId: Optional[int]
-    iCalSourceUrl: Optional[str]
+    eventTemplateId: Optional[int] = None
+    iCalSourceUrl: Optional[str] = None
     id: int
     isPrivate: bool
     isPublic: bool
@@ -495,59 +494,59 @@ class Calendar(BaseModel):
 
 
 class Address(BaseModel):
-    meetingAt: Optional[str]
-    street: Optional[str]
-    addition: Optional[str]
-    district: Optional[str]
-    zip: Optional[str]
-    city: Optional[str]
-    country: Optional[str]
-    latitude: Optional[EmptyStrToNone[float]]
-    longitude: Optional[EmptyStrToNone[float]]
+    meetingAt: Optional[str] = None
+    street: Optional[str] = None
+    addition: Optional[str] = None
+    district: Optional[str] = None
+    zip: Optional[str] = None
+    city: Optional[str] = None
+    country: Optional[str] = None
+    latitude: Optional[EmptyStrToNone[float]] = None
+    longitude: Optional[EmptyStrToNone[float]] = None
 
 
 class Appointment(BaseModel):
     id: Union[int, str]
     caption: str
-    note: Optional[str]
-    address: Optional[Address]
+    note: Optional[str] = None
+    address: Optional[Address] = None
     version: int
     calendar: Calendar
-    information: Optional[str]
-    image: Optional[str]
-    link: Optional[str]
+    information: Optional[str] = None
+    image: Optional[str] = None
+    link: Optional[str] = None
     isInternal: bool
     startDate: Union[date, datetime]
     endDate: Union[date, datetime]
     allDay: bool
     repeatId: int
-    repeatFrequency: Optional[int]
-    repeatUntil: Optional[str]
-    repeatOption: Optional[int]
+    repeatFrequency: Optional[int] = None
+    repeatUntil: Optional[str] = None
+    repeatOption: Optional[int] = None
 
     # TODO: additions, exceptions, meta
 
 
 class AgeGroup(BaseModel):
-    end: Optional[int]
+    end: Optional[int] = None
     id: int
     name: str
-    nameTranslated: Optional[str]
-    start: Optional[int]
-    sortKey: Optional[int]
+    nameTranslated: Optional[str] = None
+    start: Optional[int] = None
+    sortKey: Optional[int] = None
 
 
 class GroupHomepageDomainAttributes(BaseModel):
-    childGroupIds: Optional[List[int]]
+    childGroupIds: Optional[List[int]] = None
 
 
 class GroupHomepageSimple(BaseModel):
-    apiUrl: Optional[str]
-    domainAttributes: Optional[GroupHomepageDomainAttributes]
-    frontendUrl: Optional[str]
-    icon: Optional[str]
-    imageUrl: Optional[str]
-    title: Optional[str]
+    apiUrl: Optional[str] = None
+    domainAttributes: Optional[GroupHomepageDomainAttributes] = None
+    frontendUrl: Optional[str] = None
+    icon: Optional[str] = None
+    imageUrl: Optional[str] = None
+    title: Optional[str] = None
 
     def get_hash(self) -> str:
         if self.apiUrl:
@@ -557,47 +556,47 @@ class GroupHomepageSimple(BaseModel):
 
 
 class GroupInformation(BaseModel):
-    ageGroups: Optional[List[AgeGroup]]
-    campus: Optional[Dict]
-    groupCategory: Optional[str]
-    groupPlaces: Optional[List[Dict]]
-    imageUrl: Optional[str]
-    leader: Optional[List[PersonDomainObject]]
-    meetingTime: Optional[str]
-    note: Optional[str]
-    targetGroup: Optional[Dict]
-    weekday: Optional[Dict]
+    ageGroups: Optional[List[AgeGroup]] = None
+    campus: Optional[Dict] = None
+    groupCategory: Optional[str] = None
+    groupPlaces: Optional[List[Dict]] = None
+    imageUrl: Optional[str] = None
+    leader: Optional[List[PersonDomainObject]] = None
+    meetingTime: Optional[str] = None
+    note: Optional[str] = None
+    targetGroup: Optional[Dict] = None
+    weekday: Optional[Dict] = None
 
 
 class GroupDetail(BaseModel):
-    allowWaitinglist: Optional[bool]
-    autoAccept: Optional[bool]
-    canSignUp: Optional[bool]
-    children: Optional[List[int]]
-    currentMemberCount: Optional[int]
-    id: Optional[int]
-    information: Optional[GroupInformation]
-    maxMemberCount: Optional[int]
-    name: Optional[str]
-    requestedPlacesCount: Optional[int]
-    requestedWaitinglistPlacesCount: Optional[int]
-    signUpConditions: Optional[Dict]
-    signUpHeadline: Optional[str]
-    signUpPersons: Optional[Dict]
+    allowWaitinglist: Optional[bool] = None
+    autoAccept: Optional[bool] = None
+    canSignUp: Optional[bool] = None
+    children: Optional[List[int]] = None
+    currentMemberCount: Optional[int] = None
+    id: Optional[int] = None
+    information: Optional[GroupInformation] = None
+    maxMemberCount: Optional[int] = None
+    name: Optional[str] = None
+    requestedPlacesCount: Optional[int] = None
+    requestedWaitinglistPlacesCount: Optional[int] = None
+    signUpConditions: Optional[Dict] = None
+    signUpHeadline: Optional[str] = None
+    signUpPersons: Optional[Dict] = None
 
 
 class GroupHomepage(BaseModel):
-    defaultView: Optional[str]
-    filter: Optional[List[Dict]]
+    defaultView: Optional[str] = None
+    filter: Optional[List[Dict]] = None
     groups: List[GroupDetail]
-    id: Optional[int]
-    isEnabled: Optional[bool]
-    meta: Optional[Dict]
-    orderDirection: Optional[str]
-    parentGroup: Optional[int]
-    randomUrl: Optional[str]
-    showFilter: Optional[bool]
-    showGroups: Optional[bool]
-    showLeader: Optional[bool]
-    showMap: Optional[bool]
-    sortBy: Optional[str]
+    id: Optional[int] = None
+    isEnabled: Optional[bool] = None
+    meta: Optional[Dict] = None
+    orderDirection: Optional[str] = None
+    parentGroup: Optional[int] = None
+    randomUrl: Optional[str] = None
+    showFilter: Optional[bool] = None
+    showGroups: Optional[bool] = None
+    showLeader: Optional[bool] = None
+    showMap: Optional[bool] = None
+    sortBy: Optional[str] = None
