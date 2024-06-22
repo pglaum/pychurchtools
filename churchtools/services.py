@@ -10,13 +10,13 @@ TODO:
 
 """
 
-from churchtools.ct_types import Service, ServiceGroup
 from typing import Any, List
+
+from churchtools.ct_types import Service, ServiceGroup
 
 
 class Services:
     def __init__(self, ct: Any) -> None:
-
         self.__ct = ct
 
     def list(self) -> List[Service]:

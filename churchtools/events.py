@@ -12,9 +12,10 @@ TODO:
 
 """
 
-from churchtools.ct_types import Agenda, Event, Song
 from datetime import datetime
 from typing import Any, List
+
+from churchtools.ct_types import Agenda, Event, Song
 
 
 class Events:
@@ -49,6 +50,8 @@ class Events:
         :type from_date: datetime
         :param to_date: List events up to this date. Default: two months from now
         :type to_date: datetime
+        :param include: Include additional data (e.g. "eventServices")
+        :type include: str
         :returns: A list of events
         :rtype: List[Event]
         """
@@ -121,7 +124,7 @@ class Events:
         and this endpoint provides the data with all its details.
         """
 
-        route = f"event/masterdata"
+        route = "event/masterdata"
         res = self.__ct.make_request(route)
 
         return res

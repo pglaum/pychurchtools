@@ -6,8 +6,9 @@ Endpoints of general purpose.
 
 """
 
-from churchtools.ct_types import Person, SearchResult, VersionInfo
 from typing import Any, Dict, List
+
+from churchtools.ct_types import Person, SearchResult, VersionInfo
 
 
 class General:
@@ -73,7 +74,7 @@ class General:
 
         params: Dict[str, Any] = {}
         params["query"] = query
-        params["domainTypes[]"] = domain_types
+        params["domainTypes"] = domain_types
 
         res = self.__ct.make_request("search", params=params)
 

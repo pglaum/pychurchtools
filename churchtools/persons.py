@@ -21,6 +21,9 @@ TODO:
 
 """
 
+from datetime import date, datetime
+from typing import Any, Dict, List, Optional, Tuple
+
 from churchtools.ct_types import (
     Birthday,
     Device,
@@ -33,8 +36,6 @@ from churchtools.ct_types import (
     ServiceRequest,
     Setting,
 )
-from datetime import date, datetime
-from typing import Any, Dict, List, Optional, Tuple
 
 
 class Persons:
@@ -405,7 +406,7 @@ class Persons:
         endpoint provides the data with all its details.
         """
 
-        route = f"person/masterdata"
+        route = "person/masterdata"
         res = self.__ct.make_request(route)
 
         return res

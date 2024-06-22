@@ -44,8 +44,8 @@ from churchtools.calendars import Calendars
 from churchtools.departments import Departments
 from churchtools.events import Events
 from churchtools.general import General
-from churchtools.groups import Groups
 from churchtools.group_homepages import GroupHomepages
+from churchtools.groups import Groups
 from churchtools.persons import Persons
 from churchtools.services import Services
 from churchtools.songs import Songs
@@ -54,7 +54,6 @@ from churchtools.wiki import Wiki
 
 
 class ChurchTools:
-
     __base_url = ""
     __debugging = 0
     __cookie = None

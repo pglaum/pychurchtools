@@ -22,6 +22,9 @@ setup(
     url="https://git.sr.ht/~pglaum/pychurchtools",
     packages=["churchtools"],
     install_requires=["pydantic", "requests"],
+    extras_require={
+        "tests": ["pytest"],
+    },
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     classifiers=[

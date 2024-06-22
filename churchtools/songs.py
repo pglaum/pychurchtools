@@ -6,13 +6,13 @@ Endpoints for Songs
 
 """
 
-from churchtools.ct_types import MetaPagination, Song
 from typing import Any, Dict, List, Optional, Tuple
+
+from churchtools.ct_types import MetaPagination, Song
 
 
 class Songs:
     def __init__(self, ct: Any) -> None:
-
         self.__ct = ct
 
     def list(
