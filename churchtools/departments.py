@@ -6,8 +6,9 @@ Find out about departments in ChurchTools
 
 """
 
-from churchtools.ct_types import Department
 from typing import Any, List
+
+from churchtools.ct_types import Department
 
 
 class Departments:

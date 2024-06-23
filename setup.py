@@ -19,9 +19,20 @@ setup(
     description=("A library for the ChurchTools API"),
     license="GPLv3",
     keywords="api churchtools",
-    url="https://git.sr.ht/~pglaum/pychurchtools",
+    url="https://github.com/pglaum/pychurchtools",
     packages=["churchtools"],
-    install_requires=["pydantic", "requests"],
+    install_requires=[
+        "pydantic",
+        "requests",
+    ],
+    extras_require={
+        "tests": [
+            "black",
+            "mypy",
+            "pytest",
+            "types-requests",
+        ],
+    },
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     classifiers=[

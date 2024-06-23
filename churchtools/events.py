@@ -12,9 +12,10 @@ TODO:
 
 """
 
-from churchtools.ct_types import Agenda, Event, Song
 from datetime import datetime
-from typing import Any, List
+from typing import Any, List, Optional
+
+from churchtools.ct_types import Agenda, Event, Song
 
 
 class Events:
@@ -23,7 +24,7 @@ class Events:
 
         self.__ct = ct
 
-    def get(self, event_id: int) -> Event:
+    def get(self, event_id: int) -> Event | None:
         """Get a single event by id.
 
         :param event_id: The event id
@@ -41,7 +42,10 @@ class Events:
         return None
 
     def list(
-        self, from_date: datetime = None, to_date: datetime = None, include: str = None
+        self,
+        from_date: Optional[datetime] = None,
+        to_date: Optional[datetime] = None,
+        include: Optional[str] = None,
     ) -> List[Event]:
         """List upcoming events, or events from or to a date.
 
@@ -49,6 +53,8 @@ class Events:
         :type from_date: datetime
         :param to_date: List events up to this date. Default: two months from now
         :type to_date: datetime
+        :param include: Include additional data (e.g. "eventServices")
+        :type include: str
         :returns: A list of events
         :rtype: List[Event]
         """
@@ -76,7 +82,7 @@ class Events:
 
         return events
 
-    def agenda(self, event_id: int) -> Agenda:
+    def agenda(self, event_id: int) -> Agenda | None:
         """Get the agenda of an event.
 
         :param event_id: The ID of the event
@@ -121,7 +127,7 @@ class Events:
         and this endpoint provides the data with all its details.
         """
 
-        route = f"event/masterdata"
+        route = "event/masterdata"
         res = self.__ct.make_request(route)
 
         return res

@@ -21,6 +21,9 @@ TODO:
 
 """
 
+from datetime import date, datetime
+from typing import Any, Dict, List, Optional, Tuple
+
 from churchtools.ct_types import (
     Birthday,
     Device,
@@ -33,8 +36,6 @@ from churchtools.ct_types import (
     ServiceRequest,
     Setting,
 )
-from datetime import date, datetime
-from typing import Any, Dict, List, Optional, Tuple
 
 
 class Persons:
@@ -62,11 +63,11 @@ class Persons:
 
     def list(
         self,
-        ids: List[int] = None,
-        status_ids: List[int] = None,
-        campus_ids: List[int] = None,
-        birthday_before: datetime = None,
-        birthday_after: datetime = None,
+        ids: Optional[List[int]] = None,
+        status_ids: Optional[List[int]] = None,
+        campus_ids: Optional[List[int]] = None,
+        birthday_before: Optional[datetime] = None,
+        birthday_after: Optional[datetime] = None,
         is_archived: bool = False,
         page: int = 1,
         limit: int = 10,
@@ -171,7 +172,9 @@ class Persons:
 
         return rls
 
-    def events(self, person_id: int, from_date: datetime = None) -> List[Event]:
+    def events(
+        self, person_id: int, from_date: Optional[datetime] = None
+    ) -> List[Event]:
         """Get events that a person is involved in.
 
         :param person_id: The ID of the person
@@ -233,7 +236,7 @@ class Persons:
 
         return grps
 
-    def settings(self, person_id: int, module: str = None) -> List[Setting]:
+    def settings(self, person_id: int, module: Optional[str] = None) -> List[Setting]:
         """Get the settings for a person.
 
         :param person_id: The ID of the person
@@ -279,7 +282,7 @@ class Persons:
         return sttng
 
     def birthdays(
-        self, start_date: date = None, end_date: date = None
+        self, start_date: Optional[date] = None, end_date: Optional[date] = None
     ) -> List[Birthday]:
         """Get all birthdays in a time span.
 
@@ -405,7 +408,7 @@ class Persons:
         endpoint provides the data with all its details.
         """
 
-        route = f"person/masterdata"
+        route = "person/masterdata"
         res = self.__ct.make_request(route)
 
         return res

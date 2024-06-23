@@ -6,21 +6,21 @@ Endpoints for Songs
 
 """
 
-from churchtools.ct_types import MetaPagination, Song
 from typing import Any, Dict, List, Optional, Tuple
+
+from churchtools.ct_types import MetaPagination, Song
 
 
 class Songs:
     def __init__(self, ct: Any) -> None:
-
         self.__ct = ct
 
     def list(
         self,
-        song_category_ids: List[int] = None,
-        ids: List[int] = None,
+        song_category_ids: Optional[List[int]] = None,
+        ids: Optional[List[int]] = None,
         practice: bool = False,
-        key_of_arrangement: str = None,
+        key_of_arrangement: Optional[str] = None,
         page: int = 1,
         limit: int = 10,
     ) -> Tuple[List[Song], Optional[MetaPagination]]:

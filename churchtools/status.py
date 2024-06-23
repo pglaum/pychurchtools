@@ -14,8 +14,9 @@ TODO:
 
 """
 
-from churchtools.ct_types import CTStatus
 from typing import Any, List, Optional
+
+from churchtools.ct_types import CTStatus
 
 
 class Status:

@@ -6,13 +6,13 @@ Groups we love
 
 """
 
-from churchtools.ct_types import GroupHomepageSimple, GroupHomepage
 from typing import Any, List
+
+from churchtools.ct_types import GroupHomepage, GroupHomepageSimple
 
 
 class GroupHomepages:
     def __init__(self, ct: Any) -> None:
-
         self.__ct = ct
 
     def list(self) -> List[GroupHomepageSimple]:
@@ -30,7 +30,6 @@ class GroupHomepages:
                 homepages.append(GroupHomepageSimple(**item))
 
         return homepages
-
 
     def get(self, hash: str) -> GroupHomepage:
         """Get a GroupHomepage by hash

@@ -6,13 +6,13 @@ Groups we love
 
 """
 
-from churchtools.ct_types import AgeGroup
 from typing import Any, List
+
+from churchtools.ct_types import AgeGroup
 
 
 class Groups:
     def __init__(self, ct: Any) -> None:
-
         self.__ct = ct
 
     def agegroups(self) -> List[AgeGroup]:

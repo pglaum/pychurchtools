@@ -6,8 +6,9 @@ Endpoints for the wiki.
 
 """
 
-from churchtools.ct_types import WikiCategory, WikiPage, WikiSearchResult
 from typing import Any, Dict, List, Optional
+
+from churchtools.ct_types import WikiCategory, WikiPage, WikiSearchResult
 
 
 class Wiki:
@@ -106,7 +107,7 @@ class Wiki:
         return pgs
 
     def search(
-        self, query: str, wiki_category_ids: List[int] = None
+        self, query: str, wiki_category_ids: Optional[List[int]] = None
     ) -> List[WikiSearchResult]:
         """Search for a query.
 
