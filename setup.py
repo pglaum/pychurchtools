@@ -13,7 +13,7 @@ def read(fname):
 
 setup(
     name="churchtools",
-    version="0.2.0",
+    version="0.2.1",
     author="Philipp Glaum",
     author_email="p@pglaum.de",
     description=("A library for the ChurchTools API"),
