@@ -13,7 +13,7 @@ TODO:
 """
 
 from datetime import datetime
-from typing import Any, List
+from typing import Any, List, Optional
 
 from churchtools.ct_types import Agenda, Event, Song
 
@@ -24,7 +24,7 @@ class Events:
 
         self.__ct = ct
 
-    def get(self, event_id: int) -> Event:
+    def get(self, event_id: int) -> Event | None:
         """Get a single event by id.
 
         :param event_id: The event id
@@ -42,7 +42,10 @@ class Events:
         return None
 
     def list(
-        self, from_date: datetime = None, to_date: datetime = None, include: str = None
+        self,
+        from_date: Optional[datetime] = None,
+        to_date: Optional[datetime] = None,
+        include: Optional[str] = None,
     ) -> List[Event]:
         """List upcoming events, or events from or to a date.
 
@@ -79,7 +82,7 @@ class Events:
 
         return events
 
-    def agenda(self, event_id: int) -> Agenda:
+    def agenda(self, event_id: int) -> Agenda | None:
         """Get the agenda of an event.
 
         :param event_id: The ID of the event

@@ -58,7 +58,7 @@ class ChurchTools:
     __debugging = 0
     __cookie = None
 
-    def __init__(self, base_url: str, cookie: Dict[str, str] = None) -> None:
+    def __init__(self, base_url: str, cookie: Optional[Dict[str, str]] = None) -> None:
         """Initialize a CT object.
 
         The login cookie can look like this:
@@ -99,7 +99,7 @@ class ChurchTools:
     def make_request(
         self,
         endpoint: str,
-        params: Any = None,
+        params: Optional[Any] = None,
         binary: bool = False,
         method: str = "get",
     ) -> Any:
@@ -245,7 +245,7 @@ class ChurchTools:
 
         # check if the user is 'anonymous'
         i_am = self.general.whoami()
-        if i_am.id < 0:
+        if not i_am or not i_am.id or i_am.id < 0:
             return False
 
         return True

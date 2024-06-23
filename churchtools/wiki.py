@@ -107,7 +107,7 @@ class Wiki:
         return pgs
 
     def search(
-        self, query: str, wiki_category_ids: List[int] = None
+        self, query: str, wiki_category_ids: Optional[List[int]] = None
     ) -> List[WikiSearchResult]:
         """Search for a query.
 
