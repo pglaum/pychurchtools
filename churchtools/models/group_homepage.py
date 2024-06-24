@@ -3,7 +3,8 @@ from typing import Any, Dict, Generator, Generic, List, Optional, TypeVar, Union
 
 from pydantic import BaseModel
 
-from churchtools.models.person import PersonDomainObject  # type: ignore
+from churchtools.models.group import AgeGroup
+from churchtools.models.person import PersonDomainObject
 
 
 class GroupHomepageDomainAttributes(BaseModel):
@@ -23,15 +24,6 @@ class GroupHomepageSimple(BaseModel):
             return self.apiUrl.split("/")[-1]
 
         return ""
-
-
-class AgeGroup(BaseModel):
-    end: Optional[int] = None
-    id: int
-    name: str
-    nameTranslated: Optional[str] = None
-    start: Optional[int] = None
-    sortKey: Optional[int] = None
 
 
 class GroupInformation(BaseModel):

@@ -94,3 +94,41 @@ class PersonRelationship(BaseModel):
         return (
             f"<Relationship: {self.relative.title} " f"({self.degreeOfRelationship})>"
         )
+
+
+class BirthdayPersonDomainAttributes(BaseModel):
+    firstName: str
+    lastName: str
+    guid: str
+
+
+class BirthdayPerson(BaseModel):
+    title: str
+    domainType: str
+    domainIdentifier: str
+    apiUrl: str
+    frontendUrl: str
+    imageUrl: Optional[str] = None
+    domainAttributes: BirthdayPersonDomainAttributes
+
+    def __repr__(self) -> str:
+        return f"<BirthdayPerson: {self.title}>"
+
+
+class Birthday(BaseModel):
+    type: str
+    date: date
+    age: Optional[int] = None
+    person: BirthdayPerson
+
+    def __repr__(self) -> str:
+        return f"<Birthday: {self.person.title} {self.date} " f"({self.age} years)>"
+
+
+class Device(BaseModel):
+    id: str
+    type: str
+    ttl: datetime
+    version: str
+    createdAt: datetime
+    updatedAt: datetime

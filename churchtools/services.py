@@ -12,7 +12,7 @@ TODO:
 
 from typing import Any, List
 
-from churchtools.ct_types import Service, ServiceGroup
+from .models.service import Service, ServiceGroup
 
 
 class Services:
