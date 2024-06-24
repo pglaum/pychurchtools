@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from typing import Any, Dict, List
 
-from churchtools.ct_types import Appointment, Calendar
+from .models.calendar import Appointment, Calendar
 
 
 class Calendars:

@@ -8,7 +8,8 @@ Endpoints of general purpose.
 
 from typing import Any, Dict, List
 
-from churchtools.ct_types import Person, SearchResult, VersionInfo
+from .models.general import SearchResult, VersionInfo
+from .models.person import Person
 
 
 class General:

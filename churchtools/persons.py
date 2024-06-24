@@ -24,18 +24,12 @@ TODO:
 from datetime import date, datetime
 from typing import Any, Dict, List, Optional, Tuple
 
-from churchtools.ct_types import (
-    Birthday,
-    Device,
-    Event,
-    Group,
-    MetaPagination,
-    Person,
-    PersonRelationship,
-    PersonTag,
-    ServiceRequest,
-    Setting,
-)
+from .models.event import Event
+from .models.group import Group
+from .models.pagination import MetaPagination
+from .models.person import Birthday, Device, Person, PersonRelationship, PersonTag
+from .models.service import ServiceRequest
+from .models.settings import Setting
 
 
 class Persons:

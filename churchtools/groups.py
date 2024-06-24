@@ -8,7 +8,7 @@ Groups we love
 
 from typing import Any, List
 
-from churchtools.ct_types import AgeGroup
+from .models.group import AgeGroup
 
 
 class Groups:

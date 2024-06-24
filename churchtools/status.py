@@ -16,7 +16,7 @@ TODO:
 
 from typing import Any, List, Optional
 
-from churchtools.ct_types import CTStatus
+from .models.status import Status as CTStatus
 
 
 class Status:
