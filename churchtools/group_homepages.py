@@ -8,7 +8,7 @@ Groups we love
 
 from typing import Any, List
 
-from churchtools.ct_types import GroupHomepage, GroupHomepageSimple
+from .models.group_homepage import GroupHomepage, GroupHomepageSimple
 
 
 class GroupHomepages:

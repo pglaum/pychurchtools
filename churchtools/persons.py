@@ -29,7 +29,6 @@ from churchtools.ct_types import (
     Device,
     Group,
     MetaPagination,
-    Person,
     PersonRelationship,
     PersonTag,
     ServiceRequest,
@@ -37,6 +36,7 @@ from churchtools.ct_types import (
 )
 
 from .models.event import Event
+from .models.person import Person
 
 
 class Persons:
