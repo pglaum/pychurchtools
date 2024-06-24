@@ -8,7 +8,7 @@ Endpoints for the wiki.
 
 from typing import Any, Dict, List, Optional
 
-from churchtools.ct_types import WikiCategory, WikiPage, WikiSearchResult
+from .models.wiki import WikiCategory, WikiPage, WikiSearchResult
 
 
 class Wiki:

@@ -1,43 +1,9 @@
 from datetime import date, datetime
 from typing import Any, Dict, Generator, Generic, List, Optional, TypeVar, Union
 
-from pydantic import BaseModel  # type: ignore
+from pydantic import BaseModel
 
-PydanticField = TypeVar("PydanticField")
-
-
-class EmptyStrToNone(Generic[PydanticField]):
-    @classmethod
-    def __get_validators__(cls) -> Generator:
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, v: PydanticField, field: Any) -> Optional[PydanticField]:
-        if v == "":
-            return None
-        return v
-
-
-class EmptyStrToFalse(Generic[PydanticField]):
-    @classmethod
-    def __get_validators__(cls) -> Generator:
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, v: PydanticField, field: Any) -> bool:
-        if v == "" or not v:
-            return False
-        return True
-
-
-class CTStatus(BaseModel):
-    id: int
-    name: str
-    shorty: str
-    isMember: bool
-    isSearchable: bool
-    sortKey: int
-    securityLevelId: int
+from . import EmptyStrToFalse
 
 
 class WikiCategory(BaseModel):
