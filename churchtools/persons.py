@@ -27,7 +27,6 @@ from typing import Any, Dict, List, Optional, Tuple
 from churchtools.ct_types import (
     Birthday,
     Device,
-    Event,
     Group,
     MetaPagination,
     Person,
@@ -36,6 +35,8 @@ from churchtools.ct_types import (
     ServiceRequest,
     Setting,
 )
+
+from .models.event import Event
 
 
 class Persons:

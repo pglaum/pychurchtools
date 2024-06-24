@@ -86,48 +86,6 @@ class Person(BaseModel):
         return f"<Person: {self.firstName} {self.lastName} [{self.id}]>"
 
 
-class AgendaSong(BaseModel):
-    songId: int
-    arrangementId: int
-    title: str
-    arrangement: str
-    category: str
-    key: str
-    bpm: str
-    defaultArrangement: Optional[str] = None
-
-
-class AgendaItem(BaseModel):
-    id: int
-    position: int
-    type: str
-    title: str
-    note: Optional[str] = None
-    duration: int
-    start: datetime
-    isBeforeEvent: bool
-    song: Optional[AgendaSong] = None
-
-    # TODO: responsible
-    # TODO: serviceGroupNotes
-    # TODO: meta
-
-
-class Agenda(BaseModel):
-    id: int
-    name: str
-    series: str
-    isFinal: bool
-    calendarId: int
-    total: int
-    items: List[AgendaItem]
-
-    # TODO: meta
-
-    def __repr__(self) -> str:
-        return f"<Agenda: {self.name} [{self.id}]>"
-
-
 class Service(BaseModel):
     id: int
     name: str
@@ -163,45 +121,6 @@ class ServiceGroup(BaseModel):
         return f"<ServiceGroup: {self.name} [{self.id}]>"
 
 
-class EventService(BaseModel):
-    id: int
-    name: Optional[str] = None
-    serviceId: int
-    agreed: bool
-    isValid: bool
-    requestedDate: datetime
-    comment: str
-    counter: int
-    allowChat: bool
-
-    # TODO: person
-    # TODO: requesterPerson
-
-    def __repr__(self) -> str:
-        return f"<EventService: {self.name}>"
-
-
-class Event(BaseModel):
-    id: int
-    guid: str
-    name: str
-    description: Optional[str] = None
-    startDate: datetime
-    endDate: datetime
-    chatStatus: str
-    eventServices: Optional[List[EventService]] = None
-
-    # TODO: permissions
-    # TODO: calendar
-
-    def __repr__(self) -> str:
-        return (
-            f"<Event: {self.startDate.day:02}."
-            f"{self.startDate.month:02} {self.startDate.hour:02}:"
-            f'{self.startDate.minute:02} "{self.name}" [{self.id}]>'
-        )
-
-
 class GroupDomainAttributes(BaseModel):
     note: str
 
@@ -217,62 +136,6 @@ class Group(BaseModel):
 
     def __repr__(self) -> str:
         return f"<Group: {self.title}>"
-
-
-class ArrangementLink(BaseModel):
-    domainType: str
-    domainId: str
-    name: str
-    filename: str
-    fileUrl: str
-
-
-class ArrangementFile(BaseModel):
-    domainType: str
-    domainId: str
-    name: str
-    filename: str
-    fileUrl: str
-
-
-class Arrangement(BaseModel):
-    id: int
-    name: str
-    isDefault: bool
-    keyOfArrangement: str
-    bpm: str
-    beat: str
-    duration: int
-    note: str
-    links: List[ArrangementLink]
-    files: List[ArrangementFile]
-
-    # TODO: meta
-
-
-class SongCategory(BaseModel):
-    id: int
-    name: str
-    nameTranslated: str
-    sortKey: int
-    campusId: Optional[int] = None
-
-
-class Song(BaseModel):
-    id: int
-    name: str
-    category: SongCategory
-    shouldPractice: bool
-    author: str
-    ccli: str
-    copyright: str
-    note: str
-    arrangements: List[Arrangement]
-
-    # TODO: meta
-
-    def __repr__(self) -> str:
-        return f"<Song: {self.name} [{self.id}]>"
 
 
 class VersionInfo(BaseModel):
@@ -450,16 +313,6 @@ class Pagination(BaseModel):
 class MetaPagination(BaseModel):
     count: int
     pagination: Pagination
-
-
-class Department(BaseModel):
-    id: int
-    name: str
-    nameTranslated: Optional[str] = None
-    sortKey: int
-
-    def __repr__(self) -> str:
-        return f"<Department: {self.name} [{self.id}]>"
 
 
 class SearchResult(BaseModel):

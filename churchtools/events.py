@@ -15,7 +15,8 @@ TODO:
 from datetime import datetime
 from typing import Any, List, Optional
 
-from churchtools.ct_types import Agenda, Event, Song
+from .models.event import Agenda, Event
+from .models.song import Song
 
 
 class Events:

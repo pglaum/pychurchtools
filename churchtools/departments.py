@@ -8,7 +8,7 @@ Find out about departments in ChurchTools
 
 from typing import Any, List
 
-from churchtools.ct_types import Department
+from .models.department import Department
 
 
 class Departments:

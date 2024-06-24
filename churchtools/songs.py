@@ -8,7 +8,9 @@ Endpoints for Songs
 
 from typing import Any, Dict, List, Optional, Tuple
 
-from churchtools.ct_types import MetaPagination, Song
+from churchtools.ct_types import MetaPagination
+
+from .models.song import Song
 
 
 class Songs:
