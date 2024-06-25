@@ -29,7 +29,7 @@ class GroupHomepageSimple(BaseModel):
 class GroupInformation(BaseModel):
     ageGroups: Optional[List[AgeGroup]] = None
     campus: Optional[Dict] = None
-    groupCategory: Optional[str] = None
+    groupCategory: Optional[Dict] = None
     groupPlaces: Optional[List[Dict]] = None
     imageUrl: Optional[str] = None
     leader: Optional[List[PersonDomainObject]] = None

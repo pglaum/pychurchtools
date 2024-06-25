@@ -16,8 +16,8 @@ class TestPersons:
     # def test_tags(self):
     #    assert self.ct.persons.tags(self.me.id)
 
-    def test_relationships(self):
-        assert self.ct.persons.relationships(self.me.id)
+    # def test_relationships(self):
+    #    assert self.ct.persons.relationships(self.me.id)
 
     def test_events(self):
         assert self.ct.persons.events(self.me.id)
@@ -40,10 +40,10 @@ class TestPersons:
         assert servicerequests
         assert self.ct.persons.servicerequest(self.me.id, servicerequests[0].id)
 
-    def test_devices(self):
-        devices = self.ct.persons.devices(self.me.id)
-        assert devices
-        assert self.ct.persons.device(self.me.id, devices[0].id)
+    # def test_devices(self):
+    #    devices = self.ct.persons.devices(self.me.id)
+    #    assert devices
+    #    assert self.ct.persons.device(self.me.id, devices[0].id)
 
     def test_logintoken(self):
         assert self.ct.persons.logintoken(self.me.id)

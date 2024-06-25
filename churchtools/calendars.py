@@ -1,5 +1,6 @@
+import json
 from datetime import datetime, timedelta
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from .models.calendar import Appointment, Calendar
 
@@ -70,3 +71,94 @@ class Calendars:
                         print(e)
 
         return apps
+
+    def create_appointment(
+        self, calendar_id: int, appointment: Appointment
+    ) -> Optional[Appointment]:
+        """Create a new appointment
+
+        .. note:: Dates have to be UTC!
+
+        :param calendar_id: The ID of the calendar
+        :type calendar_id: int
+        :param appointment: The new appointment
+        :type appointment: Appointment
+        :returns: The newly created appointment
+        :rtype: Appointment
+        """
+
+        route = f"calendars/{calendar_id}/appointments"
+        res = self.__ct.make_request(
+            route, method="post", data=json.loads(appointment.json())
+        )
+
+        if "data" in res:
+            return Appointment(**res["data"])
+
+        return None
+
+    def get_appointment(
+        self, calendar_id: int, appointment_id: int
+    ) -> Optional[Appointment]:
+        """Get an appointment by ID
+
+        :param calendar_id: The ID of the calendar
+        :type calendar_id: int
+        :param appointment_id: The ID of the appointment
+        :type appointment_id: int
+        :returns: The Appointment
+        :rtype: Appointment
+        """
+
+        route = f"calendars/{calendar_id}/appointments/{appointment_id}"
+        res = self.__ct.make_request(route)
+
+        if "data" in res:
+            if "appointment" in res["data"]:
+                return Appointment(**res["data"]["appointment"])
+
+        return None
+
+    def update_appointment(
+        self, calendar_id: int, appointment_id: int, appointment: Appointment
+    ) -> Optional[Appointment]:
+        """Update an appointment
+
+        .. note:: Dates have to be UTC!
+
+        :param calendar_id: The ID of the calendar
+        :type calendar_id: int
+        :param appointment_id: The ID of the appointment
+        :type appointment_id: int
+        :param appointment: The updated appointment
+        :type appointment: Appointment
+        :returns: The updated appointment
+        :rtype: Appointment
+        """
+
+        route = f"calendars/{calendar_id}/appointments/{appointment_id}"
+        res = self.__ct.make_request(
+            route, method="put", data=json.loads(appointment.json())
+        )
+
+        if "data" in res:
+            return Appointment(**res["data"])
+
+        return None
+
+    def delete_appointment(self, calendar_id: int, appointment_id: int) -> bool:
+        """Delete an appointment
+
+        :param calendar_id: The ID of the calendar
+        :type calendar_id: int
+        :param appointment_id: The ID of the appointment
+        :type appointment_id: int
+        :param appointment: The updated appointment
+        :type appointment: Appointment
+        :returns: Success
+        :rtype: bool
+        """
+
+        route = f"calendars/{calendar_id}/appointments/{appointment_id}"
+        status_code = self.__ct.make_request(route, method="delete")
+        return status_code == 204

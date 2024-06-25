@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from typing import Optional, Union
 
-from pydantic import BaseModel  # type: ignore
+from pydantic import BaseModel, field_serializer  # type: ignore
 
 from . import EmptyStrToNone
 
@@ -35,22 +35,30 @@ class Address(BaseModel):
 
 
 class Appointment(BaseModel):
-    id: Union[int, str]
+    id: Optional[Union[int, str]] = None
     caption: str
     note: Optional[str] = None
     address: Optional[Address] = None
-    version: int
-    calendar: Calendar
+    version: int = 0
+    calendar: Optional[Calendar] = None
     information: Optional[str] = None
     image: Optional[str] = None
     link: Optional[str] = None
-    isInternal: bool
+    isInternal: bool = True
     startDate: Union[date, datetime]
     endDate: Union[date, datetime]
-    allDay: bool
-    repeatId: int
+    allDay: bool = False
+    repeatId: int = 0
     repeatFrequency: Optional[int] = None
     repeatUntil: Optional[str] = None
     repeatOption: Optional[int] = None
+
+    @field_serializer("startDate")
+    def serialize_startDate(self, dt: datetime, _info):
+        return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+    @field_serializer("endDate")
+    def serialize_endDate(self, dt: datetime, _info):
+        return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     # TODO: additions, exceptions, meta

@@ -11,5 +11,6 @@ class TestGroupHomepages:
         assert self.ct.group_homepages.list()
 
     def test_get(self):
+        self.ct.set_debugging_level(2)
         assert self.homepages and len(self.homepages) > 0
         assert self.ct.group_homepages.get(self.homepages[0].frontendUrl.split("/")[-1])
