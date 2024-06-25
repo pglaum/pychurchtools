@@ -9,7 +9,7 @@ implemented.
 
 ## Installation
 
-To install, you can use "`pip install .`" in the source directory.
+To install from PyPI, you can use "`pip install churchtools`".
 Type "`pip uninstall churchtools`" to remove the library.
 
 Dependencies:
