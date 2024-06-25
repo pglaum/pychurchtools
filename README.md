@@ -72,3 +72,9 @@ print('Your next events:')
 
 - Set the `debugging` field from 0 - 2 for none to many debug messages.
 - Times are in UTC
+
+## Tests
+
+- Create a CT instance here: <https://ccp.church.tools/demo>
+- Set the environment variables `CHURCHTOOLS_URL`, `CHURCHTOOLS_USER` & `CHURCHTOOLS_PASSWORD`
+- Run `pytest`
