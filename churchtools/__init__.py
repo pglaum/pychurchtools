@@ -102,6 +102,7 @@ class ChurchTools:
         params: Optional[Any] = None,
         binary: bool = False,
         method: str = "get",
+        data: Optional[Any] = None,
     ) -> Any:
         """Make a request to the churchtools API.
 
@@ -142,7 +143,12 @@ class ChurchTools:
             return requests.get(rurl, params=params, cookies=self.__cookie).content
 
         if method == "post":
-            resp = requests.post(rurl, params=params, cookies=self.__cookie)
+            resp = requests.post(rurl, params=params, json=data, cookies=self.__cookie)
+        elif method == "put":
+            resp = requests.put(rurl, params=params, json=data, cookies=self.__cookie)
+        elif method == "delete":
+            resp = requests.delete(rurl, params=params, cookies=self.__cookie)
+            return resp.status_code
         else:
             if param_str:
                 resp = requests.get(rurl + param_str, cookies=self.__cookie)
@@ -159,13 +165,12 @@ class ChurchTools:
 
             return None
 
-        robj = json.loads(rstr)
-
         if self.__debugging > 0:
             print(rurl, "->", resp.status_code)
             print(rstr)
             print()
 
+        robj = json.loads(rstr)
         return robj
 
     def check_response(self, resp: requests.models.Response) -> bool:

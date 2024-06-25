@@ -1,14 +1,56 @@
+from datetime import datetime, timedelta
+
+from requests import delete
+
+from churchtools.models.calendar import Appointment
 from tests import get_ct_client
 
 
 class TestCalendar:
+    appointment_id = 0
+
     @classmethod
     def setup_class(cls):
         cls.ct = get_ct_client()
+        cls.calendars = cls.ct.calendars.list()
 
-    def test_list_and_appointments(self):
-        calendars = self.ct.calendars.list()
-        public_calendars = [calendar for calendar in calendars if calendar.isPublic]
-        assert len(public_calendars) > 0
-        print(public_calendars[0])
-        assert self.ct.calendars.appointments([public_calendars[0].id])
+    def test_list(self):
+        assert self.ct.calendars.list()
+
+    def test_create_appointment(self):
+        appt = Appointment(
+            caption="Calendar caption",
+            isInternal=False,
+            startDate=datetime.now(),
+            endDate=datetime.now() + timedelta(hours=2),
+        )
+        new_appt = self.ct.calendars.create_appointment(self.calendars[0].id, appt)
+        assert new_appt
+        print("new appt id", new_appt.id)
+        self.__class__.appointment_id = new_appt.id
+
+    def test_appointments(self):
+        assert self.ct.calendars.appointments([self.calendars[0].id])
+
+    def test_put_appointment(self):
+        appt = Appointment(
+            id=self.__class__.appointment_id,
+            caption="Calendar caption 2",
+            isInternal=False,
+            startDate=datetime.now(),
+            endDate=datetime.now() + timedelta(hours=2),
+        )
+        assert self.ct.calendars.update_appointment(
+            self.calendars[0].id, self.__class__.appointment_id, appt
+        )
+
+    def test_get_appointment(self):
+        appt = self.ct.calendars.get_appointment(
+            self.calendars[0].id, self.__class__.appointment_id
+        )
+        assert appt.caption == "Calendar caption 2"
+
+    def test_delete_appointment(self):
+        assert self.ct.calendars.delete_appointment(
+            self.calendars[0].id, self.__class__.appointment_id
+        )
