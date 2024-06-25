@@ -12,13 +12,15 @@ jobs:
         with:
           fetch-depth: 0
       - name: install dependencies
-        run: python3 -m pip install .[tests]
+        run: python3 -m pip install poetry
+      - name: install dependencies
+        run: poetry install
       - name: black formatting
-        run: black --check churchtools/
+        run: poetry run black --check churchtools/
       - name: mypy check
-        run: mypy churchtools/
+        run: poetry run mypy churchtools/
       - name: pytest
-        run: pytest
+        run: poetry run pytest
         env:
           CHURCHTOOLS_URL: ${{ secrets.CHURCHTOOLS_URL }}
           CHURCHTOOLS_USER: ${{ secrets.CHURCHTOOLS_USER }}
