@@ -1,7 +1,5 @@
 from datetime import datetime, timedelta
 
-from requests import delete
-
 from churchtools.models.calendar import Appointment
 from tests import get_ct_client
 
