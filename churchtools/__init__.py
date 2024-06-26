@@ -47,6 +47,7 @@ from churchtools.general import General
 from churchtools.group_homepages import GroupHomepages
 from churchtools.groups import Groups
 from churchtools.persons import Persons
+from churchtools.resource import Resources
 from churchtools.services import Services
 from churchtools.songs import Songs
 from churchtools.status import Status
@@ -91,6 +92,7 @@ class ChurchTools:
         self.groups = Groups(self)
         self.group_homepages = GroupHomepages(self)
         self.persons = Persons(self)
+        self.resources = Resources(self)
         self.services = Services(self)
         self.songs = Songs(self)
         self.status = Status(self)
