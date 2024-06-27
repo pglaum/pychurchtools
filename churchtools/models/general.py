@@ -291,6 +291,8 @@ class SearchResult(BaseModel):
 
 class VersionInfo(BaseModel):
     build: str
+    shortName: str
+    siteName: str
     version: str
 
     def __repr__(self) -> str:
