@@ -105,6 +105,7 @@ class ChurchTools:
         binary: bool = False,
         method: str = "get",
         data: Optional[Any] = None,
+        return_status_code: bool = False,
     ) -> Any:
         """Make a request to the churchtools API.
 
@@ -116,6 +117,8 @@ class ChurchTools:
         :type binary: bool
         :param method: The http request method
         :type method: str
+        :type return_status_code: Only return status code
+        :param return_status_code: bool
         :returns: The result of the request
         :rtype: binary, dict, or string
         """
@@ -156,6 +159,9 @@ class ChurchTools:
                 resp = requests.get(rurl + param_str, cookies=self.__cookie)
             else:
                 resp = requests.get(rurl, params=params, cookies=self.__cookie)
+
+        if return_status_code:
+            return resp.status_code
 
         rstr = resp.content.decode()
 

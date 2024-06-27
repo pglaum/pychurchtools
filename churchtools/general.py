@@ -8,7 +8,7 @@ Endpoints of general purpose.
 
 from typing import Any, Dict, List
 
-from .models.general import SearchResult, VersionInfo
+from .models.general import Config, SearchResult, VersionInfo
 from .models.person import Person
 
 
@@ -17,6 +17,30 @@ class General:
         """Initialize a General object."""
 
         self.__ct = ct
+
+    def config(self) -> Config:
+        """Get the ChurchTools-Config
+
+        :returns: The current churchtools config
+        :rtype: Config
+        """
+
+        res = self.__ct.make_request("config")
+        return Config(**res)
+
+    def config_update(self, updates: dict) -> bool:
+        """Change the ChurchTools-config
+
+        :param updates: The field you want to update
+        :type updates: dict
+        :returns: The success
+        :rtype: bool
+        """
+
+        res = self.__ct.make_request(
+            "config", method="put", data=updates, return_status_code=True
+        )
+        return res == 204
 
     def csrftoken(self) -> str:
         """Returns the CSRF-Token for the current user.
