@@ -6,7 +6,7 @@ Endpoints of general purpose.
 
 """
 
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from .models.general import Config, SearchResult, VersionInfo
 from .models.person import Person
@@ -18,7 +18,7 @@ class General:
 
         self.__ct = ct
 
-    def config(self) -> Config:
+    def config(self) -> Optional[Config]:
         """Get the ChurchTools-Config
 
         :returns: The current churchtools config
@@ -26,6 +26,9 @@ class General:
         """
 
         res = self.__ct.make_request("config")
+        if not res:
+            return None
+
         return Config(**res)
 
     def config_update(self, updates: dict) -> bool:

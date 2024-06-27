@@ -9,239 +9,239 @@ class LicenseSettings(BaseModel):
 
 
 class Config(BaseModel):
-    _current_config_file: str
-    accept_datasecurity: bool
-    access_control_allow_credentials: bool
-    access_control_allow_origins: str
-    admin_ids: List[str]
-    admin_mail: str
-    admin_message: str
-    aiAssistantAvailable: bool
-    ai_description_available_generation_count: int
-    ai_description_available_generation_tests: int
-    ai_description_generation_count: int
-    ai_description_generation_enabled: bool
-    ai_description_total_generation_count: int
-    allowaiassistant: bool
-    allowcheckin: str
-    allowedcals: str
-    allowedclients: str
-    allowedresources: str
-    allowedservices: str
-    allowedstations: str
-    allowedsyncconnections: str
-    allowedsyncjobs: str
-    alloweduser: str
-    allowfinance: str
+    _current_config_file: Optional[str] = None
+    accept_datasecurity: Optional[bool] = None
+    access_control_allow_credentials: Optional[bool] = None
+    access_control_allow_origins: Optional[str] = None
+    admin_ids: List[Optional[str]] = None
+    admin_mail: Optional[str] = None
+    admin_message: Optional[str] = None
+    aiAssistantAvailable: Optional[bool] = None
+    ai_description_available_generation_count: Optional[int] = None
+    ai_description_available_generation_tests: Optional[int] = None
+    ai_description_generation_count: Optional[int] = None
+    ai_description_generation_enabled: Optional[bool] = None
+    ai_description_total_generation_count: Optional[int] = None
+    allowaiassistant: Optional[bool] = None
+    allowcheckin: Optional[str] = None
+    allowedcals: Optional[str] = None
+    allowedclients: Optional[str] = None
+    allowedresources: Optional[str] = None
+    allowedservices: Optional[str] = None
+    allowedstations: Optional[str] = None
+    allowedsyncconnections: Optional[str] = None
+    allowedsyncjobs: Optional[str] = None
+    alloweduser: Optional[str] = None
+    allowfinance: Optional[str] = None
     allowldap: Optional[str] = None
-    allowoptigemsync: str
+    allowoptigemsync: Optional[str] = None
     allowsync: Optional[str] = None
     alpha_book_affiliate_id: Optional[str] = None
-    alpha_book_enabled: bool
-    app_security_request: bool
-    authorized_persons: str
-    brand: str
-    build: str
-    ccli_auto_reporting_enabled: bool
+    alpha_book_enabled: Optional[bool] = None
+    app_security_request: Optional[bool] = None
+    authorized_persons: Optional[str] = None
+    brand: Optional[str] = None
+    build: Optional[str] = None
+    ccli_auto_reporting_enabled: Optional[bool] = None
     ccli_last_token_refresh: Optional[str] = None
     ccli_refresh_token: Optional[str] = None
-    chatServer: str
-    chrome_active: str
-    chrome_binary: str
-    churchcal_active: bool
+    chatServer: Optional[str] = None
+    chrome_active: Optional[str] = None
+    chrome_binary: Optional[str] = None
+    churchcal_active: Optional[bool] = None
     churchcal_css: Optional[str] = None
-    churchcal_entries_last_days: int
-    churchcal_firstdayinweek: int
-    churchcal_maincalname: str
-    churchcal_name: str
-    churchcal_name_default: str
-    churchcal_sortcode: int
-    churchchat_allow_event_chat: bool
-    churchchat_allow_group_chat: bool
-    churchchat_allow_person_chat: bool
-    churchchat_delete_event_chat_after_x_days: int
-    churchchat_invite_ct_event_chat: bool
-    churchchat_invite_ct_group_chat: bool
-    churchchat_name: str
-    churchchat_name_default: str
-    churchchat_sortcode: int
+    churchcal_entries_last_days: Optional[int] = None
+    churchcal_firstdayinweek: Optional[int] = None
+    churchcal_maincalname: Optional[str] = None
+    churchcal_name: Optional[str] = None
+    churchcal_name_default: Optional[str] = None
+    churchcal_sortcode: Optional[int] = None
+    churchchat_allow_event_chat: Optional[bool] = None
+    churchchat_allow_group_chat: Optional[bool] = None
+    churchchat_allow_person_chat: Optional[bool] = None
+    churchchat_delete_event_chat_after_x_days: Optional[int] = None
+    churchchat_invite_ct_event_chat: Optional[bool] = None
+    churchchat_invite_ct_group_chat: Optional[bool] = None
+    churchchat_name: Optional[str] = None
+    churchchat_name_default: Optional[str] = None
+    churchchat_sortcode: Optional[int] = None
     churchchat_start_event_chat_before_x_days: Optional[int] = None
     churchchat_start_event_chat_for_calendars: Optional[str] = None
-    churchchat_sync_user_id: int
-    churchcheckin_active: bool
-    churchcheckin_label_child: str
-    churchcheckin_label_parent: str
-    churchcheckin_label_standard: str
-    churchcheckin_name: str
-    churchcheckin_name_default: str
-    churchcheckin_sortcode: int
+    churchchat_sync_user_id: Optional[int] = None
+    churchcheckin_active: Optional[bool] = None
+    churchcheckin_label_child: Optional[str] = None
+    churchcheckin_label_parent: Optional[str] = None
+    churchcheckin_label_standard: Optional[str] = None
+    churchcheckin_name: Optional[str] = None
+    churchcheckin_name_default: Optional[str] = None
+    churchcheckin_sortcode: Optional[int] = None
     churchcheckin_tags: Optional[str] = None
-    churchcustommodule_active: str
-    churchcustommodule_name: str
-    churchcustommodule_name_default: str
-    churchdb_active: bool
-    churchdb_archivedeletehistory: bool
-    churchdb_birthdaylist_station: str
-    churchdb_birthdaylist_status: str
+    churchcustommodule_active: Optional[str] = None
+    churchcustommodule_name: Optional[str] = None
+    churchcustommodule_name_default: Optional[str] = None
+    churchdb_active: Optional[bool] = None
+    churchdb_archivedeletehistory: Optional[bool] = None
+    churchdb_birthdaylist_station: Optional[str] = None
+    churchdb_birthdaylist_status: Optional[str] = None
     churchdb_cleverreach_client_id: Optional[str] = None
     churchdb_cleverreach_client_secret: Optional[str] = None
     churchdb_cleverreach_connected: Optional[bool] = None
-    churchdb_emailseparator: str
-    churchdb_groupnotchoosable: int
-    churchdb_home_lat: str
-    churchdb_home_lng: str
-    churchdb_mailchimp_apikey: str
+    churchdb_emailseparator: Optional[str] = None
+    churchdb_groupnotchoosable: Optional[int] = None
+    churchdb_home_lat: Optional[str] = None
+    churchdb_home_lng: Optional[str] = None
+    churchdb_mailchimp_apikey: Optional[str] = None
     churchdb_mailchimp_connected: Optional[bool] = None
     churchdb_mailjet_apikey: Optional[str] = None
     churchdb_mailjet_apisecret: Optional[str] = None
     churchdb_mailjet_connected: Optional[bool] = None
-    churchdb_memberlist_station: str
-    churchdb_memberlist_status: str
-    churchdb_name: str
-    churchdb_name_default: str
-    churchdb_sendgroupmails: bool
-    churchdb_smspromote_apikey: str
-    churchdb_sortcode: int
-    churchfinance_active: bool
-    churchfinance_name: str
-    churchfinance_name_default: str
-    churchfinance_sortcode: int
-    churchgroup_active: bool
-    churchgroup_inmenu: bool
-    churchgroup_name: str
-    churchgroup_name_default: str
-    churchgroup_sortcode: str
-    churchreport_active: bool
-    churchreport_name: str
-    churchreport_name_default: str
-    churchreport_sortcode: int
-    churchresource_active: bool
-    churchresource_anonymize_for_public_user: bool
-    churchresource_entries_last_days: int
-    churchresource_name: str
-    churchresource_name_default: str
-    churchresource_send_emails: bool
-    churchresource_sortcode: int
-    churchservice_active: bool
-    churchservice_agendashowenumeration: bool
+    churchdb_memberlist_station: Optional[str] = None
+    churchdb_memberlist_status: Optional[str] = None
+    churchdb_name: Optional[str] = None
+    churchdb_name_default: Optional[str] = None
+    churchdb_sendgroupmails: Optional[bool] = None
+    churchdb_smspromote_apikey: Optional[str] = None
+    churchdb_sortcode: Optional[int] = None
+    churchfinance_active: Optional[bool] = None
+    churchfinance_name: Optional[str] = None
+    churchfinance_name_default: Optional[str] = None
+    churchfinance_sortcode: Optional[int] = None
+    churchgroup_active: Optional[bool] = None
+    churchgroup_inmenu: Optional[bool] = None
+    churchgroup_name: Optional[str] = None
+    churchgroup_name_default: Optional[str] = None
+    churchgroup_sortcode: Optional[str] = None
+    churchreport_active: Optional[bool] = None
+    churchreport_name: Optional[str] = None
+    churchreport_name_default: Optional[str] = None
+    churchreport_sortcode: Optional[int] = None
+    churchresource_active: Optional[bool] = None
+    churchresource_anonymize_for_public_user: Optional[bool] = None
+    churchresource_entries_last_days: Optional[int] = None
+    churchresource_name: Optional[str] = None
+    churchresource_name_default: Optional[str] = None
+    churchresource_send_emails: Optional[bool] = None
+    churchresource_sortcode: Optional[int] = None
+    churchservice_active: Optional[bool] = None
+    churchservice_agendashowenumeration: Optional[bool] = None
     churchservice_ccli_token: Optional[str] = None
     churchservice_ccli_token_secret: Optional[str] = None
-    churchservice_entries_last_days: int
-    churchservice_invite_persons: bool
-    churchservice_name: str
-    churchservice_name_default: str
-    churchservice_openservice_rememberdays: int
-    churchservice_reminderhours: int
-    churchservice_songwithcategoryasdir: bool
-    churchservice_sortcode: int
-    churchsync_active: bool
-    churchsync_inmenu: bool
-    churchsync_name: str
-    churchsync_name_default: str
-    churchsync_sortcode: str
-    churchwiki_active: bool
-    churchwiki_name: str
-    churchwiki_name_default: str
-    churchwiki_sortcode: int
-    cron_daily: datetime
-    cron_hour_8: datetime
-    cronjob_dbdump: bool
-    cronjob_delay: int
-    csrf_enabled: bool
-    currently_mail_sending: str
-    datasecurity_banner_enabled: bool
+    churchservice_entries_last_days: Optional[int] = None
+    churchservice_invite_persons: Optional[bool] = None
+    churchservice_name: Optional[str] = None
+    churchservice_name_default: Optional[str] = None
+    churchservice_openservice_rememberdays: Optional[int] = None
+    churchservice_reminderhours: Optional[int] = None
+    churchservice_songwithcategoryasdir: Optional[bool] = None
+    churchservice_sortcode: Optional[int] = None
+    churchsync_active: Optional[bool] = None
+    churchsync_inmenu: Optional[bool] = None
+    churchsync_name: Optional[str] = None
+    churchsync_name_default: Optional[str] = None
+    churchsync_sortcode: Optional[str] = None
+    churchwiki_active: Optional[bool] = None
+    churchwiki_name: Optional[str] = None
+    churchwiki_name_default: Optional[str] = None
+    churchwiki_sortcode: Optional[int] = None
+    cron_daily: Optional[datetime] = None
+    cron_hour_8: Optional[datetime] = None
+    cronjob_dbdump: Optional[bool] = None
+    cronjob_delay: Optional[int] = None
+    csrf_enabled: Optional[bool] = None
+    currently_mail_sending: Optional[str] = None
+    datasecurity_banner_enabled: Optional[bool] = None
     datasecurity_privacy_agreement_text: Optional[str] = None
     datasecurity_privacy_agreement_text_for_children: Optional[str] = None
-    db_name: str
-    db_password: str
-    db_server: str
-    db_user: str
-    default_phone_area_code: str
-    emailServer: str
-    encryptionkey: str
+    db_name: Optional[str] = None
+    db_password: Optional[str] = None
+    db_server: Optional[str] = None
+    db_user: Optional[str] = None
+    default_phone_area_code: Optional[str] = None
+    emailServer: Optional[str] = None
+    encryptionkey: Optional[str] = None
     env: Optional[str] = None
     evangelische_termine_api_key: Optional[str] = None
-    evangelische_termine_enabled: bool
-    evangelische_termine_name: str
+    evangelische_termine_enabled: Optional[bool] = None
+    evangelische_termine_name: Optional[str] = None
     evangelische_termine_url: Optional[str] = None
     evangelische_termine_vid: Optional[str] = None
     feature_custommodule: Optional[str] = None
     feature_darkmode: Optional[str] = None
-    feature_group: str
+    feature_group: Optional[str] = None
     feature_sync: Optional[str] = None
-    finance_active: bool
-    finance_inmenu: str
-    finance_name: str
-    finance_name_default: str
-    finance_sortcode: str
+    finance_active: Optional[bool] = None
+    finance_inmenu: Optional[str] = None
+    finance_name: Optional[str] = None
+    finance_name_default: Optional[str] = None
+    finance_sortcode: Optional[str] = None
     first_sync_job: Optional[datetime] = None
-    first_transaction: datetime
-    hostingservice: str
-    https_only: str
+    first_transaction: Optional[datetime] = None
+    hostingservice: Optional[str] = None
+    https_only: Optional[str] = None
     image_extension: Optional[str] = None
     installation_verification_code: Optional[str] = None
-    invite_email_text: str
-    isPostsActive: bool
-    isSamlActive: bool
-    is_churchtools_blog_widget_active: bool
-    is_churchtools_onboarding_widget_active: bool
-    is_pr_widget_active: bool
-    is_rss_widget_active: bool
-    language: str
-    last_cron: str
-    last_cron_finished: str
-    last_db_dump: str
-    last_import_clear: str
-    last_translation_update: str
-    ldap_otp_enabled: bool
+    invite_email_text: Optional[str] = None
+    isPostsActive: Optional[bool] = None
+    isSamlActive: Optional[bool] = None
+    is_churchtools_blog_widget_active: Optional[bool] = None
+    is_churchtools_onboarding_widget_active: Optional[bool] = None
+    is_pr_widget_active: Optional[bool] = None
+    is_rss_widget_active: Optional[bool] = None
+    language: Optional[str] = None
+    last_cron: Optional[str] = None
+    last_cron_finished: Optional[str] = None
+    last_db_dump: Optional[str] = None
+    last_import_clear: Optional[str] = None
+    last_translation_update: Optional[str] = None
+    ldap_otp_enabled: Optional[bool] = None
     licenseSettings: Optional[LicenseSettings] = None
     log_debug: Optional[str] = None
-    login_message: str
-    mail_enabled: bool
-    mail_sending_in_background: str
-    mail_sending_starttime: str
-    mail_smtp_args_host: str
-    mail_smtp_args_password: str
-    mail_smtp_args_port: str
-    mail_smtp_args_smtpsecure: str
-    mail_smtp_args_username: str
-    max_uploadfile_size_kb: int
-    memberlist_birthday_full: str
-    memberlist_email: str
-    memberlist_fax: str
-    memberlist_group_couples: str
-    memberlist_picture: str
-    memberlist_salutation: str
-    memberlist_telefongeschaeftlich: str
-    memberlist_telefonhandy: str
-    memberlist_telefonprivat: str
-    onboarding_start: datetime
-    openstreetmaps_enabled: bool
-    orderstatus: str
-    orderstatus_since_date: datetime
-    package: str
-    post_active: bool
+    login_message: Optional[str] = None
+    mail_enabled: Optional[bool] = None
+    mail_sending_in_background: Optional[str] = None
+    mail_sending_starttime: Optional[str] = None
+    mail_smtp_args_host: Optional[str] = None
+    mail_smtp_args_password: Optional[str] = None
+    mail_smtp_args_port: Optional[str] = None
+    mail_smtp_args_smtpsecure: Optional[str] = None
+    mail_smtp_args_username: Optional[str] = None
+    max_uploadfile_size_kb: Optional[int] = None
+    memberlist_birthday_full: Optional[str] = None
+    memberlist_email: Optional[str] = None
+    memberlist_fax: Optional[str] = None
+    memberlist_group_couples: Optional[str] = None
+    memberlist_picture: Optional[str] = None
+    memberlist_salutation: Optional[str] = None
+    memberlist_telefongeschaeftlich: Optional[str] = None
+    memberlist_telefonhandy: Optional[str] = None
+    memberlist_telefonprivat: Optional[str] = None
+    onboarding_start: Optional[datetime] = None
+    openstreetmaps_enabled: Optional[bool] = None
+    orderstatus: Optional[str] = None
+    orderstatus_since_date: Optional[datetime] = None
+    package: Optional[str] = None
+    post_active: Optional[bool] = None
     post_edit_time_limited: Optional[bool] = None
     post_email_summary_default_enabled: Optional[bool] = None
     post_featured_groups: Optional[str] = None
-    post_name: str
-    post_sortcode: int
-    post_wizard_completed: bool
+    post_name: Optional[str] = None
+    post_sortcode: Optional[int] = None
+    post_wizard_completed: Optional[bool] = None
     post_wizard_groups: Optional[str] = None
     prevent_change_security_settings: Optional[bool] = None
-    prevent_export: bool
-    privacy_policy_external: bool
-    privacy_policy_external_link: str
-    privacy_policy_fields_mandatory: bool
+    prevent_export: Optional[bool] = None
+    privacy_policy_external: Optional[bool] = None
+    privacy_policy_external_link: Optional[str] = None
+    privacy_policy_fields_mandatory: Optional[bool] = None
     privacy_policy_fields_not_mandatory_api: Optional[bool] = None
-    privacy_policy_internal: bool
-    privacy_policy_relationships: str
-    profile: str
-    rabbitmq_config_host: str
-    rabbitmq_config_password: str
-    rabbitmq_config_port: str
-    rabbitmq_config_user: str
-    rss_widget_link: str
+    privacy_policy_internal: Optional[bool] = None
+    privacy_policy_relationships: Optional[str] = None
+    profile: Optional[str] = None
+    rabbitmq_config_host: Optional[str] = None
+    rabbitmq_config_password: Optional[str] = None
+    rabbitmq_config_port: Optional[str] = None
+    rabbitmq_config_user: Optional[str] = None
+    rss_widget_link: Optional[str] = None
     safe_mode_enable_authorized_persons: Optional[str] = None
     safe_mode_enable_chat_sync: Optional[str] = None
     safe_mode_enable_consolidation: Optional[str] = None
@@ -250,28 +250,28 @@ class Config(BaseModel):
     safe_mode_enable_mail: Optional[str] = None
     safe_mode_enable_newsletter: Optional[str] = None
     safe_mode_enable_notification: Optional[str] = None
-    send_data_security_mails: bool
-    short_name: str
-    show_remember_me: bool
-    site_language: str
-    site_licensekey: str
-    site_logo: str
-    site_mail: str
-    site_name: str
-    site_offline: bool
-    site_startpage: str
-    site_url: str
+    send_data_security_mails: Optional[bool] = None
+    short_name: Optional[str] = None
+    show_remember_me: Optional[bool] = None
+    site_language: Optional[str] = None
+    site_licensekey: Optional[str] = None
+    site_logo: Optional[str] = None
+    site_mail: Optional[str] = None
+    site_name: Optional[str] = None
+    site_offline: Optional[bool] = None
+    site_startpage: Optional[str] = None
+    site_url: Optional[str] = None
     support_user_active_since: Optional[datetime] = None
     test: Optional[str] = None
-    timezone: str
-    version: str
-    webchatLink: str
-    website_order_status: str
-    website_sync_user_id: str
+    timezone: Optional[str] = None
+    version: Optional[str] = None
+    webchatLink: Optional[str] = None
+    website_order_status: Optional[str] = None
+    website_sync_user_id: Optional[str] = None
     website_trial_user_id: Optional[int] = None
-    website_url: str
-    welcome: str
-    welcome_subtext: str
+    website_url: Optional[str] = None
+    welcome: Optional[str] = None
+    welcome_subtext: Optional[str] = None
 
 
 class SearchResult(BaseModel):

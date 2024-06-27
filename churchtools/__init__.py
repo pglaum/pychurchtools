@@ -245,6 +245,21 @@ class ChurchTools:
 
         return True
 
+    def logout(self) -> bool:
+        """Logs out the current user and destroys the associated session
+
+        :returns: Logout success
+        :rtype: bool
+        """
+
+        res = self.make_request("logout", method="post", return_status_code=True)
+
+        if res == 204:
+            self.__cookie = None
+            return True
+
+        return False
+
     def is_authenticated(self) -> bool:
         """Check if the current object is authenticated with curchtools.
 
