@@ -13,7 +13,7 @@ class Config(BaseModel):
     accept_datasecurity: Optional[bool] = None
     access_control_allow_credentials: Optional[bool] = None
     access_control_allow_origins: Optional[str] = None
-    admin_ids: List[Optional[str]] = None
+    admin_ids: Optional[List[str]] = None
     admin_mail: Optional[str] = None
     admin_message: Optional[str] = None
     aiAssistantAvailable: Optional[bool] = None
