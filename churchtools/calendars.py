@@ -160,5 +160,7 @@ class Calendars:
         """
 
         route = f"calendars/{calendar_id}/appointments/{appointment_id}"
-        status_code = self.__ct.make_request(route, method="delete")
+        status_code = self.__ct.make_request(
+            route, method="delete", return_status_code=True
+        )
         return status_code == 204

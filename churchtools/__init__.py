@@ -105,6 +105,7 @@ class ChurchTools:
         binary: bool = False,
         method: str = "get",
         data: Optional[Any] = None,
+        return_status_code: bool = False,
     ) -> Any:
         """Make a request to the churchtools API.
 
@@ -116,6 +117,8 @@ class ChurchTools:
         :type binary: bool
         :param method: The http request method
         :type method: str
+        :type return_status_code: Only return status code
+        :param return_status_code: bool
         :returns: The result of the request
         :rtype: binary, dict, or string
         """
@@ -150,12 +153,14 @@ class ChurchTools:
             resp = requests.put(rurl, params=params, json=data, cookies=self.__cookie)
         elif method == "delete":
             resp = requests.delete(rurl, params=params, cookies=self.__cookie)
-            return resp.status_code
         else:
             if param_str:
                 resp = requests.get(rurl + param_str, cookies=self.__cookie)
             else:
                 resp = requests.get(rurl, params=params, cookies=self.__cookie)
+
+        if return_status_code:
+            return resp.status_code
 
         rstr = resp.content.decode()
 
@@ -238,6 +243,21 @@ class ChurchTools:
         self.__cookie = {cookie[0]: cookie[1]}
 
         return True
+
+    def logout(self) -> bool:
+        """Logs out the current user and destroys the associated session
+
+        :returns: Logout success
+        :rtype: bool
+        """
+
+        res = self.make_request("logout", method="post", return_status_code=True)
+
+        if res == 204:
+            self.__cookie = None
+            return True
+
+        return False
 
     def is_authenticated(self) -> bool:
         """Check if the current object is authenticated with curchtools.
