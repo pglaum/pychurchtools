@@ -289,6 +289,10 @@ class SearchResult(BaseModel):
         return f"<SearchResult: {self.title} [{self.domainType}]>"
 
 
+class SimulateStop(BaseModel):
+    redirect: str
+
+
 class VersionInfo(BaseModel):
     build: str
     shortName: str

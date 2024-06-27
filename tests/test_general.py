@@ -20,8 +20,20 @@ class TestGeneral:
     def test_info(self):
         assert self.ct.general.info()
 
-    def test_whoami(self):
-        assert self.ct.general.whoami()
-
     def test_search(self):
         assert self.ct.general.search("Gott")
+
+    def test_simulate(self):
+        persons, _ = self.ct.persons.list()
+        me = self.ct.general.whoami()
+        persons_other_than_me = [p for p in persons if p.id != me.id]
+        person_to_simulate = persons_other_than_me[0]
+        assert self.ct.general.simulate(person_to_simulate.id)
+        simulated_me = self.ct.general.whoami()
+        assert simulated_me.id == person_to_simulate.id
+        assert self.ct.general.simulate_stop()
+        new_me = self.ct.general.whoami()
+        assert new_me.id == me.id
+
+    def test_whoami(self):
+        assert self.ct.general.whoami()

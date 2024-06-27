@@ -153,7 +153,6 @@ class ChurchTools:
             resp = requests.put(rurl, params=params, json=data, cookies=self.__cookie)
         elif method == "delete":
             resp = requests.delete(rurl, params=params, cookies=self.__cookie)
-            return resp.status_code
         else:
             if param_str:
                 resp = requests.get(rurl + param_str, cookies=self.__cookie)
