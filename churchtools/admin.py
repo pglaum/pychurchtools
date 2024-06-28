@@ -9,7 +9,7 @@ Admin relevant endpoints
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
-from churchtools.models.admin import LogEntry
+from churchtools.models.admin import LogEntry, LoginStatistic
 from churchtools.models.pagination import MetaPagination
 
 
@@ -42,12 +42,12 @@ class Admin:
         :type after: datetime
         :param person_id: Filter by person
         :type person_id: int
-        :param page: Page number to show page in pagination. If empty, start at first page
+        :param page: Page number to show page in pagination. If empty, start at first page.
         :type page: int
         :param limit: Number of results per page (default: 10)
         :type limit: int
         :returns: A list of log messages & pagination
-        :rtype: Tuple[List[LogEntry], MetaPagination
+        :rtype: Tuple[List[LogEntry], MetaPagination]
         """
 
         params: Dict[str, Any] = {}
@@ -79,3 +79,41 @@ class Admin:
             pagination = MetaPagination(**res["meta"])
 
         return logs, pagination
+
+    def login_statistics(
+        self,
+        order_by: Optional[str] = None,
+        page: Optional[int] = None,
+        limit: Optional[int] = None,
+    ) -> Tuple[List[LoginStatistic], Optional[MetaPagination]]:
+        """Get statistics about login counts of users.
+
+        :param order_by: Order the pagination result. Allowed values: `frequent` and `last`
+        :type order_by: str
+        :param page: Page number to show page in pagination. If empty, start at first page.
+        :type page: int
+        :param limit: Number of results per page (default: 10)
+        :type limit: int
+        :returns: A list of login statistics & pagination
+        :rtype: Tuple[List[LogEntry], MetaPagination]
+        """
+
+        params: Dict[str, Any] = {}
+        if order_by:
+            params["order_by"] = order_by
+        if page:
+            params["page"] = page
+        if limit:
+            params["limit"] = limit
+
+        res = self.__ct.make_request("logs/statistics/login", params=params)
+
+        login_statistics: List[LoginStatistic] = []
+        pagination = None
+        if res and "data" in res:
+            for login in res["data"]:
+                login_statistics.append(LoginStatistic(**login))
+        if res and "meta" in res:
+            pagination = MetaPagination(**res["meta"])
+
+        return login_statistics, pagination
