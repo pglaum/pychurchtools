@@ -24,7 +24,6 @@ class TestCalendar:
         )
         new_appt = self.ct.calendars.create_appointment(self.calendars[0].id, appt)
         assert new_appt
-        print("new appt id", new_appt.id)
         self.__class__.appointment_id = new_appt.id
 
     def test_appointments(self):
