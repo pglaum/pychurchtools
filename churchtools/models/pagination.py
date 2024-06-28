@@ -12,4 +12,4 @@ class Pagination(BaseModel):
 
 class MetaPagination(BaseModel):
     count: int
-    pagination: Pagination
+    pagination: Optional[Pagination] = None

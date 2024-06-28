@@ -22,16 +22,16 @@ class LoginPersonColor(BaseModel):
 
 class LoginPersonDomainAttributes(BaseModel):
     firstName: str
-    guid: Optional[str]
+    guid: Optional[str] = None
     lastName: str
 
 
 class LoginPerson(BaseModel):
     apiUrl: str
-    color: Optional[LoginPersonColor]
+    color: Optional[LoginPersonColor] = None
     domainIdentifier: str
     frontendUrl: str
-    imageUrl: Optional[str]
+    imageUrl: Optional[str] = None
     initials: str
     title: str
     domainAttributes: LoginPersonDomainAttributes
@@ -44,3 +44,9 @@ class LoginStatistic(BaseModel):
     lastLogin: datetime
     person: LoginPerson
     totalLogins: int
+
+
+class SecurityLevel(BaseModel):
+    id: int
+    name: str
+    sortkey: int

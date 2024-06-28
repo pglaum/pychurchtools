@@ -153,6 +153,8 @@ class ChurchTools:
             resp = requests.post(rurl, params=params, json=data, cookies=self.__cookie)
         elif method == "put":
             resp = requests.put(rurl, params=params, json=data, cookies=self.__cookie)
+        elif method == "patch":
+            resp = requests.patch(rurl, params=params, json=data, cookies=self.__cookie)
         elif method == "delete":
             resp = requests.delete(rurl, params=params, cookies=self.__cookie)
         else:
@@ -162,6 +164,11 @@ class ChurchTools:
                 resp = requests.get(rurl, params=params, cookies=self.__cookie)
 
         if return_status_code:
+            if self.__debugging > 0:
+                print(rurl, "->", resp.status_code)
+                print(params)
+                if resp.content:
+                    print(resp.content.decode())
             return resp.status_code
 
         rstr = resp.content.decode()

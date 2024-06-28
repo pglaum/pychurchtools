@@ -1,3 +1,4 @@
+from churchtools.models.admin import SecurityLevel
 from tests import get_ct_client
 
 
@@ -19,3 +20,16 @@ class TestAdmin:
         login_statistics, pagination = self.ct.admin.logs()
         assert login_statistics
         assert pagination
+
+    def test_security_levels(self):
+        securitylevels, pagination = self.ct.admin.list_security_levels()
+        assert securitylevels
+        assert pagination
+        new_level = self.ct.admin.create_security_level(99, "pytest level")
+        assert new_level
+        new_level = self.ct.admin.patch_security_level(99, "pytest level patched")
+        assert new_level
+        new_level = self.ct.admin.get_security_level(99)
+        assert new_level
+        assert new_level.name == "pytest level patched"
+        assert self.ct.admin.delete_security_level(99)
