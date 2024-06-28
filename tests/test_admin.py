@@ -11,6 +11,10 @@ class TestAdmin:
         assert logs
         assert pagination
 
+    def test_get_log(self):
+        logs, _ = self.ct.admin.logs()
+        assert self.ct.admin.get_log(logs[0].id)
+
     def test_login_statistics(self):
         login_statistics, pagination = self.ct.admin.logs()
         assert login_statistics

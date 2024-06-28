@@ -80,6 +80,22 @@ class Admin:
 
         return logs, pagination
 
+    def get_log(self, id: int) -> Optional[LogEntry]:
+        """Fetch one specific log message by its ID
+
+        :param id: ID of the entity
+        :type id: int
+        :returns: The log entry
+        :rtype: Optional[LogEntry]
+        """
+
+        res = self.__ct.make_request(f"logs/{id}")
+
+        if res and "data" in res:
+            return LogEntry(**res["data"])
+
+        return None
+
     def login_statistics(
         self,
         order_by: Optional[str] = None,
