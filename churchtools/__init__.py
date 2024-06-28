@@ -40,6 +40,7 @@ from urllib.parse import urljoin
 
 import requests
 
+from churchtools.admin import Admin
 from churchtools.calendars import Calendars
 from churchtools.departments import Departments
 from churchtools.events import Events
@@ -85,6 +86,7 @@ class ChurchTools:
         else:
             self.__cookie = None
 
+        self.admin = Admin(self)
         self.calendars = Calendars(self)
         self.departments = Departments(self)
         self.events = Events(self)
@@ -168,12 +170,14 @@ class ChurchTools:
         if not r_ok:
             if self.__debugging > 0:
                 print(rurl, "->", resp.status_code)
+                print(params)
                 print(rstr)
 
             return None
 
         if self.__debugging > 0:
             print(rurl, "->", resp.status_code)
+            print(params)
             print(rstr)
             print()
 
@@ -204,6 +208,11 @@ class ChurchTools:
         if resp.status_code == 404:
             if self.__debugging > 0:
                 print("Error: 404 Not Found")
+            return False
+
+        if resp.status_code == 503:
+            if self.__debugging > 0:
+                print("Error: 503 Service Unavailable")
             return False
 
         return True
