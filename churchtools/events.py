@@ -44,7 +44,7 @@ class Events:
 
         return None
 
-    def list(
+    def get_all(
         self,
         from_date: datetime | None = None,
         to_date: datetime | None = None,

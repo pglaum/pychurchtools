@@ -40,7 +40,7 @@ import traceback
 from typing import Any
 from urllib.parse import urljoin
 
-import requests
+import requests  # type: ignore
 
 from churchtools.admin import Admin
 from churchtools.calendars import Calendars

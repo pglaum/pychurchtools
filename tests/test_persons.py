@@ -13,7 +13,7 @@ class TestPersons:
         assert self.ct.persons.get(self.me.id)
 
     def test_list(self):
-        assert self.ct.persons.list()
+        assert self.ct.persons.get_all()
 
     # def test_tags(self):
     #    assert self.ct.persons.tags(self.me.id)

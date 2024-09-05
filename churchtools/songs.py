@@ -18,7 +18,7 @@ class Songs:
     def __init__(self, ct: Any) -> None:
         self.__ct = ct
 
-    def list(
+    def get_all(
         self,
         song_category_ids: list[int] | None = None,
         ids: list[int] | None = None,

@@ -21,7 +21,7 @@ class Services:
     def __init__(self, ct: Any) -> None:
         self.__ct = ct
 
-    def list(self) -> list[Service]:
+    def get_all(self) -> list[Service]:
         """List all services.
 
         :returns: A list of all services

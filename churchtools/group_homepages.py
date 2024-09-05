@@ -17,7 +17,7 @@ class GroupHomepages:
     def __init__(self, ct: Any) -> None:
         self.__ct = ct
 
-    def list(self) -> list[GroupHomepageSimple]:
+    def get_all(self) -> list[GroupHomepageSimple]:
         """Get all GroupHomepages
 
         :returns: A list of all group homepages

@@ -19,7 +19,7 @@ class Departments:
 
         self.__ct = ct
 
-    def list(self) -> list[Department]:
+    def get_all(self) -> list[Department]:
         """Returns all departments"""
 
         res = self.__ct.make_request("departments")

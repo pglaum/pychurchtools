@@ -13,7 +13,7 @@ class Calendars:
 
         self.__ct = ct
 
-    def list(self) -> list[Calendar]:
+    def get_all(self) -> list[Calendar]:
         """Get all calendars
 
         :returns: A list of calendars

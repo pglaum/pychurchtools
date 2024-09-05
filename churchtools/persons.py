@@ -57,7 +57,7 @@ class Persons:
 
         return None
 
-    def list(
+    def get_all(
         self,
         ids: list[int] | None = None,
         status_ids: list[int] | None = None,
