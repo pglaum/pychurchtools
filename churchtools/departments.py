@@ -6,6 +6,8 @@ Find out about departments in ChurchTools
 
 """
 
+from __future__ import annotations
+
 from typing import Any
 
 from .models.department import Department

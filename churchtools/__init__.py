@@ -33,6 +33,8 @@ TODO (for 100% completion):
 
 """
 
+from __future__ import annotations
+
 import json
 import traceback
 from typing import Any

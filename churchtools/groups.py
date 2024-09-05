@@ -6,6 +6,8 @@ Groups we love
 
 """
 
+from __future__ import annotations
+
 from typing import Any
 
 from .models.group import AgeGroup

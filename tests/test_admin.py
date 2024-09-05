@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from churchtools.models.admin import SecurityLevel
 from tests import get_ct_client
 

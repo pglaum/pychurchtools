@@ -6,6 +6,8 @@ Endpoints for the wiki.
 
 """
 
+from __future__ import annotations
+
 from typing import Any
 
 from .models.wiki import WikiCategory, WikiPage, WikiSearchResult

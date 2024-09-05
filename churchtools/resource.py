@@ -6,6 +6,8 @@ CRUD methods for Resources
 
 """
 
+from __future__ import annotations
+
 from datetime import datetime
 from typing import Any
 

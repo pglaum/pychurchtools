@@ -6,6 +6,8 @@ Endpoints of general purpose.
 
 """
 
+from __future__ import annotations
+
 from typing import Any
 
 from .models.general import Config, SearchResult, SimulateStop, VersionInfo

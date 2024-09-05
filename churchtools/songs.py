@@ -6,6 +6,8 @@ Endpoints for Songs
 
 """
 
+from __future__ import annotations
+
 from typing import Any
 
 from .models.pagination import MetaPagination
