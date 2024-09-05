@@ -7,7 +7,7 @@ Admin relevant endpoints
 """
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 from churchtools.models.admin import LogEntry, LoginStatistic, SecurityLevel
 from churchtools.models.pagination import MetaPagination
@@ -21,14 +21,14 @@ class Admin:
 
     def logs(
         self,
-        message: Optional[str] = None,
-        levels: Optional[List[str]] = None,
-        before: Optional[datetime] = None,
-        after: Optional[datetime] = None,
-        person_id: Optional[int] = None,
-        page: Optional[int] = None,
-        limit: Optional[int] = None,
-    ) -> Tuple[List[LogEntry], Optional[MetaPagination]]:
+        message: str | None = None,
+        levels: list[str] | None = None,
+        before: datetime | None = None,
+        after: datetime | None = None,
+        person_id: int | None = None,
+        page: int | None = None,
+        limit: int | None = None,
+    ) -> tuple[list[LogEntry], MetaPagination | None]:
         """The response is a collection of all log messages you may see and is limited to a specific number of messages.
         You can use the page parameter to browse the list of log messages. The logs are ordered by date.
 
@@ -50,7 +50,7 @@ class Admin:
         :rtype: Tuple[List[LogEntry], MetaPagination]
         """
 
-        params: Dict[str, Any] = {}
+        params: dict[str, Any] = {}
 
         if message:
             params["message"] = message
@@ -69,7 +69,7 @@ class Admin:
 
         res = self.__ct.make_request("logs", params=params)
 
-        logs: List[LogEntry] = []
+        logs: list[LogEntry] = []
         pagination = None
         if res and "data" in res:
             for log in res["data"]:
@@ -80,7 +80,7 @@ class Admin:
 
         return logs, pagination
 
-    def get_log(self, id: int) -> Optional[LogEntry]:
+    def get_log(self, id: int) -> LogEntry | None:
         """Fetch one specific log message by its ID
 
         :param id: ID of the entity
@@ -98,10 +98,10 @@ class Admin:
 
     def login_statistics(
         self,
-        order_by: Optional[str] = None,
-        page: Optional[int] = None,
-        limit: Optional[int] = None,
-    ) -> Tuple[List[LoginStatistic], Optional[MetaPagination]]:
+        order_by: str | None = None,
+        page: int | None = None,
+        limit: int | None = None,
+    ) -> tuple[list[LoginStatistic], MetaPagination | None]:
         """Get statistics about login counts of users.
 
         :param order_by: Order the pagination result. Allowed values: `frequent` and `last`
@@ -114,7 +114,7 @@ class Admin:
         :rtype: Tuple[List[LogEntry], Optional[MetaPagination]]
         """
 
-        params: Dict[str, Any] = {}
+        params: dict[str, Any] = {}
         if order_by:
             params["order_by"] = order_by
         if page:
@@ -124,7 +124,7 @@ class Admin:
 
         res = self.__ct.make_request("logs/statistics/login", params=params)
 
-        login_statistics: List[LoginStatistic] = []
+        login_statistics: list[LoginStatistic] = []
         pagination = None
         if res and "data" in res:
             for login in res["data"]:
@@ -136,7 +136,7 @@ class Admin:
 
     def list_security_levels(
         self,
-    ) -> Tuple[List[SecurityLevel], Optional[MetaPagination]]:
+    ) -> tuple[list[SecurityLevel], MetaPagination | None]:
         """Get all security levels
 
         :returns: A list of security levels & pagination
@@ -145,7 +145,7 @@ class Admin:
 
         res = self.__ct.make_request("securitylevels")
 
-        securitylevels: List[SecurityLevel] = []
+        securitylevels: list[SecurityLevel] = []
         pagination = None
         if res and "data" in res:
             for level in res["data"]:
@@ -155,7 +155,7 @@ class Admin:
 
         return securitylevels, pagination
 
-    def create_security_level(self, id: int, name: str) -> Optional[SecurityLevel]:
+    def create_security_level(self, id: int, name: str) -> SecurityLevel | None:
         """Create a new security level.
 
         :param id: The ID of the new security level
@@ -166,7 +166,7 @@ class Admin:
         :rtype: Optional[SecurityLevel]
         """
 
-        data: Dict[str, Any] = {"name": name}
+        data: dict[str, Any] = {"name": name}
         res = self.__ct.make_request(f"securitylevels/{id}", method="post", data=data)
         if res:
             return SecurityLevel(**res)
@@ -177,9 +177,9 @@ class Admin:
         self,
         id: int,
         name: str,
-        forcereorder: Optional[bool] = None,
-        newid: Optional[int] = None,
-    ) -> Optional[SecurityLevel]:
+        forcereorder: bool | None = None,
+        newid: int | None = None,
+    ) -> SecurityLevel | None:
         """Change a security level
 
         :param id: The ID of the updated security level
@@ -194,8 +194,8 @@ class Admin:
         :rtype: Optional[SecurityLevel]
         """
 
-        params: Dict[str, Any] = {}
-        data: Dict[str, Any] = {
+        params: dict[str, Any] = {}
+        data: dict[str, Any] = {
             "name": name,
             "newid": newid if newid is not None else id,
         }
@@ -212,7 +212,7 @@ class Admin:
 
         return None
 
-    def get_security_level(self, id: int) -> Optional[SecurityLevel]:
+    def get_security_level(self, id: int) -> SecurityLevel | None:
         """Get a security level
 
         :param id: The ID of the updated security level

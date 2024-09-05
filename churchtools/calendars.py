@@ -1,6 +1,6 @@
 import json
 from datetime import datetime, timedelta
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from .models.calendar import Appointment, Calendar
 
@@ -11,7 +11,7 @@ class Calendars:
 
         self.__ct = ct
 
-    def list(self) -> List[Calendar]:
+    def list(self) -> list[Calendar]:
         """Get all calendars
 
         :returns: A list of calendars
@@ -31,17 +31,17 @@ class Calendars:
 
     def appointments(
         self,
-        calendar_ids: List[int],
+        calendar_ids: list[int],
         start_date: datetime = datetime.now(),
         end_date: datetime = datetime.now() + timedelta(weeks=4),
-    ) -> List[Appointment]:
+    ) -> list[Appointment]:
         """Get all appointments
 
         :returns: A list of appointments
         :rtype: List[Appointment]
         """
 
-        params: Dict[str, Any] = {}
+        params: dict[str, Any] = {}
 
         params["calendar_ids"] = calendar_ids
 
@@ -74,7 +74,7 @@ class Calendars:
 
     def create_appointment(
         self, calendar_id: int, appointment: Appointment
-    ) -> Optional[Appointment]:
+    ) -> Appointment | None:
         """Create a new appointment
 
         .. note:: Dates have to be UTC!
@@ -99,7 +99,7 @@ class Calendars:
 
     def get_appointment(
         self, calendar_id: int, appointment_id: int
-    ) -> Optional[Appointment]:
+    ) -> Appointment | None:
         """Get an appointment by ID
 
         :param calendar_id: The ID of the calendar
@@ -121,7 +121,7 @@ class Calendars:
 
     def update_appointment(
         self, calendar_id: int, appointment_id: int, appointment: Appointment
-    ) -> Optional[Appointment]:
+    ) -> Appointment | None:
         """Update an appointment
 
         .. note:: Dates have to be UTC!

@@ -1,15 +1,13 @@
-from typing import Optional
-
 from pydantic import BaseModel
 
 
 class AgeGroup(BaseModel):
-    end: Optional[int] = None
+    end: int | None = None
     id: int
     name: str
-    nameTranslated: Optional[str] = None
-    start: Optional[int] = None
-    sortKey: Optional[int] = None
+    nameTranslated: str | None = None
+    start: int | None = None
+    sortKey: int | None = None
 
 
 class GroupDomainAttributes(BaseModel):
@@ -22,7 +20,7 @@ class Group(BaseModel):
     domainIdentifier: str
     apiUrl: str
     frontendUrl: str
-    imageUrl: Optional[str] = None
+    imageUrl: str | None = None
     domainAttributes: GroupDomainAttributes
 
     def __repr__(self) -> str:

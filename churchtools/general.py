@@ -6,7 +6,7 @@ Endpoints of general purpose.
 
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from .models.general import Config, SearchResult, SimulateStop, VersionInfo
 from .models.person import Person
@@ -18,7 +18,7 @@ class General:
 
         self.__ct = ct
 
-    def config(self) -> Optional[Config]:
+    def config(self) -> Config | None:
         """Get the ChurchTools-Config
 
         :returns: The current churchtools config
@@ -71,8 +71,8 @@ class General:
     def search(
         self,
         query: str,
-        domain_types: List[str] = ["person", "group", "song", "wiki_page"],
-    ) -> List[SearchResult]:
+        domain_types: list[str] = ["person", "group", "song", "wiki_page"],
+    ) -> list[SearchResult]:
         """Search globally for different or all domain types.
 
         :param query: The search query
@@ -83,7 +83,7 @@ class General:
         :rtype: SearchResult
         """
 
-        params: Dict[str, Any] = {}
+        params: dict[str, Any] = {}
         params["query"] = query
         params["domainTypes"] = domain_types
 
@@ -106,13 +106,13 @@ class General:
         :rtype: bool
         """
 
-        params: Dict[str, Any] = {"personId": person_id}
+        params: dict[str, Any] = {"personId": person_id}
         res = self.__ct.make_request(
             "simulate", method="post", data=params, return_status_code=True
         )
         return res == 204
 
-    def simulate_stop(self) -> Optional[SimulateStop]:
+    def simulate_stop(self) -> SimulateStop | None:
         """Stops the simulation of another person
 
         :returns: The simulate stop data

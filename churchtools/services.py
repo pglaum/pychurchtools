@@ -10,7 +10,7 @@ TODO:
 
 """
 
-from typing import Any, List
+from typing import Any
 
 from .models.service import Service, ServiceGroup
 
@@ -19,7 +19,7 @@ class Services:
     def __init__(self, ct: Any) -> None:
         self.__ct = ct
 
-    def list(self) -> List[Service]:
+    def list(self) -> list[Service]:
         """List all services.
 
         :returns: A list of all services
@@ -35,7 +35,7 @@ class Services:
 
         return services
 
-    def groups(self) -> List[ServiceGroup]:
+    def groups(self) -> list[ServiceGroup]:
         """List all service groups.
 
         :returns: A list of all service groups

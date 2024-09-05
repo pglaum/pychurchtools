@@ -6,7 +6,7 @@ Endpoints for Songs
 
 """
 
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 from .models.pagination import MetaPagination
 from .models.song import Song
@@ -18,13 +18,13 @@ class Songs:
 
     def list(
         self,
-        song_category_ids: Optional[List[int]] = None,
-        ids: Optional[List[int]] = None,
+        song_category_ids: list[int] | None = None,
+        ids: list[int] | None = None,
         practice: bool = False,
-        key_of_arrangement: Optional[str] = None,
+        key_of_arrangement: str | None = None,
         page: int = 1,
         limit: int = 10,
-    ) -> Tuple[List[Song], Optional[MetaPagination]]:
+    ) -> tuple[list[Song], MetaPagination | None]:
         """Return a list of songs.
 
         :param song_category_ids: Only query for these category IDs
@@ -43,7 +43,7 @@ class Songs:
         :rtype: List[Song]
         """
 
-        params: Dict[str, Any] = {}
+        params: dict[str, Any] = {}
 
         if song_category_ids:
             params["song_category_ids"] = song_category_ids
@@ -72,7 +72,7 @@ class Songs:
 
         return songs, pagination
 
-    def get(self, song_id: int) -> Optional[Song]:
+    def get(self, song_id: int) -> Song | None:
         """Get a song by id.
 
         :param song_id: The ID of the song

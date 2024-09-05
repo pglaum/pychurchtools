@@ -1,4 +1,5 @@
-from typing import Any, Generator, Generic, Optional, TypeVar
+from typing import Any, Generic, TypeVar
+from collections.abc import Generator
 
 PydanticField = TypeVar("PydanticField")
 
@@ -9,7 +10,7 @@ class EmptyStrToNone(Generic[PydanticField]):
         yield cls.validate
 
     @classmethod
-    def validate(cls, v: PydanticField, field: Any) -> Optional[PydanticField]:
+    def validate(cls, v: PydanticField, field: Any) -> PydanticField | None:
         if v == "":
             return None
         return v
