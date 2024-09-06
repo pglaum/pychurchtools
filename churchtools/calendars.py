@@ -34,14 +34,16 @@ class Calendars:
     def appointments(
         self,
         calendar_ids: list[int],
-        start_date: datetime = datetime.now(),
-        end_date: datetime = datetime.now() + timedelta(weeks=4),
+        start_date: datetime | None = None,
+        end_date: datetime | None = None,
     ) -> list[Appointment]:
         """Get all appointments
 
         :returns: A list of appointments
         :rtype: List[Appointment]
         """
+        start_date = datetime.now() if start_date is None else start_date
+        end_date = datetime.now() + timedelta(weeks=4) if end_date is None else end_date
 
         params: dict[str, Any] = {}
 

@@ -71,9 +71,7 @@ class General:
         return VersionInfo(**res)
 
     def search(
-        self,
-        query: str,
-        domain_types: list[str] = ["person", "group", "song", "wiki_page"],
+        self, query: str, domain_types: list[str] | None = None
     ) -> list[SearchResult]:
         """Search globally for different or all domain types.
 
@@ -84,6 +82,11 @@ class General:
         :returns: A list of search results
         :rtype: SearchResult
         """
+        domain_types = (
+            ["person", "group", "song", "wiki_page"]
+            if domain_types is None
+            else domain_types
+        )
 
         params: dict[str, Any] = {}
         params["query"] = query

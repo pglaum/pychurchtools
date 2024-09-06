@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import date, datetime
 
-from pydantic import BaseModel, field_serializer  # type: ignore
+from pydantic import BaseModel, field_serializer, Field  # type: ignore
 
 from . import EmptyStrToNone
 
@@ -62,13 +62,13 @@ class AppointmentMeta(BaseModel):
 
 
 class Appointment(BaseModel):
-    additions: list[AppointmentAddition] = []
+    additions: list[AppointmentAddition] = Field(default_factory=list)
     address: Address | None = None
     allDay: bool = False
     calendar: Calendar | None = None
     caption: str
     endDate: date | datetime
-    exceptions: list[AppointmentException] = []
+    exceptions: list[AppointmentException] = Field(default_factory=list)
     id: int | str | None = None
     image: str | None = None
     information: str | None = None
