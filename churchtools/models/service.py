@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from datetime import datetime
-from typing import Optional
 
 from pydantic import BaseModel
 
@@ -16,10 +17,10 @@ class Service(BaseModel):
     standard: bool
     hidePersonName: bool
     sendReminderMails: bool
-    sendServiceRequestMails: Optional[bool] = None
+    sendServiceRequestMails: bool | None = None
     allowControlLiveAgenda: bool
-    groupIds: Optional[str] = None
-    tagIds: Optional[str] = None
+    groupIds: str | None = None
+    tagIds: str | None = None
     calTextTemplate: str
     allowChat: bool
 
@@ -31,9 +32,9 @@ class ServiceGroup(BaseModel):
     id: int
     name: str
     sortKey: int
-    viewAll: Optional[bool] = None
-    campusId: Optional[int] = None
-    onlyVisibleInCampusFilter: Optional[bool] = None
+    viewAll: bool | None = None
+    campusId: int | None = None
+    onlyVisibleInCampusFilter: bool | None = None
 
     def __repr__(self) -> str:
         return f"<ServiceGroup: {self.name} [{self.id}]>"

@@ -14,7 +14,9 @@ TODO:
 
 """
 
-from typing import Any, List, Optional
+from __future__ import annotations
+
+from typing import Any
 
 from .models.status import Status as CTStatus
 
@@ -25,7 +27,7 @@ class Status:
 
         self.__ct = ct
 
-    def get_all(self) -> List[CTStatus]:
+    def get_all(self) -> list[CTStatus]:
         """Get all statuses from the API.
 
         :returns: A list of all status
@@ -41,7 +43,7 @@ class Status:
 
         return statuses
 
-    def get(self, status_id: int) -> Optional[CTStatus]:
+    def get(self, status_id: int) -> CTStatus | None:
         """Get a status by ID.
 
         :param status_id: The ID of the status

@@ -6,7 +6,9 @@ Groups we love
 
 """
 
-from typing import Any, List
+from __future__ import annotations
+
+from typing import Any
 
 from .models.group_homepage import GroupHomepage, GroupHomepageSimple
 
@@ -15,7 +17,7 @@ class GroupHomepages:
     def __init__(self, ct: Any) -> None:
         self.__ct = ct
 
-    def list(self) -> List[GroupHomepageSimple]:
+    def get_all(self) -> list[GroupHomepageSimple]:
         """Get all GroupHomepages
 
         :returns: A list of all group homepages

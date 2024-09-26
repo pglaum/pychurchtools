@@ -12,13 +12,13 @@ jobs:
         with:
           fetch-depth: 0
       - name: install dependencies
-        run: python3 -m pip install poetry
+        run: python3 -m pip install poetry pre-commit
       - name: install dependencies
-        run: poetry install
-      - name: black formatting
-        run: poetry run black --check churchtools/
-      - name: mypy check
-        run: poetry run mypy churchtools/
+        run: |
+          poetry install
+          pre-commit install --install-hooks
+      - name: run pre-commit
+        run: pre-commit run --all
       - name: pytest
         run: poetry run pytest
         env:

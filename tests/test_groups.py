@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from tests import get_ct_client
 
 

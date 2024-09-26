@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from datetime import datetime
-from typing import List, Optional
 
 from pydantic import BaseModel
 
@@ -12,7 +13,7 @@ class LogEntry(BaseModel):
     level: int
     message: str
     personId: int
-    simulatePersonId: Optional[int] = None
+    simulatePersonId: int | None = None
 
 
 class LoginPersonColor(BaseModel):
@@ -22,22 +23,22 @@ class LoginPersonColor(BaseModel):
 
 class LoginPersonDomainAttributes(BaseModel):
     firstName: str
-    guid: Optional[str] = None
+    guid: str | None = None
     lastName: str
 
 
 class LoginPerson(BaseModel):
     apiUrl: str
-    color: Optional[LoginPersonColor] = None
+    color: LoginPersonColor | None = None
     domainIdentifier: str
     frontendUrl: str
-    imageUrl: Optional[str] = None
+    imageUrl: str | None = None
     initials: str
     title: str
     domainAttributes: LoginPersonDomainAttributes
     domainType: str
     icon: str
-    infos: List[str]
+    infos: list[str]
 
 
 class LoginStatistic(BaseModel):

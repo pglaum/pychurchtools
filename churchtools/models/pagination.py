@@ -1,4 +1,4 @@
-from typing import Optional
+from __future__ import annotations
 
 from pydantic import BaseModel
 
@@ -12,4 +12,4 @@ class Pagination(BaseModel):
 
 class MetaPagination(BaseModel):
     count: int
-    pagination: Optional[Pagination] = None
+    pagination: Pagination | None = None

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from datetime import datetime, timedelta
 
 from churchtools.models.calendar import Appointment
@@ -10,10 +12,10 @@ class TestCalendar:
     @classmethod
     def setup_class(cls):
         cls.ct = get_ct_client()
-        cls.calendars = cls.ct.calendars.list()
+        cls.calendars = cls.ct.calendars.get_all()
 
     def test_list(self):
-        assert self.ct.calendars.list()
+        assert self.ct.calendars.get_all()
 
     def test_create_appointment(self):
         appt = Appointment(

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from tests import get_ct_client
 
 
@@ -5,10 +7,10 @@ class TestEvents:
     @classmethod
     def setup_class(cls):
         cls.ct = get_ct_client()
-        cls.events = cls.ct.events.list()
+        cls.events = cls.ct.events.get_all()
 
     def test_list(self):
-        assert self.ct.events.list(include="eventServices")
+        assert self.ct.events.get_all(include="eventServices")
 
     def test_get(self):
         assert self.events and len(self.events) > 0

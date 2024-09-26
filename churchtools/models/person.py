@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from datetime import date, datetime
-from typing import List, Optional
 
 from pydantic import BaseModel  # type: ignore
 
@@ -7,53 +8,53 @@ from . import EmptyStrToNone
 
 
 class Person(BaseModel):
-    id: Optional[int] = None
-    securityLevelForPerson: Optional[int] = None
-    editSecurityLevelForPerson: Optional[int] = None
-    title: Optional[str] = None
-    firstName: Optional[str] = None
-    lastName: Optional[str] = None
-    nickname: Optional[str] = None
-    job: Optional[str] = None
-    street: Optional[str] = None
-    addressAddition: Optional[str] = None
-    zip: Optional[str] = None
-    city: Optional[str] = None
-    country: Optional[str] = None
-    latitude: Optional[EmptyStrToNone[float]] = None
-    longitude: Optional[EmptyStrToNone[float]] = None
-    latitudeLoose: Optional[EmptyStrToNone[float]] = None
-    longitudeLoose: Optional[EmptyStrToNone[float]] = None
-    phonePrivate: Optional[str] = None
-    phoneWork: Optional[str] = None
-    mobile: Optional[str] = None
-    fax: Optional[str] = None
-    birthName: Optional[str] = None
-    birthday: Optional[EmptyStrToNone[date]] = None
-    birthplace: Optional[str] = None
-    imageUrl: Optional[str] = None
-    familyImageUrl: Optional[str] = None
-    sexId: Optional[int] = None
-    email: Optional[str] = None
-    cmsUserId: Optional[str] = None
-    optigemUserId: Optional[str] = None
-    nationalityId: Optional[int] = None
-    familyStatusId: Optional[int] = None
-    weddingDate: Optional[EmptyStrToNone[date]] = None
-    campusId: Optional[int] = None
-    statusId: Optional[int] = None
-    departmentIds: Optional[List[int]] = None
-    firstContact: Optional[EmptyStrToNone[datetime]] = None
-    dateOfBelonging: Optional[EmptyStrToNone[date]] = None
-    dateOfEntry: Optional[EmptyStrToNone[datetime]] = None
-    dateOfResign: Optional[EmptyStrToNone[datetime]] = None
-    dateOfBaptism: Optional[EmptyStrToNone[date]] = None
-    placeOfBaptism: Optional[str] = None
-    baptisedBy: Optional[str] = None
-    referredBy: Optional[str] = None
-    referredTo: Optional[str] = None
-    growPathId: Optional[int] = None
-    isArchived: Optional[bool] = None
+    id: int | None = None
+    securityLevelForPerson: int | None = None
+    editSecurityLevelForPerson: int | None = None
+    title: str | None = None
+    firstName: str | None = None
+    lastName: str | None = None
+    nickname: str | None = None
+    job: str | None = None
+    street: str | None = None
+    addressAddition: str | None = None
+    zip: str | None = None
+    city: str | None = None
+    country: str | None = None
+    latitude: EmptyStrToNone[float] | None = None
+    longitude: EmptyStrToNone[float] | None = None
+    latitudeLoose: EmptyStrToNone[float] | None = None
+    longitudeLoose: EmptyStrToNone[float] | None = None
+    phonePrivate: str | None = None
+    phoneWork: str | None = None
+    mobile: str | None = None
+    fax: str | None = None
+    birthName: str | None = None
+    birthday: EmptyStrToNone[date] | None = None
+    birthplace: str | None = None
+    imageUrl: str | None = None
+    familyImageUrl: str | None = None
+    sexId: int | None = None
+    email: str | None = None
+    cmsUserId: str | None = None
+    optigemUserId: str | None = None
+    nationalityId: int | None = None
+    familyStatusId: int | None = None
+    weddingDate: EmptyStrToNone[date] | None = None
+    campusId: int | None = None
+    statusId: int | None = None
+    departmentIds: list[int] | None = None
+    firstContact: EmptyStrToNone[datetime] | None = None
+    dateOfBelonging: EmptyStrToNone[date] | None = None
+    dateOfEntry: EmptyStrToNone[datetime] | None = None
+    dateOfResign: EmptyStrToNone[datetime] | None = None
+    dateOfBaptism: EmptyStrToNone[date] | None = None
+    placeOfBaptism: str | None = None
+    baptisedBy: str | None = None
+    referredBy: str | None = None
+    referredTo: str | None = None
+    growPathId: int | None = None
+    isArchived: bool | None = None
 
     # TODO: privacyPolicyAgreement
     # TODO: meta
@@ -108,7 +109,7 @@ class BirthdayPerson(BaseModel):
     domainIdentifier: str
     apiUrl: str
     frontendUrl: str
-    imageUrl: Optional[str] = None
+    imageUrl: str | None = None
     domainAttributes: BirthdayPersonDomainAttributes
 
     def __repr__(self) -> str:
@@ -118,7 +119,7 @@ class BirthdayPerson(BaseModel):
 class Birthday(BaseModel):
     type: str
     date: date
-    age: Optional[int] = None
+    age: int | None = None
     person: BirthdayPerson
 
     def __repr__(self) -> str:

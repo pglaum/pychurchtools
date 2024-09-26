@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from uuid import uuid4
 
 from tests import get_ct_client
@@ -24,7 +26,7 @@ class TestGeneral:
         assert self.ct.general.search("Gott")
 
     def test_simulate(self):
-        persons, _ = self.ct.persons.list()
+        persons, _ = self.ct.persons.get_all()
         me = self.ct.general.whoami()
         persons_other_than_me = [p for p in persons if p.id != me.id]
         person_to_simulate = persons_other_than_me[0]

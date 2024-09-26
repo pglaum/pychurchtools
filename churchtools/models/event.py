@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from datetime import datetime
-from typing import List, Optional
 
 from pydantic import BaseModel  # type: ignore
 
@@ -12,7 +13,7 @@ class AgendaSong(BaseModel):
     category: str
     key: str
     bpm: str
-    defaultArrangement: Optional[str] = None
+    defaultArrangement: str | None = None
 
 
 class AgendaItem(BaseModel):
@@ -20,11 +21,11 @@ class AgendaItem(BaseModel):
     position: int
     type: str
     title: str
-    note: Optional[str] = None
+    note: str | None = None
     duration: int
     start: datetime
     isBeforeEvent: bool
-    song: Optional[AgendaSong] = None
+    song: AgendaSong | None = None
 
     # TODO: responsible
     # TODO: serviceGroupNotes
@@ -38,7 +39,7 @@ class Agenda(BaseModel):
     isFinal: bool
     calendarId: int
     total: int
-    items: List[AgendaItem]
+    items: list[AgendaItem]
 
     # TODO: meta
 
@@ -48,7 +49,7 @@ class Agenda(BaseModel):
 
 class EventService(BaseModel):
     id: int
-    name: Optional[str] = None
+    name: str | None = None
     serviceId: int
     agreed: bool
     isValid: bool
@@ -68,11 +69,11 @@ class Event(BaseModel):
     id: int
     guid: str
     name: str
-    description: Optional[str] = None
+    description: str | None = None
     startDate: datetime
     endDate: datetime
     chatStatus: str
-    eventServices: Optional[List[EventService]] = None
+    eventServices: list[EventService] | None = None
 
     # TODO: permissions
     # TODO: calendar

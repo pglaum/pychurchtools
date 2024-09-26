@@ -33,12 +33,14 @@ TODO (for 100% completion):
 
 """
 
+from __future__ import annotations
+
 import json
 import traceback
-from typing import Any, Dict, Optional
+from typing import Any
 from urllib.parse import urljoin
 
-import requests
+import requests  # type: ignore
 
 from churchtools.admin import Admin
 from churchtools.calendars import Calendars
@@ -60,7 +62,7 @@ class ChurchTools:
     __debugging = 0
     __cookie = None
 
-    def __init__(self, base_url: str, cookie: Optional[Dict[str, str]] = None) -> None:
+    def __init__(self, base_url: str, cookie: dict[str, str] | None = None) -> None:
         """Initialize a CT object.
 
         The login cookie can look like this:
@@ -103,10 +105,10 @@ class ChurchTools:
     def make_request(
         self,
         endpoint: str,
-        params: Optional[Any] = None,
+        params: Any | None = None,
         binary: bool = False,
         method: str = "get",
-        data: Optional[Any] = None,
+        data: Any | None = None,
         return_status_code: bool = False,
     ) -> Any:
         """Make a request to the churchtools API.
@@ -241,7 +243,7 @@ class ChurchTools:
 
         rurl = urljoin(self.__base_url, "api/login")
 
-        params: Dict[str, Any] = {}
+        params: dict[str, Any] = {}
         params["password"] = password
         params["username"] = username
         params["rememberMe"] = remember_me
@@ -339,7 +341,7 @@ class ChurchTools:
 
         self.__cookie = cookie
 
-    def get_login_cookie(self) -> Optional[dict]:
+    def get_login_cookie(self) -> dict | None:
         """Get the login cookie.
 
         :returns: the login cookie

@@ -1,4 +1,4 @@
-from typing import Optional
+from __future__ import annotations
 
 from pydantic import BaseModel  # type: ignore
 
@@ -6,7 +6,7 @@ from pydantic import BaseModel  # type: ignore
 class Department(BaseModel):
     id: int
     name: str
-    nameTranslated: Optional[str] = None
+    nameTranslated: str | None = None
     sortKey: int
 
     def __repr__(self) -> str:

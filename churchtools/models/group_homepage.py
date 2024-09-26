@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional
+from __future__ import annotations
 
 from pydantic import BaseModel
 
@@ -7,16 +7,16 @@ from churchtools.models.person import PersonDomainObject
 
 
 class GroupHomepageDomainAttributes(BaseModel):
-    childGroupIds: Optional[List[int]] = None
+    childGroupIds: list[int] | None = None
 
 
 class GroupHomepageSimple(BaseModel):
-    apiUrl: Optional[str] = None
-    domainAttributes: Optional[GroupHomepageDomainAttributes] = None
-    frontendUrl: Optional[str] = None
-    icon: Optional[str] = None
-    imageUrl: Optional[str] = None
-    title: Optional[str] = None
+    apiUrl: str | None = None
+    domainAttributes: GroupHomepageDomainAttributes | None = None
+    frontendUrl: str | None = None
+    icon: str | None = None
+    imageUrl: str | None = None
+    title: str | None = None
 
     def get_hash(self) -> str:
         if self.apiUrl:
@@ -26,47 +26,47 @@ class GroupHomepageSimple(BaseModel):
 
 
 class GroupInformation(BaseModel):
-    ageGroups: Optional[List[AgeGroup]] = None
-    campus: Optional[Dict] = None
-    groupCategory: Optional[Dict] = None
-    groupPlaces: Optional[List[Dict]] = None
-    imageUrl: Optional[str] = None
-    leader: Optional[List[PersonDomainObject]] = None
-    meetingTime: Optional[str] = None
-    note: Optional[str] = None
-    targetGroup: Optional[Dict] = None
-    weekday: Optional[Dict] = None
+    ageGroups: list[AgeGroup] | None = None
+    campus: dict | None = None
+    groupCategory: dict | None = None
+    groupPlaces: list[dict] | None = None
+    imageUrl: str | None = None
+    leader: list[PersonDomainObject] | None = None
+    meetingTime: str | None = None
+    note: str | None = None
+    targetGroup: dict | None = None
+    weekday: dict | None = None
 
 
 class GroupDetail(BaseModel):
-    allowWaitinglist: Optional[bool] = None
-    autoAccept: Optional[bool] = None
-    canSignUp: Optional[bool] = None
-    children: Optional[List[int]] = None
-    currentMemberCount: Optional[int] = None
-    id: Optional[int] = None
-    information: Optional[GroupInformation] = None
-    maxMemberCount: Optional[int] = None
-    name: Optional[str] = None
-    requestedPlacesCount: Optional[int] = None
-    requestedWaitinglistPlacesCount: Optional[int] = None
-    signUpConditions: Optional[Dict] = None
-    signUpHeadline: Optional[str] = None
-    signUpPersons: Optional[Dict] = None
+    allowWaitinglist: bool | None = None
+    autoAccept: bool | None = None
+    canSignUp: bool | None = None
+    children: list[int] | None = None
+    currentMemberCount: int | None = None
+    id: int | None = None
+    information: GroupInformation | None = None
+    maxMemberCount: int | None = None
+    name: str | None = None
+    requestedPlacesCount: int | None = None
+    requestedWaitinglistPlacesCount: int | None = None
+    signUpConditions: dict | None = None
+    signUpHeadline: str | None = None
+    signUpPersons: dict | None = None
 
 
 class GroupHomepage(BaseModel):
-    defaultView: Optional[str] = None
-    filter: Optional[List[Dict]] = None
-    groups: List[GroupDetail]
-    id: Optional[int] = None
-    isEnabled: Optional[bool] = None
-    meta: Optional[Dict] = None
-    orderDirection: Optional[str] = None
-    parentGroup: Optional[int] = None
-    randomUrl: Optional[str] = None
-    showFilter: Optional[bool] = None
-    showGroups: Optional[bool] = None
-    showLeader: Optional[bool] = None
-    showMap: Optional[bool] = None
-    sortBy: Optional[str] = None
+    defaultView: str | None = None
+    filter: list[dict] | None = None
+    groups: list[GroupDetail]
+    id: int | None = None
+    isEnabled: bool | None = None
+    meta: dict | None = None
+    orderDirection: str | None = None
+    parentGroup: int | None = None
+    randomUrl: str | None = None
+    showFilter: bool | None = None
+    showGroups: bool | None = None
+    showLeader: bool | None = None
+    showMap: bool | None = None
+    sortBy: str | None = None

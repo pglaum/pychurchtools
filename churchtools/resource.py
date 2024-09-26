@@ -6,8 +6,10 @@ CRUD methods for Resources
 
 """
 
+from __future__ import annotations
+
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 from churchtools.models import resource
 from churchtools.models.resource import Booking, Resource, ResourceType
@@ -21,14 +23,14 @@ class Resources:
 
     def bookings(
         self,
-        resource_ids: List[int],
-        status_ids: Optional[List[int]] = None,
-        from_: Optional[datetime] = None,
-        to: Optional[datetime] = None,
-    ) -> List[Booking]:
+        resource_ids: list[int],
+        status_ids: list[int] | None = None,
+        from_: datetime | None = None,
+        to: datetime | None = None,
+    ) -> list[Booking]:
         """Returns all departments"""
 
-        params: Dict[str, Any] = {"resource_ids": resource_ids}
+        params: dict[str, Any] = {"resource_ids": resource_ids}
 
         if status_ids:
             params["status_ids"] = status_ids
@@ -47,7 +49,7 @@ class Resources:
 
         return bookings
 
-    def masterdata(self) -> Tuple[List[ResourceType], List[Resource]]:
+    def masterdata(self) -> tuple[list[ResourceType], list[Resource]]:
         res = self.__ct.make_request("resource/masterdata")
 
         resource_types = []

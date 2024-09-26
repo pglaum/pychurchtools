@@ -1,4 +1,4 @@
-from typing import Optional
+from __future__ import annotations
 
 from pydantic import BaseModel
 
@@ -9,7 +9,7 @@ class WikiCategory(BaseModel):
     id: int
     name: str
     sortKey: int
-    campusId: Optional[int] = None
+    campusId: int | None = None
     inMenu: bool
     fileAccessWithoutPermission: bool
     nameTranslated: str
@@ -27,9 +27,9 @@ class WikiPage(BaseModel):
     wikiCategory: WikiCategory
     title: str
     version: int
-    text: Optional[str] = None
+    text: str | None = None
     onStartpage: EmptyStrToFalse[bool]
-    redirectTo: Optional[str] = None
+    redirectTo: str | None = None
     permissions: WikiPermission
     isMarkdown: bool
 
@@ -45,7 +45,7 @@ class WikiSearchResult(BaseModel):
     domainIdentifier: str
     apiUrl: str
     frontendUrl: str
-    imageUrl: Optional[str] = None
+    imageUrl: str | None = None
     preview: str
 
     def __repr__(self) -> str:

@@ -12,8 +12,10 @@ TODO:
 
 """
 
+from __future__ import annotations
+
 from datetime import datetime
-from typing import Any, List, Optional
+from typing import Any
 
 from .models.event import Agenda, Event
 from .models.song import Song
@@ -42,12 +44,12 @@ class Events:
 
         return None
 
-    def list(
+    def get_all(
         self,
-        from_date: Optional[datetime] = None,
-        to_date: Optional[datetime] = None,
-        include: Optional[str] = None,
-    ) -> List[Event]:
+        from_date: datetime | None = None,
+        to_date: datetime | None = None,
+        include: str | None = None,
+    ) -> list[Event]:
         """List upcoming events, or events from or to a date.
 
         :param from_date: List events after this date. Default: today
@@ -100,7 +102,7 @@ class Events:
 
         return None
 
-    def songs(self, event_id: int) -> List[Song]:
+    def songs(self, event_id: int) -> list[Song]:
         """Get the songs of an event.
 
         :param event_id: The ID of the event

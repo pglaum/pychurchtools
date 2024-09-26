@@ -21,8 +21,10 @@ TODO:
 
 """
 
+from __future__ import annotations
+
 from datetime import date, datetime
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any
 
 from .models.event import Event
 from .models.group import Group
@@ -38,7 +40,7 @@ class Persons:
 
         self.__ct = ct
 
-    def get(self, person_id: int) -> Optional[Person]:
+    def get(self, person_id: int) -> Person | None:
         """Get a person by id.
 
         :param person_id: The ID of the person
@@ -55,17 +57,17 @@ class Persons:
 
         return None
 
-    def list(
+    def get_all(
         self,
-        ids: Optional[List[int]] = None,
-        status_ids: Optional[List[int]] = None,
-        campus_ids: Optional[List[int]] = None,
-        birthday_before: Optional[datetime] = None,
-        birthday_after: Optional[datetime] = None,
+        ids: list[int] | None = None,
+        status_ids: list[int] | None = None,
+        campus_ids: list[int] | None = None,
+        birthday_before: datetime | None = None,
+        birthday_after: datetime | None = None,
         is_archived: bool = False,
         page: int = 1,
         limit: int = 10,
-    ) -> Tuple[List[Person], Optional[MetaPagination]]:
+    ) -> tuple[list[Person], MetaPagination | None]:
         """Returns a list of persons, that the logged in user can see.
 
         :param ids: A list of IDs that is to be queried
@@ -88,7 +90,7 @@ class Persons:
         :rtype: List[Person]
         """
 
-        params: Dict[str, Any] = {}
+        params: dict[str, Any] = {}
 
         if ids:
             params["ids"] = ids
@@ -127,7 +129,7 @@ class Persons:
 
         return persons, pagination
 
-    def tags(self, person_id: int) -> List[PersonTag]:
+    def tags(self, person_id: int) -> list[PersonTag]:
         """Get the tags of a person.
 
         :param person_id: The ID of the person
@@ -146,7 +148,7 @@ class Persons:
 
         return tags
 
-    def relationships(self, person_id: int) -> List[PersonRelationship]:
+    def relationships(self, person_id: int) -> list[PersonRelationship]:
         """Get relationships for a person.
 
         :param person_id: The ID of the person
@@ -166,9 +168,7 @@ class Persons:
 
         return rls
 
-    def events(
-        self, person_id: int, from_date: Optional[datetime] = None
-    ) -> List[Event]:
+    def events(self, person_id: int, from_date: datetime | None = None) -> list[Event]:
         """Get events that a person is involved in.
 
         :param person_id: The ID of the person
@@ -201,7 +201,7 @@ class Persons:
         person_id: int,
         show_overdue_groups: bool = False,
         show_inactive_groups: bool = False,
-    ) -> List[Group]:
+    ) -> list[Group]:
         """Get events that a person is part of.
 
         :param person_id: The ID of the person
@@ -230,7 +230,7 @@ class Persons:
 
         return grps
 
-    def settings(self, person_id: int, module: Optional[str] = None) -> List[Setting]:
+    def settings(self, person_id: int, module: str | None = None) -> list[Setting]:
         """Get the settings for a person.
 
         :param person_id: The ID of the person
@@ -276,8 +276,8 @@ class Persons:
         return sttng
 
     def birthdays(
-        self, start_date: Optional[date] = None, end_date: Optional[date] = None
-    ) -> List[Birthday]:
+        self, start_date: date | None = None, end_date: date | None = None
+    ) -> list[Birthday]:
         """Get all birthdays in a time span.
 
         :param start_date: Start date of the timespan (default: yesterday)
@@ -306,7 +306,7 @@ class Persons:
 
         return bdays
 
-    def servicerequests(self, person_id: int) -> List[ServiceRequest]:
+    def servicerequests(self, person_id: int) -> list[ServiceRequest]:
         """Get all service requests for a person.
 
         :param person_id: The ID of the person
@@ -343,7 +343,7 @@ class Persons:
         rqst = ServiceRequest(**res["data"])
         return rqst
 
-    def devices(self, person_id: int) -> List[Device]:
+    def devices(self, person_id: int) -> list[Device]:
         """Get all in ChurchTools registered devices of a person.
 
         These are all registered smartphones/tablets with the CT app.

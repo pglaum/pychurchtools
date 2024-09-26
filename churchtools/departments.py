@@ -6,7 +6,9 @@ Find out about departments in ChurchTools
 
 """
 
-from typing import Any, List
+from __future__ import annotations
+
+from typing import Any
 
 from .models.department import Department
 
@@ -17,7 +19,7 @@ class Departments:
 
         self.__ct = ct
 
-    def list(self) -> List[Department]:
+    def get_all(self) -> list[Department]:
         """Returns all departments"""
 
         res = self.__ct.make_request("departments")

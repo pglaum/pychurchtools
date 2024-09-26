@@ -1,25 +1,26 @@
-from datetime import date, datetime
-from typing import List, Optional, Union
+from __future__ import annotations
 
-from pydantic import BaseModel, field_serializer  # type: ignore
+from datetime import date, datetime
+
+from pydantic import BaseModel, field_serializer, Field  # type: ignore
 
 from . import EmptyStrToNone
 
 
 class CalendarMeta(BaseModel):
-    modifiedDate: Union[date, datetime]
+    modifiedDate: date | datetime
     modifiedPid: int
 
 
 class Calendar(BaseModel):
-    campusId: Optional[int] = None
+    campusId: int | None = None
     color: str
-    eventTemplateId: Optional[int] = None
-    iCalSourceUrl: Optional[str] = None
+    eventTemplateId: int | None = None
+    iCalSourceUrl: str | None = None
     id: int
     isPrivate: bool
     isPublic: bool
-    meta: Optional[CalendarMeta] = None
+    meta: CalendarMeta | None = None
     name: str
     nameTranslated: str
     randomUrl: str
@@ -27,24 +28,24 @@ class Calendar(BaseModel):
 
 
 class Address(BaseModel):
-    meetingAt: Optional[str] = None
-    street: Optional[str] = None
-    addition: Optional[str] = None
-    district: Optional[str] = None
-    zip: Optional[str] = None
-    city: Optional[str] = None
-    country: Optional[str] = None
-    latitude: Optional[EmptyStrToNone[float]] = None
-    longitude: Optional[EmptyStrToNone[float]] = None
+    meetingAt: str | None = None
+    street: str | None = None
+    addition: str | None = None
+    district: str | None = None
+    zip: str | None = None
+    city: str | None = None
+    country: str | None = None
+    latitude: EmptyStrToNone[float] | None = None
+    longitude: EmptyStrToNone[float] | None = None
 
 
 class AppointmentAddition(BaseModel):
-    date: Union[date, datetime]
-    isRepeated: Optional[bool] = False
+    date: date | datetime
+    isRepeated: bool | None = False
 
 
 class AppointmentException(BaseModel):
-    date: Union[date, datetime]
+    date: date | datetime
     id: int
     meta: CalendarMeta
 
@@ -54,33 +55,33 @@ class PersonWithOnlyId(BaseModel):
 
 
 class AppointmentMeta(BaseModel):
-    createdDate: Union[date, datetime]
+    createdDate: date | datetime
     createdPerson: PersonWithOnlyId
-    modifiedDate: Union[date, datetime]
+    modifiedDate: date | datetime
     modifiedPerson: PersonWithOnlyId
 
 
 class Appointment(BaseModel):
-    additions: List[AppointmentAddition] = []
-    address: Optional[Address] = None
+    additions: list[AppointmentAddition] = Field(default_factory=list)
+    address: Address | None = None
     allDay: bool = False
-    calendar: Optional[Calendar] = None
+    calendar: Calendar | None = None
     caption: str
-    endDate: Union[date, datetime]
-    exceptions: List[AppointmentException] = []
-    id: Optional[Union[int, str]] = None
-    image: Optional[str] = None
-    information: Optional[str] = None
+    endDate: date | datetime
+    exceptions: list[AppointmentException] = Field(default_factory=list)
+    id: int | str | None = None
+    image: str | None = None
+    information: str | None = None
     isInternal: bool = True
-    link: Optional[str] = None
-    meta: Optional[AppointmentMeta] = None
-    note: Optional[str] = None
-    onBehalfOfPid: Optional[int] = None
-    startDate: Union[date, datetime]
-    repeatFrequency: Optional[int] = None
+    link: str | None = None
+    meta: AppointmentMeta | None = None
+    note: str | None = None
+    onBehalfOfPid: int | None = None
+    startDate: date | datetime
+    repeatFrequency: int | None = None
     repeatId: int = 0
-    repeatOption: Optional[int] = None
-    repeatUntil: Optional[str] = None
+    repeatOption: int | None = None
+    repeatUntil: str | None = None
     version: int = 0
 
     @field_serializer("startDate")

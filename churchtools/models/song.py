@@ -1,4 +1,4 @@
-from typing import List, Optional
+from __future__ import annotations
 
 from pydantic import BaseModel  # type: ignore
 
@@ -28,8 +28,8 @@ class Arrangement(BaseModel):
     beat: str
     duration: int
     note: str
-    links: List[ArrangementLink]
-    files: List[ArrangementFile]
+    links: list[ArrangementLink]
+    files: list[ArrangementFile]
 
     # TODO: meta
 
@@ -39,7 +39,7 @@ class SongCategory(BaseModel):
     name: str
     nameTranslated: str
     sortKey: int
-    campusId: Optional[int] = None
+    campusId: int | None = None
 
 
 class Song(BaseModel):
@@ -51,7 +51,7 @@ class Song(BaseModel):
     ccli: str
     copyright: str
     note: str
-    arrangements: List[Arrangement]
+    arrangements: list[Arrangement]
 
     # TODO: meta
 
