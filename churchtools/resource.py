@@ -53,7 +53,6 @@ class Resources:
 
                     bookings.append(booking)
 
-
         return bookings
 
     def masterdata(self) -> tuple[list[ResourceType], list[Resource]]:
