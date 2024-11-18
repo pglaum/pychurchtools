@@ -37,9 +37,15 @@ class Resource(BaseModel):
     sortKey: int
 
 
+class StartEndDate(BaseModel):
+    startDate: datetime
+    endDate: datetime
+
+
 class Booking(BaseModel):
     additionals: list[BookingAdditional]
     allDay: bool
+    calculated: StartEndDate | None = None
     calId: int | None = None
     caption: str
     endDate: date | datetime

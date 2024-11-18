@@ -168,7 +168,7 @@ class ChurchTools:
         if return_status_code:
             if self.__debugging > 0:
                 print(rurl, "->", resp.status_code)
-                print(params)
+                print(params, "->", param_str)
                 if resp.content:
                     print(resp.content.decode())
             return resp.status_code
@@ -179,14 +179,14 @@ class ChurchTools:
         if not r_ok:
             if self.__debugging > 0:
                 print(rurl, "->", resp.status_code)
-                print(params)
+                print(params, "->", param_str)
                 print(rstr)
 
             return None
 
         if self.__debugging > 0:
             print(rurl, "->", resp.status_code)
-            print(params)
+            print(params, "->", param_str)
             print(rstr)
             print()
 
