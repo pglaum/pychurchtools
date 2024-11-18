@@ -28,3 +28,7 @@ pre-commit = "^4.0.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[project.urls]
+Homepage = "https://github.com/pglaum/pychurchtools"
+Issues = "https://github.com/pglaum/pychurchtools/issues"
