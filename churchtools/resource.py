@@ -35,7 +35,7 @@ class Resources:
         if status_ids:
             params["status_ids"] = status_ids
         if from_:
-            params["from_"] = f"{from_.year}-{from_.month:02d}-" f"{from_.day:02d}"
+            params["from"] = f"{from_.year}-{from_.month:02d}-" f"{from_.day:02d}"
         if to:
             params["to"] = f"{to.year}-{to.month:02d}-" f"{to.day:02d}"
 
