@@ -12,7 +12,7 @@ from datetime import datetime
 from typing import Any
 
 from churchtools.models import resource
-from churchtools.models.resource import Booking, Resource, ResourceType
+from churchtools.models.resource import Booking, Resource, ResourceType, StartEndDate
 
 
 class Resources:
@@ -45,7 +45,14 @@ class Resources:
         if res and "data" in res:
             for item in res["data"]:
                 if "base" in item:
-                    bookings.append(Booking(**item["base"]))
+                    booking = Booking(**item["base"])
+
+                    # difference to API: add calculated start & endDate into the Booking
+                    if "calculated" in item:
+                        booking.calculated = StartEndDate(**item["calculated"])
+
+                    bookings.append(booking)
+
 
         return bookings
 
