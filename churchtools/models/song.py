@@ -23,10 +23,10 @@ class Arrangement(BaseModel):
     id: int
     name: str
     isDefault: bool
-    keyOfArrangement: str
-    bpm: str
-    beat: str
-    duration: int
+    keyOfArrangement: str | None = None
+    bpm: str | None = None
+    beat: str | None = None
+    duration: int | None = None
     note: str
     links: list[ArrangementLink]
     files: list[ArrangementFile]
@@ -47,9 +47,9 @@ class Song(BaseModel):
     name: str
     category: SongCategory
     shouldPractice: bool
-    author: str
-    ccli: str
-    copyright: str
+    author: str | None = None
+    ccli: str | None = None
+    copyright: str | None = None
     note: str
     arrangements: list[Arrangement]
 
