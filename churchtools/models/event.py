@@ -12,7 +12,7 @@ class AgendaSong(BaseModel):
     arrangement: str
     category: str
     key: str
-    bpm: str
+    bpm: int | None = None
     defaultArrangement: str | None = None
 
 

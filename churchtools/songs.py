@@ -24,6 +24,7 @@ class Songs:
         ids: list[int] | None = None,
         practice: bool = False,
         key_of_arrangement: str | None = None,
+        include: list[str] = ["arrangements", "tags"],
         page: int = 1,
         limit: int = 10,
     ) -> tuple[list[Song], MetaPagination | None]:
@@ -37,6 +38,8 @@ class Songs:
         :type practice: bool
         :param key_of_arrangement: Query for keys of an arrangement of the song
         :type key_of_arrangement: str
+        :param include: Include additional data. Possible values: arrangements, tags. Default: ['arrangements', 'tags']
+        :type include: List[str]
         :param page: Result page number
         :type page: int
         :param limit: Result item count
@@ -59,6 +62,8 @@ class Songs:
             params["page"] = page
         if limit:
             params["limit"] = limit
+        if include:
+            params["include"] = include
 
         res = self.__ct.make_request("songs", params=params)
 
