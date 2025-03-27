@@ -19,8 +19,8 @@ class Service(BaseModel):
     sendReminderMails: bool
     sendServiceRequestMails: bool | None = None
     allowControlLiveAgenda: bool
-    groupIds: str | None = None
-    tagIds: str | None = None
+    groupIds: list[int] | None = None
+    tagIds: list[int] | None = None
     calTextTemplate: str
     allowChat: bool
 

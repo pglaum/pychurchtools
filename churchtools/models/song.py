@@ -24,7 +24,7 @@ class Arrangement(BaseModel):
     name: str
     isDefault: bool
     keyOfArrangement: str | None = None
-    bpm: str | None = None
+    bpm: int | None = None
     beat: str | None = None
     duration: int | None = None
     note: str
@@ -51,8 +51,8 @@ class Song(BaseModel):
     ccli: str | None = None
     copyright: str | None = None
     note: str
-    arrangements: list[Arrangement]
-    tags: list[SongTag]
+    arrangements: list[Arrangement] | None = None
+    tags: list[SongTag] | None = None
 
     # TODO: meta
 
