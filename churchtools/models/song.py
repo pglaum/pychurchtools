@@ -52,8 +52,19 @@ class Song(BaseModel):
     copyright: str | None = None
     note: str
     arrangements: list[Arrangement]
+    tags: list[SongTag]
 
     # TODO: meta
 
     def __repr__(self) -> str:
         return f"<Song: {self.name} [{self.id}]>"
+
+
+class SongTag(BaseModel):
+    id: int
+    name: str
+    description: str | None = None
+    color: str | None = None
+
+    def __repr__(self) -> str:
+        return f"<SongTag: {self.name} [{self.id}]>"
