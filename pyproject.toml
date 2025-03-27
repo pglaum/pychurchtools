@@ -3,7 +3,7 @@ name = "churchtools"
 
 [tool.poetry]
 name = "churchtools"
-version = "0.4.1"
+version = "0.5.0"
 description = "A library for the ChurchTools API"
 authors = ["Philipp Glaum <p@pglaum.de>"]
 license = "GPLv3"
