@@ -18,13 +18,13 @@ class TestEvents:
 
     def test_agenda(self):
         # TODO: find an event with agenda more reliably
-        next_services = [evt for evt in self.events if "Gottesdienst" in evt.name]
+        next_services = [evt for evt in self.events if "Heilige Messe" in evt.name]
         assert len(next_services) > 0
         assert self.ct.events.agenda(next_services[0].id)
 
     def test_songs(self):
         # TODO: find an event with songs more reliably
-        next_services = [evt for evt in self.events if "Gottesdienst" in evt.name]
+        next_services = [evt for evt in self.events if "Heilige Messe" in evt.name]
         assert len(next_services) > 0
         assert self.ct.events.songs(next_services[0].id)
 
