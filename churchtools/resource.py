@@ -28,7 +28,7 @@ class Resources:
         from_: datetime | None = None,
         to: datetime | None = None,
     ) -> list[Booking]:
-        """Returns all departments"""
+        """Returns all bookings"""
 
         params: dict[str, Any] = {"resource_ids": resource_ids}
 

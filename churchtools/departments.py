@@ -15,7 +15,7 @@ from .models.department import Department
 
 class Departments:
     def __init__(self, ct: Any) -> None:
-        """Initialize a Persons object."""
+        """Initialize a Departments object."""
 
         self.__ct = ct
 
