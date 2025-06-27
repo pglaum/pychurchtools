@@ -8,8 +8,10 @@ from . import EmptyStrToNone
 
 
 class CalendarMeta(BaseModel):
+    createdDate: date | datetime
+    createdPerson: PersonWithOnlyId
     modifiedDate: date | datetime
-    modifiedPid: int
+    modifiedPerson: PersonWithOnlyId
 
 
 class Calendar(BaseModel):
@@ -44,10 +46,15 @@ class AppointmentAddition(BaseModel):
     isRepeated: bool | None = False
 
 
+class AppointmentExceptionMeta(BaseModel):
+    modifiedDate: date | datetime
+    modifiedPid: int
+
+
 class AppointmentException(BaseModel):
     date: date | datetime
     id: int
-    meta: CalendarMeta
+    meta: AppointmentExceptionMeta
 
 
 class PersonWithOnlyId(BaseModel):

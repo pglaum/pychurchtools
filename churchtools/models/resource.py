@@ -4,7 +4,7 @@ from datetime import date, datetime
 
 from pydantic import BaseModel
 
-from churchtools.models.calendar import AppointmentMeta, CalendarMeta
+from churchtools.models.calendar import AppointmentMeta, AppointmentExceptionMeta, CalendarMeta
 
 
 class BookingAdditional(BaseModel):
@@ -12,6 +12,13 @@ class BookingAdditional(BaseModel):
     id: int
     isRepeated: bool | None = None
     meta: CalendarMeta
+
+
+class BookingException(BaseModel):
+    date: date | datetime
+    id: int
+    isRepeated: bool | None = None
+    meta: AppointmentExceptionMeta
 
 
 class ResourceType(BaseModel):
@@ -49,7 +56,7 @@ class Booking(BaseModel):
     calId: int | None = None
     caption: str
     endDate: date | datetime
-    exceptions: list[BookingAdditional]
+    exceptions: list[BookingException]
     id: int
     location: str | None = None
     meta: AppointmentMeta | None = None
