@@ -4,7 +4,11 @@ from datetime import date, datetime
 
 from pydantic import BaseModel
 
-from churchtools.models.calendar import AppointmentMeta, AppointmentExceptionMeta, CalendarMeta
+from churchtools.models.calendar import (
+    AppointmentMeta,
+    AppointmentExceptionMeta,
+    CalendarMeta,
+)
 
 
 class BookingAdditional(BaseModel):
