@@ -15,14 +15,14 @@ class BookingAdditional(BaseModel):
     date: date | datetime
     id: int
     isRepeated: bool | None = None
-    meta: CalendarMeta
+    meta: AppointmentExceptionMeta
 
 
 class BookingException(BaseModel):
     date: date | datetime
     id: int
     isRepeated: bool | None = None
-    meta: AppointmentExceptionMeta
+    meta: CalendarMeta
 
 
 class ResourceType(BaseModel):
