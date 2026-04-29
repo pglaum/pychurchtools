@@ -77,7 +77,7 @@ class PersonDomainAttributes(BaseModel):
 
 class PersonDomainObject(BaseModel):
     domainAttributes: PersonDomainAttributes
-    imageUrl: str
+    imageUrl: str | None = None
     frontendUrl: str
     apiUrl: str
     domainType: str
