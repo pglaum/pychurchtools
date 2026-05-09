@@ -48,7 +48,7 @@ class AppointmentAddition(BaseModel):
 
 class AppointmentExceptionMeta(BaseModel):
     modifiedDate: date | datetime
-    modifiedPid: int
+    modifiedPid: int | None = None
 
 
 class AppointmentException(BaseModel):
