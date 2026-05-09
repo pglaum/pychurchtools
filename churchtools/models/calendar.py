@@ -68,6 +68,9 @@ class AppointmentMeta(BaseModel):
     modifiedPerson: PersonWithOnlyId
 
 
+class ImageDomainObject(BaseModel):
+    imageUrl: str | None = None
+
 class Appointment(BaseModel):
     additions: list[AppointmentAddition] = Field(default_factory=list)
     address: Address | None = None
@@ -77,7 +80,7 @@ class Appointment(BaseModel):
     endDate: date | datetime
     exceptions: list[AppointmentException] = Field(default_factory=list)
     id: int | str | None = None
-    image: str | None = None
+    image: ImageDomainObject | None = None
     information: str | None = None
     isInternal: bool = True
     link: str | None = None
